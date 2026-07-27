@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keyboard Basics — Build With Grok</title>
+  <meta name="description" content="Every important key explained in plain language—including how to read Ctrl+key notation and how Esc differs from Ctrl+C." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Keyboard Basics</h1>
+          <p class="lead">The few keyboard shortcuts you need every day—and what Esc really does.</p>
+          <div class="lesson-prereq"><span>Finish <a href="03-tui-mastery.html">The Grok Screen</a> first</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#how">How to read shortcut notation</a>
+<a href="#core">Core shortcuts (learn these first)</a>
+<a href="#esc">Esc and Ctrl+C carefully explained</a>
+<a href="#scroll">Moving in history</a>
+<a href="#more">More shortcuts when you are ready</a>
+<a href="#lab">Practice drill</a>
+</nav>
+
+<h2 id="how">How to read shortcut notation</h2>
+<ul>
+  <li><kbd>Enter</kbd> means the Return key.</li>
+  <li><kbd>Ctrl+O</kbd> means hold <strong>Control</strong>, then press O. On many Mac keyboards this is the key labeled <strong>control</strong>, not ⌘ Command.</li>
+  <li><kbd>Shift+Tab</kbd> means hold Shift and press Tab.</li>
+  <li>If a shortcut does nothing, click inside Grok’s window so it has keyboard focus (not your browser or another app).</li>
+</ul>
+
+<h2 id="core">Core shortcuts (learn these first)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Keys</th><th>What it does in plain English</th></tr></thead>
+<tbody>
+<tr><td><kbd>Enter</kbd></td><td>Send your message (or queue it if Grok is already working)</td></tr>
+<tr><td><kbd>Tab</kbd></td><td>Switch between typing box and history</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Stop the current work / close some menus (see table below)</td></tr>
+<tr><td><kbd>Ctrl+N</kbd></td><td>Start a new empty session</td></tr>
+<tr><td><kbd>Ctrl+O</kbd></td><td>Toggle “always approve tools” (YOLO). Leave this off while learning</td></tr>
+<tr><td><kbd>Shift+Tab</kbd></td><td>Cycle modes: normal work → plan-first → always-approve</td></tr>
+<tr><td><kbd>Ctrl+P</kbd> or <kbd>?</kbd></td><td>Open the command palette (searchable list of actions)</td></tr>
+<tr><td><code>@</code></td><td>Attach a file (not a Ctrl chord—just type the character)</td></tr>
+<tr><td><code>/</code></td><td>Open slash commands</td></tr>
+</tbody></table></div>
+
+<h2 id="esc">Esc and Ctrl+C carefully explained</h2>
+<p>These keys do different things depending on state. Read slowly—this prevents accidents.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Situation</th><th>Key</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Grok is working on a turn</td><td><kbd>Esc</kbd></td><td>Usually <strong>cancels</strong> that work. Your half-typed draft is often kept</td></tr>
+<tr><td>Grok is working; you typed a draft</td><td><kbd>Ctrl+C</kbd> once</td><td>Often <strong>clears the draft</strong> first, without cancelling</td></tr>
+<tr><td>Draft already empty; turn still running</td><td><kbd>Ctrl+C</kbd> again</td><td>Cancels the turn</td></tr>
+<tr><td>Idle; you typed text; prompt focused</td><td>Esc twice quickly</td><td>Clears the prompt</td></tr>
+<tr><td>Idle; prompt empty; you have history</td><td>Esc twice quickly</td><td>May open <strong>rewind</strong> (undo turns)—not “go back focus”</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="mark">Beginner tip</div><div>
+<p>If you only wanted to stop Grok, press Esc once and wait. Avoid mashing Esc repeatedly or you might open rewind by mistake.</p>
+</div></div>
+
+<h2 id="scroll">Moving in history</h2>
+<p>First press Tab so history is focused.</p>
+<ul>
+  <li>Arrow up/down: select different blocks</li>
+  <li>Arrow left/right: collapse or expand a block</li>
+  <li>Shift+left/right: jump between your past user messages (“turns”)</li>
+</ul>
+<p>There is an optional <strong>Vim mode</strong> (<code>/vim-mode</code>) that uses letter keys like j/k for people who already use Vim. If you have never heard of Vim, leave it off.</p>
+
+<h2 id="more">More shortcuts when you are ready</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Keys</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><kbd>Ctrl+B</kbd></td><td>Send a long-running foreground shell job to the background so you can keep chatting</td></tr>
+<tr><td><kbd>Ctrl+S</kbd></td><td>Open session picker (resume an old chat)</td></tr>
+<tr><td><kbd>Ctrl+M</kbd></td><td>Model picker when not in prompt; multiline toggle when prompt is focused</td></tr>
+<tr><td><kbd>Ctrl+T</kbd></td><td>Toggle the to-do list pane</td></tr>
+<tr><td><kbd>Ctrl+G</kbd></td><td>Full TUI: toggle <strong>tasks</strong> pane (background work). Minimal mode: may mean “edit draft in external editor” instead—use <code>/tasks</code> or the palette if the chord conflicts</td></tr>
+<tr><td>Empty prompt + <kbd>↑</kbd></td><td>Browse prompts you sent earlier</td></tr>
+<tr><td><kbd>Ctrl+.</kbd> or <kbd>Ctrl+X</kbd></td><td>Keyboard shortcuts help (Ctrl+X is the reliable fallback on many terminals)</td></tr>
+</tbody></table></div>
+<p>Image paste differs by OS (Windows often needs <kbd>Alt+V</kbd> for image clipboard in some terminals). If paste fails, drag an image file into the prompt instead. Mid-turn “send now / interject” chords also differ by terminal (e.g. Ctrl+Enter vs Ctrl+L in VS Code family)—see official keyboard docs via <code>/docs</code>.</p>
+
+<h2 id="lab">Practice drill (5 minutes)</h2>
+<ol class="steps">
+  <li>Start Grok and send any short message.</li>
+  <li>While it runs (or after), press Tab and move through history with arrows.</li>
+  <li>Return to the prompt with Tab. Type a draft sentence, then Esc twice carefully to clear it (or delete with Backspace if you prefer).</li>
+  <li>Open the palette with Ctrl+P, then close it with Esc.</li>
+  <li>Type <code>/</code>, look at commands, Esc to close without running one.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can send, cancel calmly, switch focus, and open @ / / menus without panic. You know YOLO (Ctrl+O) should stay off until you understand permissions.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. <kbd>Ctrl+O</kbd> toggles…</legend>
+      <label><input type="radio" name="kq1" value="right" /> Always-approve (YOLO) — leave off while learning</label>
+      <label><input type="radio" name="kq1" value="wrong" /> A free coffee coupon</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. After Beginner keys, the curriculum’s first big win is…</legend>
+      <label><input type="radio" name="kq2" value="right" /> Shipping a game or app walkthrough (not jumping to Advanced)</label>
+      <label><input type="radio" name="kq2" value="wrong" /> Enabling Always-approve forever and skipping ships</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        
+<div class="callout tip" id="next-step-ship"><div class="mark">What to do next</div><div>
+<p>Beginner track is complete. <strong>Your first real win:</strong> <a href="17-building-games.html">How Game Projects Work</a>, then the <a href="21-walkthrough-first-game.html">First Game walkthrough</a>. (If you only care about apps, use <a href="18-building-apps.html">How App Projects Work</a> then the app walkthrough—pick one path and finish it before Intermediate.)</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>No prior knowledge assumed. Glossary: <a href="00-glossary.html">Words You’ll See</a>.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "keys" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Permissions & Safety — Build With Grok</title>
+  <meta name="description" content="Three separate safety layers: how often Grok asks, hard allow/deny rules, and the OS sandbox." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Permissions & Safety</h1>
+          <p class="lead">Three safety layers, in plain English: how often Grok asks, allow/deny rules, and the OS sandbox.</p>
+          <div class="lesson-prereq"><span>You have seen a permission popup at least once</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#layers">Three safety layers</a>
+<a href="#modes">Permission modes</a>
+<a href="#rules">Allow / deny rules</a>
+<a href="#sandbox">Sandbox (separate seatbelt)</a>
+<a href="#practice">Practice</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Big idea</div><div>
+<p>Permission mode, allow/deny rules, and the OS sandbox are <strong>three different layers</strong>. Mix them up and you get either false safety or constant popups. Learn them as a stack.</p>
+</div></div>
+
+<figure class="figure square" style="max-width:320px;margin-inline:auto"><img src="../assets/safety-shields.jpg" alt="" /><figcaption>Three layers of protection—mode, rules, sandbox.</figcaption></figure>
+<h2 id="layers">Three safety layers (memorize this)</h2>
+<div class="card-grid cols-3">
+  <article class="card"><div class="icon">1</div><h3>Permission mode</h3><p>How often Grok <em>asks you</em> before tools run (Ask / Auto / Always-approve).</p></article>
+  <article class="card"><div class="icon violet">2</div><h3>Allow / deny rules</h3><p>Hard policy: some tools or patterns never run (deny always wins).</p></article>
+  <article class="card"><div class="icon amber">3</div><h3>Sandbox</h3><p>Extra OS limits on read/write/network—even after you say yes to a tool.</p></article>
+</div>
+<p class="why">Always-approve skips most popups, but <strong>deny rules still apply</strong>, and a sandbox can still block writes outside the project.</p>
+
+<h2 id="modes">Permission modes</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Mode</th><th>Plain English</th><th>When</th></tr></thead>
+<tbody>
+<tr><td><strong>Ask</strong> (default)</td><td>Often pauses before edits and shell</td><td>Learning; untrusted folders</td></tr>
+<tr><td><strong>Auto</strong></td><td>Grok auto-allows safer actions and still asks for riskier ones</td><td>When you want fewer prompts but not full auto. If <code>/auto</code> is missing from your menu, stay on Ask</td></tr>
+<tr><td><strong>Always-approve</strong></td><td>Skips ordinary prompts</td><td>Trusted machine + project + good git/tests</td></tr>
+<tr><td><strong>acceptEdits</strong> (advanced)</td><td>Edits freer; shell may still ask</td><td>Heavy local refactors you’ll review in git</td></tr>
+</tbody></table></div>
+<p><strong>How to change:</strong> <kbd>Shift+Tab</kbd> cycles <strong>Normal → Plan → Always-approve</strong> (watch the UI indicator). Also: <code>/always-approve</code>, <code>/auto</code> (only if that feature appears in your menu), <kbd>Ctrl+O</kbd> (toggle always-approve), <code>/settings</code>, or launch with <code>grok --always-approve</code> / <code>--yolo</code> (CLI flags—not a <code>/yolo</code> slash command).</p>
+<div class="callout warn"><div class="mark">Beginner rule</div><div>
+<p>Stay on <strong>Ask</strong> until you finish a ship walkthrough. Never Always-approve on folders with production secrets or untrusted downloads.</p>
+</div></div>
+
+<h2 id="rules">Allow / deny rules</h2>
+<p>Rules are patterns that force allow or deny for tools regardless of mode. Deny wins ties. Configure via settings UI, project <code>.grok/config.toml</code> permission sections, or CLI flags such as:</p>
+<div class="pre-wrap"><pre><code>grok --deny '…' --allow '…'</code></pre></div>
+<p class="why">Use deny as a permanent seatbelt for dangerous shell patterns—even when always-approve is on for trusted automation (scripts/CI you control).</p>
+
+<h2 id="sandbox">Sandbox (separate from permissions)</h2>
+<p>Off by default. An extra OS safety net that limits what Grok’s process (and child commands) may read, write, or use on the network—even after you approve a tool. On Linux this uses Landlock; on macOS it uses Seatbelt (the OS’s built-in sandbox tech). You usually pick a profile instead of typing those names.</p>
+<div class="pre-wrap"><pre><code><span class="comment"># Sandbox is OFF by default. Profiles (install docs):</span>
+grok --sandbox workspace   <span class="comment"># write CWD + temp + ~/.grok; read everywhere</span>
+grok --sandbox read-only   <span class="comment"># no project writes (only ~/.grok + temp)</span>
+grok --sandbox strict      <span class="comment"># untrusted code; tighter reads + writes</span>
+<span class="comment"># Also: off (default), devbox (disposable VMs). Network child limits are Linux-focused.</span>
+<span class="comment"># also: GROK_SANDBOX=workspace  or  [sandbox] profile in config</span></code></pre></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Profile</th><th>Idea</th></tr></thead>
+<tbody>
+<tr><td>workspace</td><td>Read broadly; write mainly CWD + temp + Grok home</td></tr>
+<tr><td>read-only</td><td>Analyze; don’t change project files</td></tr>
+<tr><td>strict</td><td>Least privilege for untrusted trees</td></tr>
+<tr><td>devbox</td><td>Disposable VM style (broader writes)</td></tr>
+</tbody></table></div>
+<p>Some network limits work differently by operating system. Do not depend on sandbox alone for network safety until you check in-product <code>/docs</code> for your version.</p>
+
+<h2 id="practice">Practice</h2>
+<ol class="steps">
+  <li>In Ask mode, request a harmless file edit and <strong>read</strong> the permission dialog before accepting.</li>
+  <li>Deliberately deny one prompt, then ask Grok to explain what it wanted to run.</li>
+  <li>Say out loud which of the three layers you just used (mode, rule, or sandbox).</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can explain: “Always-approve is not invincible—deny and sandbox still matter.”</p>
+</div></div>
+
+        
+<section class="self-check" data-self-check id="self-check" data-lesson-id="safety">
+  <h2>Self-check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. Always-approve means deny rules no longer apply.</legend>
+      <label><input type="radio" name="q1" value="wrong" /> True</label>
+      <label><input type="radio" name="q1" value="right" /> False — deny rules can still block tools</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Sandbox is the same thing as permission mode.</legend>
+      <label><input type="radio" name="q2" value="wrong" /> True</label>
+      <label><input type="radio" name="q2" value="right" /> False — sandbox is a separate OS layer</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Best mode while learning?</legend>
+      <label><input type="radio" name="q3" value="right" /> Ask (default)</label>
+      <label><input type="radio" name="q3" value="wrong" /> Always-approve on untrusted folders</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Concepts first; use in-product <code>/docs</code> for version-exact flags (product is Beta).</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "safety" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCP Integrations — Build With Grok</title>
+  <meta name="description" content="Plug external apps into Grok with MCP—what it is, how to add and manage servers, and how to stay safe." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>MCP Integrations</h1>
+          <p class="lead">MCP connects Grok to other apps you trust (issue trackers, Blender, and similar tools).</p>
+          <div class="lesson-prereq"><span>After you ship a walkthrough</span><span>Only needed when connecting other apps</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#what">What MCP is</a>
+<a href="#lifecycle">Lifecycle: add → trust → use</a>
+<a href="#config">Config shapes</a>
+<a href="#names">Tool names</a>
+<a href="#lab">Lab</a>
+</nav>
+
+<figure class="figure square" style="max-width:360px;margin-inline:auto"><img src="../assets/skills-mcp.jpg" alt="Modular connectors" /><figcaption>MCP plugs extra apps into Grok.</figcaption></figure>
+
+<h2 id="what">What MCP is</h2>
+<p><strong>MCP</strong> (Model Context Protocol) lets Grok call tools from another program—issue trackers, Blender, browsers, internal APIs. Built-in tools still work; MCP <em>adds</em> more.</p>
+
+<h2 id="lifecycle">Steps: add → check → use</h2>
+<ol class="steps">
+  <li><strong>Get a server</strong> — follow that product’s MCP install docs (often <code>npx</code>, <code>uvx</code>, or a binary).</li>
+  <li><strong>Register it</strong> with the CLI or config (examples below).</li>
+  <li><strong>Check it is healthy</strong> — <code>/mcps</code> in Grok, or list/doctor CLI commands when available.</li>
+  <li><strong>Use plain English</strong> — e.g. “Create a Linear issue for this bug” if Linear MCP is connected. Grok finds the tools; you rarely type raw tool IDs.</li>
+</ol>
+
+<div class="pre-wrap"><pre><code><span class="comment"># Common CLI shape (names may evolve—check /docs if a flag differs)</span>
+grok mcp add &lt;name&gt; -- …     <span class="comment"># register a server</span>
+grok mcp list
+grok mcp doctor              <span class="comment"># diagnose startup failures when available</span>
+<span class="comment"># In TUI: /mcps</span></code></pre></div>
+
+<h2 id="config">Config shapes</h2>
+<p><strong>User-wide</strong> (<code>~/.grok/config.toml</code>) vs <strong>project</strong> (<code>.grok/config.toml</code> — MCP is one of the things project config may hold):</p>
+<div class="pre-wrap"><pre><code>[mcp_servers.demo]
+command = "uvx"
+args = ["some-mcp-package"]
+enabled = true
+startup_timeout_sec = 60   <span class="comment"># cold npx/uvx often needs longer</span></code></pre></div>
+<p>HTTP/remote servers use a <code>url</code> + optional headers instead of <code>command</code>. OAuth-backed servers may store tokens under Grok’s credential files—treat those like passwords.</p>
+
+<div class="callout tip"><div class="mark">Compatibility</div><div>
+<p>Grok can also pick up Claude/Cursor-style MCP configs for compatibility. Prefer one clear source of truth so you know what’s connected.</p>
+</div></div>
+
+<h2 id="names">Tool names</h2>
+<p>MCP tools are often namespaced as <code>&lt;server&gt;__&lt;tool&gt;</code> in logs. You rarely type that—if a call fails, the error text naming the tool is useful for debugging with <code>/mcps</code> or doctor.</p>
+
+<div class="callout warn"><div class="mark">Trust</div><div>
+<p>An MCP server can be as powerful as the APIs it holds. Only add servers you trust. Keep secrets in env vars, not chat.</p>
+</div></div>
+
+<h2 id="lab">Lab</h2>
+<ol class="steps">
+  <li>Open Grok and run <code>/mcps</code>. Note what is already connected (maybe nothing).</li>
+  <li>Without installing anything risky, ask: “List MCP tools currently available to you.”</li>
+  <li>Write one sentence: which real app you’d connect next (GitHub, Blender, tracker) and why.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can explain MCP as “USB for tools,” know where config lives, and know <code>/mcps</code> is the TUI control panel.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. MCP mainly…</legend>
+      <label><input type="radio" name="mcp1" value="right" /> Connects Grok to other apps/tools you choose to trust</label>
+      <label><input type="radio" name="mcp1" value="wrong" /> Replaces the need for permissions</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Before adding MCP servers…</legend>
+      <label><input type="radio" name="mcp2" value="right" /> Prefer shipping a walkthrough first; only add tools you trust</label>
+      <label><input type="radio" name="mcp2" value="wrong" /> Install every server you find online</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Concepts first; use in-product <code>/docs</code> for version-exact flags (product is Beta).</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "mcp" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

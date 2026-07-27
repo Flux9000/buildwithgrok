@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skills, Plugins & Hooks — Build With Grok</title>
+  <meta name="description" content="Reusable recipes (skills), installable bundles (plugins), and automatic scripts (hooks)—each explained from zero." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Skills, Plugins & Hooks</h1>
+          <p class="lead">Skills = saved playbooks. Plugins = installable packs. Hooks = automatic scripts at key moments.</p>
+          <div class="lesson-prereq"><span>Know what <a href="10-project-rules.html">AGENTS.md</a> is for</span></div>
+        </header>
+        
+<figure class="figure square" style="max-width:380px;margin-inline:auto"><img src="../assets/skills-mcp.jpg" alt="Modules connecting to a core" /><figcaption>Think Lego pieces you snap onto Grok.</figcaption></figure>
+
+<h2>Skills = saved playbooks</h2>
+<p>A <strong>skill</strong> is a folder with a file named <code>SKILL.md</code> that teaches Grok a repeatable procedure (“how we commit,” “how we ship a game slice”). When your request matches the skill’s description, Grok loads those instructions.</p>
+<p>Why bother? So you do not retype a 20-line process every Friday.</p>
+<div class="pre-wrap"><pre><code>~/.grok/skills/hello-skill/SKILL.md</code></pre></div>
+<div class="pre-wrap"><pre><code>---
+name: hello-skill
+description: Demo skill. Use when the user says hello-skill practice.
+user-invocable: true
+---
+
+# Hello skill
+1. Reply with a cheerful greeting
+2. Ask what project folder we are in
+3. Stop — do not edit files</code></pre></div>
+<p>If <code>user-invocable: true</code>, you can also run it like <code>/hello-skill</code> from the slash menu.</p>
+<p>Project skills can live in <code>.grok/skills/</code> inside a repo so teammates share them.</p>
+
+<h2>Plugins = packs of extras</h2>
+<p>A <strong>plugin</strong> is an installable bundle that may include skills, commands, hooks, agents, and MCP connections. A <strong>marketplace</strong> is a catalog of plugins (like an app store listing).</p>
+<p>Beginners: use <code>/plugins</code> and <code>/marketplace</code> only when you trust the source. Read descriptions before enabling anything that runs code on your machine.</p>
+
+<h2>Hooks = automatic reactions</h2>
+<p>A <strong>hook</strong> runs a small script when something happens (session start, before a tool, after a tool, when Grok tries to stop). Examples:</p>
+<ul>
+  <li>Block obviously dangerous shell commands</li>
+  <li>Auto-format code after edits</li>
+  <li>Refuse to “finish” until tests pass</li>
+</ul>
+<p>Manage with <code>/hooks</code>. Creating hooks means writing JSON/config and scripts—optional until you need automation seatbelts. Official hooks guide has full schemas.</p>
+
+<div class="callout lab"><div class="mark">Tiny lab</div><div>
+<p>Create the hello-skill above under <code>~/.grok/skills/</code>, restart Grok, and run <code>/hello-skill</code> or ask “run hello-skill practice.”</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. A skill is mainly…</legend>
+      <label><input type="radio" name="sk1" value="right" /> A saved playbook/recipe you can reuse</label>
+      <label><input type="radio" name="sk1" value="wrong" /> A type of permission popup</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Hooks are for…</legend>
+      <label><input type="radio" name="sk2" value="right" /> Automatic scripts at certain moments (use carefully)</label>
+      <label><input type="radio" name="sk2" value="wrong" /> Replacing the need to install Grok</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> · every lesson assumes you may be new to the idea.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "skills" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

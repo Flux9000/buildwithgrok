@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slash Commands — Build With Grok</title>
+  <meta name="description" content="What slash commands are, how to run them step by step, and a plain-language encyclopedia of each command group." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Slash Commands</h1>
+          <p class="lead">Commands that start with / control Grok (not a normal chat question). Learn how to run them, then browse the list.</p>
+          <div class="lesson-prereq"><span>Finish Beginner track (and ideally a walkthrough)</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#what">What a slash command is</a>
+<a href="#how">How to run one</a>
+<a href="#session">Session commands</a>
+<a href="#model">Model &amp; mode</a>
+<a href="#memory">Memory</a>
+<a href="#ext">Extensions</a>
+<a href="#media">Media</a>
+<a href="#auto">Automation &amp; multi-session</a>
+<a href="#other">Help, account, UI</a>
+<a href="#hidden">Hidden / easter eggs</a>
+<a href="#truth">Version truth</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Verified against install</div><div>
+<p>Checked against <strong>Grok Build 0.2.112</strong> (official user guide + installed <code>grok</code>). If your version differs, trust in-app <code>/docs</code> and <code>/release-notes</code>.</p>
+</div></div>
+
+<h2 id="what">What a slash command is</h2>
+<p>A <strong>slash command</strong> starts with <code>/</code>. It controls Grok (new session, settings, plan mode). It is <strong>not</strong> a normal question to the AI. Example: <code>/new</code> starts a blank chat. “What is a function?” without <code>/</code> is a normal prompt.</p>
+<p class="why">Why slash? You stay on the keyboard: settings, compact history, switch models, and more. Type <code>/</code> for the menu, or use <code>/help</code>.</p>
+<p><strong>Not a slash command:</strong> <code>grok --yolo</code> is a <em>command-line flag</em> for always-approve. There is no <code>/yolo</code>. In the screen use <code>/always-approve</code> or <kbd>Ctrl+O</kbd>.</p>
+
+<h2 id="how">How to run one (step by step)</h2>
+<ol class="steps">
+  <li>Click the bottom prompt (or Tab until you can type there).</li>
+  <li>Type <code>/</code>. A list appears.</li>
+  <li>Keep typing part of the name to filter (example: <code>/comp</code> finds compact).</li>
+  <li>Use ↑/↓ to highlight, then Enter to run. Or finish typing the full command and Enter.</li>
+  <li>If a command needs extra words, type them after a space: <code>/rename my cool session</code>.</li>
+</ol>
+<div class="you-will-see"><strong>What you will see</strong>
+<p>A menu with command names and short descriptions. Some commands open a second screen (settings, session picker). Others run immediately and print a result in the history.</p>
+</div>
+
+<input class="filter-box" id="cmd-filter" type="search" placeholder="Type to filter this list… try: compact, plan, quit" />
+
+<div class="cmd-group" id="session"><h3>Session — manage this conversation</h3>
+<p>A <strong>session</strong> is the saved chat you are in right now (history + tool results).</p>
+<div class="cmd-item"><h4>/new</h4><div class="aliases">Also: /clear</div><p><strong>What it does:</strong> Throws away the current conversation view and starts fresh (still in the same project folder). <strong>When to use:</strong> Topic change, or the chat got confusing.</p></div>
+<div class="cmd-item"><h4>/resume</h4><p><strong>What it does:</strong> Opens a list of older sessions so you can reopen one. <strong>When to use:</strong> “I worked on inventory yesterday—bring that chat back.”</p></div>
+<div class="cmd-item"><h4>/compact [note]</h4><p><strong>What it does:</strong> Summarizes older history so Grok has room to think (frees the context window). Optional note tells it what to keep: <code>/compact keep the save-file format decisions</code>. <strong>When to use:</strong> Long sessions that feel forgetful or hit limits.</p></div>
+<div class="cmd-item"><h4>/context</h4><p><strong>What it does:</strong> Shows a breakdown of what is filling Grok’s memory for this chat (system text, messages, tools, free space). <strong>When to use:</strong> Before a huge task, to see if you should compact first.</p></div>
+<div class="cmd-item"><h4>/session-info</h4><div class="aliases">/status, /info</div><p>Shows which model you are on, how you signed in, how many turns you have taken, and other session stats (including usage when available).</p></div>
+<div class="cmd-item"><h4>/fork</h4><p>Starts a <strong>side chat</strong> from this point, keeping history so far, so you can try a risky idea without spoiling the original thread. Optional flags in the install: <code>/fork [--worktree|--no-worktree] [directive]</code>.</p></div>
+<div class="cmd-item"><h4>/rewind</h4><p>Steps backward to an earlier point in the chat and discards what came after (including related file snapshots when available). Use carefully—it is real undo for the session timeline. (Double-Esc on an empty idle prompt can open the same rewind picker.)</p></div>
+<div class="cmd-item"><h4>/rename</h4><div class="aliases">/title</div><p>Gives the session a human name: <code>/rename inventory-ui</code>. Helps when resuming later.</p></div>
+<div class="cmd-item"><h4>/copy</h4><p>Copies Grok’s latest answer to the clipboard. Options: <code>/copy 2</code> (Nth-latest), or a file path to write text (handy over SSH). Also backs up to <code>~/.grok/last-copy.txt</code> (or <code>GROK_COPY_FILE</code>).</p></div>
+<div class="cmd-item"><h4>/export</h4><p>Saves or copies the whole conversation.</p></div>
+<div class="cmd-item"><h4>/find [text]</h4><p>Search the conversation history (the messages above the typing box) for text.</p></div>
+<div class="cmd-item"><h4>/jump</h4><p>Jump to a turn in the conversation (navigate the transcript by turn).</p></div>
+<div class="cmd-item"><h4>/recap</h4><div class="aliases">/summarize</div><p>Summarize the session so far (handy before compact or handoff).</p></div>
+<div class="cmd-item"><h4>/share</h4><p>Share this session via URL when sharing is available for your account/build. If disabled, Grok will say so.</p></div>
+<div class="cmd-item"><h4>/quit</h4><div class="aliases">/exit</div><p>Leaves Grok and returns you to the normal terminal.</p></div>
+<div class="cmd-item"><h4>/home</h4><div class="aliases">/welcome</div><p>Leaves the session and returns to the welcome screen (there is no default key binding for this—slash only).</p></div>
+<div class="cmd-item"><h4>/edit-prompt</h4><p>In <strong>minimal mode only</strong>, opens your external editor for a new empty draft (<code>$VISUAL</code> then <code>$EDITOR</code> then <code>vi</code>). Hidden outside minimal mode. To edit an <em>existing</em> draft when a terminal steals Ctrl+G, use the command palette → <strong>Edit Prompt in External Editor</strong>.</p></div>
+</div>
+
+<div class="cmd-group" id="model"><h3>Model &amp; working mode</h3>
+<div class="cmd-item"><h4>/model</h4><div class="aliases">/m</div><p>Switches which AI model powers answers (different models have different strengths/cost). Example: <code>/model grok-build</code>.</p></div>
+<div class="cmd-item"><h4>/effort</h4><p>For models that support it, sets how hard the model “thinks” (low → xhigh). Higher can be slower/more thorough.</p></div>
+<div class="cmd-item"><h4>/always-approve</h4><p>Turns on “skip most permission popups” (sometimes nicknamed YOLO). Run it again to go back to Ask. <strong>Leave off while learning.</strong> Keyboard: <kbd>Ctrl+O</kbd>. CLI flags (not slash): <code>--always-approve</code> or <code>--yolo</code>.</p></div>
+<div class="cmd-item"><h4>/auto</h4><p>Lets Grok auto-allow safer tools; riskier work may still ask you. <strong>Only appears when the auto permission-mode feature is enabled</strong> on your build. If it is missing from the menu, stay on Ask.</p></div>
+<div class="cmd-item"><h4>/plan</h4><p>Enters plan mode: Grok designs an approach for your approval before editing product code. Optional text: <code>/plan add user login</code>. You can also cycle into Plan with <kbd>Shift+Tab</kbd> (Normal → Plan → Always-approve).</p></div>
+<div class="cmd-item"><h4>/view-plan</h4><div class="aliases">/show-plan, /plan-view</div><p>Open a preview of the current saved plan.</p></div>
+<div class="cmd-item"><h4>/multiline</h4><div class="aliases">/ml</div><p>When on, Enter inserts a newline; send with Shift+Enter or Alt+Enter. Mid-turn, bare Enter on an empty composer can still force-send the top queued follow-up.</p></div>
+<div class="cmd-item"><h4>/history</h4><p>Open prompt-history search (fuzzy over prompts you sent this session). On an empty prompt, <kbd>↑</kbd> is the quick path to the last prompt.</p></div>
+<div class="cmd-item"><h4>/vim-mode</h4><p>Toggle optional Vim-style keys for moving in history (j/k, and more). Off by default; beginners can ignore. Setting saves to <code>[ui] vim_mode</code>.</p></div>
+<div class="cmd-item"><h4>/minimal · /fullscreen</h4><div class="aliases">/full → fullscreen</div><p>Switch how this session looks: <strong>fullscreen</strong> is the usual full Grok screen; <strong>minimal</strong> is an experimental layout that uses more of your terminal’s normal scrollback. Does not rewrite config—use <code>/settings</code> → Default screen mode for permanent defaults.</p></div>
+<div class="cmd-item"><h4>/compact-mode</h4><p>Tighter visual spacing (display density), not the same as <code>/compact</code> history compression.</p></div>
+</div>
+
+<div class="cmd-group" id="memory"><h3>Memory (optional long-term notes)</h3>
+<p><strong>Memory</strong> is an experimental feature that can remember facts across sessions. It is off by default. Enabling is covered in Sessions &amp; Memory.</p>
+<div class="cmd-item"><h4>/remember</h4><p>Always available: save one note right now (“staging server is eu-west”).</p></div>
+<div class="cmd-item"><h4>/memory</h4><p>Browse or toggle memory when enabled.</p></div>
+<div class="cmd-item"><h4>/flush · /dream</h4><p>Write session knowledge into memory / reorganize memories. Need memory enabled.</p></div>
+</div>
+
+<div class="cmd-group" id="ext"><h3>Extensions — skills, plugins, agents, MCP</h3>
+<p>These open management UIs. You will understand each concept in later lessons; commands are listed here so the encyclopedia is complete.</p>
+<div class="cmd-item"><h4>/skills · /plugins · /marketplace · /hooks</h4><p>Same extensions window, different tabs: reusable recipes, installable bundles, store browsing, lifecycle scripts.</p></div>
+<div class="cmd-item"><h4>/mcps</h4><p>Manage MCP servers (bridges to other apps/tools).</p></div>
+<div class="cmd-item"><h4>/config-agents</h4><div class="aliases">/agents</div><p>Open the agents modal: view/manage agent definitions, set the default, switch the active one.</p></div>
+<div class="cmd-item"><h4>/personas</h4><p>Create, edit, and delete personas (overlays a subagent can apply).</p></div>
+</div>
+
+<div class="cmd-group" id="media"><h3>Media</h3>
+<div class="cmd-item"><h4>/imagine</h4><p>Generate an image from a text description.</p></div>
+<div class="cmd-item"><h4>/imagine-video</h4><p>Generate a short video from a description (multi-step under the hood).</p></div>
+</div>
+
+<div class="cmd-group" id="auto"><h3>Automation &amp; multi-session</h3>
+<div class="cmd-item"><h4>/loop</h4><p>Run a prompt on a recurring interval (<code>30m</code>, <code>1 hour</code>, …). Minimum interval is <strong>60 seconds</strong>. Recurring tasks expire after 7 days.</p></div>
+<div class="cmd-item"><h4>/goal</h4><p>Set/manage an autonomous goal that only completes after independent evidence review. Subcommands: <code>status</code>, <code>pause</code>, <code>resume</code>, <code>clear</code>. <strong>Only appears when goal mode is enabled</strong> for the session—if missing, use normal prompts or workflows instead.</p></div>
+<div class="cmd-item"><h4>/deep-research</h4><p>Start a structured research workflow with sources and verification; follow progress in <code>/workflows</code>.</p></div>
+<div class="cmd-item"><h4>/workflow · /workflows</h4><p><code>/workflow</code> launches or manages a saved multi-agent script by display name. <code>/workflows</code> is the live <strong>run</strong> dashboard (not a catalog of definitions). Project scripts: <code>.grok/workflows/*.rhai</code>; user: <code>~/.grok/workflows/*.rhai</code>.</p></div>
+<div class="cmd-item"><h4>/dashboard</h4><div class="aliases">/sessions</div><p>Fullscreen overview of running sessions (multi-session)—switch between, rename, or close active sessions (parent + forks). Alias <code>/sessions</code> is the same command (official sessions guide + install menu). Also try the command palette or any dashboard chord your build advertises in-app.</p></div>
+<div class="cmd-item"><h4>/tasks</h4><p>List background tasks, subagents, and scheduled tasks. Full TUI: <kbd>Ctrl+G</kbd> toggles the tasks pane (in minimal mode, Ctrl+G may mean external-edit draft instead—use this slash or the palette if the chord conflicts).</p></div>
+<div class="cmd-item"><h4>/queue</h4><p>List prompts queued behind the running turn. Mid-turn, plain Enter with text queues follow-ups; empty Enter / send-now chords can promote the top item.</p></div>
+</div>
+
+<div class="cmd-group" id="other"><h3>Help, account, appearance</h3>
+<div class="cmd-item"><h4>/help</h4><p>Browse commands and keyboard shortcuts (built-in help entry from the install menu).</p></div>
+<div class="cmd-item"><h4>/docs</h4><div class="aliases">/howto, /guides</div><p>How-to guides picker, online Build docs (<code>/docs web</code>), or a guide by title (<code>/docs Getting Started</code>).</p></div>
+<div class="cmd-item"><h4>/tutorial</h4><div class="aliases">/tour, /onboarding</div><p>Official onboarding topics inside Grok (~30s each). Nothing auto-shows—you open this on purpose.</p></div>
+<div class="cmd-item"><h4>/doctor</h4><div class="aliases">/terminal-setup, /terminal-check, /terminal-info</div><p>Diagnose terminal/clipboard/color/input/sandbox issues; <code>/doctor fix</code> lists automatic fixes.</p></div>
+<div class="cmd-item"><h4>/theme</h4><div class="aliases">/t</div><p>Switch the TUI color theme.</p></div>
+<div class="cmd-item"><h4>/settings</h4><div class="aliases">/config, /preferences, /prefs</div><p>Interactive settings modal.</p></div>
+<div class="cmd-item"><h4>/timestamps</h4><p>Toggle message timestamps on or off.</p></div>
+<div class="cmd-item"><h4>/btw</h4><p>Ask a side question without interrupting the main task (answer is not part of the main turn).</p></div>
+<div class="cmd-item"><h4>/login · /logout</h4><p>Authenticate or sign out without leaving the app shell awkwardly.</p></div>
+<div class="cmd-item"><h4>/usage</h4><div class="aliases">/cost</div><p>Credit usage / billing: bare <code>/usage</code> or <code>/usage manage</code>.</p></div>
+<div class="cmd-item"><h4>/privacy</h4><p>Show or toggle privacy / data-retention status (<code>opt-in</code> / <code>opt-out</code>). Team rules may restrict who can toggle.</p></div>
+<div class="cmd-item"><h4>/feedback</h4><p>Report an issue or send feedback.</p></div>
+<div class="cmd-item"><h4>/import-claude</h4><p>Import settings from Claude Code (<code>~/.claude</code>): permissions, env, MCP, hooks, paths.</p></div>
+<div class="cmd-item"><h4>/release-notes</h4><div class="aliases">/changelog</div><p>What changed in this Grok version.</p></div>
+<div class="cmd-item"><h4>/debug [scroll|fps|log]</h4><p>Toggle debug overlays (scroll diagnostics HUD, FPS, scroll flight recorder). For advanced troubleshooting—not everyday work.</p></div>
+<div class="cmd-item"><h4>/voice</h4><p>Start voice dictation when speech features are available (also Ctrl+Space / F8 when enabled in settings). Skip if you do not use voice.</p></div>
+<div class="cmd-item"><h4>/toggle-mouse-reporting</h4><p>Toggle terminal mouse reporting when selection/scroll fights your terminal. Advanced; see <code>/doctor</code> if mouse feels wrong.</p></div>
+<div class="cmd-item"><h4>/announcements</h4><p>Show or hide product announcement banners: <code>/announcements hide</code> or <code>/announcements show</code>.</p></div>
+<div class="cmd-item"><h4>/transcript</h4><p>View the full conversation transcript in your system pager (<code>$PAGER</code>). Useful after a long session when you want the raw thread outside the TUI chrome.</p></div>
+<div class="cmd-item"><h4>/expand</h4><p>Re-print the last collapsed block, fully expanded. <strong>Minimal mode only</strong> (<code>--minimal</code> / <code>/minimal</code>); the install rejects it outside minimal mode.</p></div>
+</div>
+
+<div class="cmd-group" id="hidden"><h3>Hidden / fun (easter eggs)</h3>
+<p>These exist in the installed binary menu but are <strong>not</strong> part of the primary learning path. Do not use them as “core workflow.”</p>
+<div class="cmd-item" data-easter-egg="gboom"><h4>/gboom</h4><div class="aliases">Hidden easter egg</div><p>Install label: <strong>Hidden easter egg</strong>. Launches a fun GBOOM mini-game-style overlay (“knee-deep in the tokens”). Needs a <strong>graphics-capable terminal</strong> (kitty, Ghostty, WezTerm, iTerm2, etc.). If your terminal cannot render it, Grok will say so. Completely optional—ignore while learning.</p></div>
+<div class="cmd-item"><h4>/scroll-debug</h4><p>Developer scroll-diagnostics HUD. Optional debug aid, not a daily command.</p></div>
+</div>
+
+<div class="callout tip"><div class="mark">Skills can become commands too</div><div>
+<p>If you (or a plugin) install a skill marked <code>user-invocable: true</code>, it appears as <code>/skill-name</code>. Built-in commands always win if names clash; use <code>/user:name</code> or <code>/local:name</code> to be specific.</p>
+</div></div>
+
+<div class="callout tip" id="truth"><div class="mark">Version truth</div><div>
+<p>Grok Build is Beta. Features gate by config/build (memory, auto mode, goals, sharing). When something is missing from your menu, that is usually expected—check <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code> for <em>your</em> version. Academy inventory source: <code>data/slash-commands-inventory.json</code>.</p>
+</div></div>
+
+<div class="callout lab"><div class="mark">Practice</div><div>
+<p>In a throwaway session run: <code>/rename practice-commands</code>, then <code>/help</code>, <code>/session-info</code>, and <code>/context</code>. Optional curiosity: type <code>/gboom</code> once if you have a graphics-capable terminal—then close it and get back to real work. No need for always-approve or destructive tools.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Plain-language path. <a href="00-glossary.html">Glossary</a> · <a href="cheatsheet.html">Cheatsheet</a></p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "commands" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

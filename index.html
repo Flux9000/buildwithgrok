@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Build With Grok — From Absolute Beginner to Master</title>
+  <meta name="description" content="Build With Grok — independent curriculum for Grok Build. Ship a first game or app, then unlock full power. Not affiliated with xAI or SpaceXAI." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="css/style.css?v=20260727h" />
+</head>
+<body class="design-system-v3-showcase" data-showcase-site>
+  <header class="site-nav" data-topnav></header>
+
+  <section class="hub-hero" data-hub-showcase-hero>
+    <div class="hub-hero-bg" aria-hidden="true" data-eager-images>
+      <img src="assets/hero.jpg" alt="" loading="eager" decoding="async" fetchpriority="high" />
+    </div>
+    <div class="hub-hero-orbs" aria-hidden="true">
+      <span class="orb-a"></span>
+      <span class="orb-b"></span>
+      <span class="orb-c"></span>
+    </div>
+    <div class="wrap">
+      <div class="hub-kicker">Beginner-friendly · Plain English · Labs on your computer · buildwithgrok.com</div>
+      <h1>Build With Grok</h1>
+      <p class="hub-sub">
+        Go from zero to confident with <strong>Grok Build</strong>—the AI coding tool in your terminal.
+        Learn the basics, then <strong>build a tiny game or app</strong> with copy-paste prompts.
+        After you ship once, unlock daily habits and advanced power tools.
+      </p>
+      <div class="hero-actions" id="hero-actions" data-first-win-funnel>
+        <a class="btn btn-primary" id="continue-btn" href="pages/01-getting-started.html" data-hub-primary-cta>Install Grok Build</a>
+        <a class="btn btn-ghost" href="pages/21-walkthrough-first-game.html" id="first-ship-cta">Then: ship a game</a>
+        <a class="btn btn-ghost" href="pages/00-glossary.html" id="glossary-cta">Optional: glossary</a>
+      </div>
+      <div class="hero-meta">
+        <span id="hub-progress-label"><strong>0</strong> / 26 complete</span>
+        <span><strong>Opened ≠ complete</strong> — mark a lesson done after the lab</span>
+        <span data-first-value-framing><strong>First wins:</strong> install works, then finish a ship walkthrough</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight" id="continue-panel">
+    <div class="wrap">
+      <div class="continue-card reveal" id="continue-card">
+        <div class="continue-card-body">
+          <div class="section-label">Your progress</div>
+          <h2 class="hub-heading" id="continue-title">Start here — install Grok Build</h2>
+          <p class="hub-lead" id="continue-desc">New here? Install and prove Grok works. Returning? Your next incomplete lesson loads after scripts run.</p>
+          <p class="hub-lead practice-due-cue" id="practice-due-cue" hidden data-practice-due></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" id="continue-btn-main" href="pages/01-getting-started.html" data-hub-primary-cta>Install Grok Build</a>
+            <a class="btn btn-ghost" id="ship-milestone-btn" href="pages/21-walkthrough-first-game.html">Go to First Ship</a>
+            <button type="button" class="btn btn-ghost" id="reset-progress-btn" data-reset-progress>Reset all progress</button>
+          </div>
+          <p class="complete-hint">Progress stays in this browser only. Opening a page means <strong>opened</strong>. Click <strong>Mark lesson complete</strong> after the lab. Early goals: (1) install works, (2) finish a game or app walkthrough.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight section-band" id="how">
+    <div class="wrap">
+      <div class="section-label">Your path</div>
+      <h2 class="hub-heading reveal">Five tracks. One order.</h2>
+      <p class="hub-lead reveal" data-first-value-framing>
+        Follow the steps in order. Success early on means: install Grok, then finish a
+        <strong>First Ship</strong> walkthrough. Do not jump to Advanced until you have shipped once.
+      </p>
+
+      <div class="callout tip reveal" id="express-path" data-express-path>
+        <div class="mark">Express path (impatient?)</div>
+        <div>
+          <p>
+            <strong>Still ship-first.</strong> Minimum path:
+            <a href="pages/01-getting-started.html">Install</a> →
+            <a href="pages/02-first-session.html">First Session</a> →
+            <a href="pages/21-walkthrough-first-game.html">First Game walkthrough</a>
+            (or the <a href="pages/22-walkthrough-first-app.html">app walkthrough</a>).
+            Glossary, Screen, and Keyboard help a lot—skip them only if you already know terminals, and come back when stuck.
+          </p>
+        </div>
+      </div>
+
+      <figure class="journey-banner reveal">
+        <img src="assets/path-journey.jpg" alt="" />
+        <figcaption>Beginner → First ship → Intermediate → Advanced → Mastery</figcaption>
+      </figure>
+
+      <div class="path-stepper reveal" id="path-stepper">
+        <a class="path-step cyan" href="pages/00-glossary.html">
+          <span class="step-num">01 · Beginner</span>
+          <strong>Learn the basics</strong>
+          <span class="desc">Glossary, install, first session, screen &amp; keys</span>
+        </a>
+        <a class="path-step green" href="pages/21-walkthrough-first-game.html">
+          <span class="step-num">02 · First ship</span>
+          <strong>Build something real</strong>
+          <span class="desc">Game or app walkthrough with copy-paste prompts</span>
+        </a>
+        <a class="path-step violet" href="pages/24-day2-git.html">
+          <span class="step-num">03 · Intermediate</span>
+          <strong>Daily habits after your first ship</strong>
+          <span class="desc">Day-2 git, slash commands, tools, safety, prompts</span>
+        </a>
+        <a class="path-step amber" href="pages/10-project-rules.html">
+          <span class="step-num">04 · Advanced</span>
+          <strong>Full power</strong>
+          <span class="desc">Plan mode, MCP, headless, dashboard, loops</span>
+        </a>
+        <a class="path-step cyan" href="pages/20-mastery.html">
+          <span class="step-num">05 · Mastery</span>
+          <strong>Keep growing</strong>
+          <span class="desc">Practice plan and master cheatsheet</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight" id="showcase" data-hub-showcase>
+    <div class="wrap">
+      <div class="hub-showcase reveal">
+        <div class="hub-showcase-grid">
+          <div>
+            <div class="showcase-kicker">What this site is</div>
+            <h2>A clear path from beginner to master—with real labs on your machine</h2>
+            <p>
+              Short lessons, copy-paste prompts, and checkboxes so you know when you are done.
+              Built as an independent community guide for Grok Build—not an official Grok or xAI product.
+            </p>
+          </div>
+          <div class="showcase-stats" aria-label="Site highlights">
+            <div class="showcase-stat"><strong>5</strong><span>tracks in order</span></div>
+            <div class="showcase-stat"><strong>26</strong><span>lessons &amp; labs</span></div>
+            <div class="showcase-stat"><strong>2</strong><span>full ship guides</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-label">Welcome</div>
+      <h2 class="hub-heading reveal">If you are brand new</h2>
+      <div class="card-grid cols-2 reveal">
+        <article class="card">
+          <h3>What you will learn</h3>
+          <p>Install Grok Build, write clear goals, approve tools safely, and ship a mini game or app. Later: plan mode, MCP, scripts, and multi-session work.</p>
+        </article>
+        <article class="card">
+          <h3>What you need</h3>
+          <p>A computer, internet, and willingness to type a few commands. No programming, Git, or AI experience required—we explain each idea when you need it.</p>
+        </article>
+        <article class="card">
+          <h3>How each lesson works</h3>
+          <p>Plain definitions, “what you will see” notes, step-by-step labs, “if stuck” tips, and a clear <strong>Done when</strong> checklist.</p>
+        </article>
+        <article class="card">
+          <h3>Recommended path</h3>
+          <p>Glossary → Install → First session → Screen → Keyboard → <strong>First ship</strong> → Intermediate → Advanced → Mastery.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-band" id="ship">
+    <div class="wrap">
+      <div class="section-label">Ship something real</div>
+      <h2 class="hub-heading reveal">End-to-end walkthroughs</h2>
+      <p class="hub-lead reveal">
+        After install, your first session, the screen lesson, and keyboard basics—pick one guide and finish it.
+        Each step includes prompts to copy and prompts to avoid.
+      </p>
+      <div class="card-grid cols-2 reveal">
+        <article class="ship-card">
+          <div class="ship-media">
+            <img src="assets/game-pipeline.jpg" alt="" />
+          </div>
+          <div class="ship-body">
+            <h3>First game: Star Clicker Arena</h3>
+            <p>WASD move, one enemy, Space attack, win/lose, restart. Opens as <code>index.html</code>—no game engine.</p>
+            <a class="btn btn-primary" href="pages/21-walkthrough-first-game.html">Start game walkthrough</a>
+          </div>
+        </article>
+        <article class="ship-card">
+          <div class="ship-media">
+            <img src="assets/ship-celebrate.jpg" alt="" />
+          </div>
+          <div class="ship-body">
+            <h3>First app: Focus List</h3>
+            <p>Add, complete, filter, and delete tasks with browser save. A real micro-product, vanilla HTML/JS.</p>
+            <a class="btn btn-primary" href="pages/22-walkthrough-first-app.html">Start app walkthrough</a>
+          </div>
+        </article>
+      </div>
+      <div class="callout tip reveal" style="margin-top:1.5rem">
+        <div class="mark">Prerequisites</div>
+        <div>
+          <p>Complete <a href="pages/01-getting-started.html">Getting Started</a>, <a href="pages/02-first-session.html">Your First Session</a>, <a href="pages/03-tui-mastery.html">The Grok Screen</a>, and <a href="pages/04-keyboard.html">Keyboard Basics</a> first—or at minimum Install + First Session if you are in a hurry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="full-potential">
+    <div class="wrap split">
+      <div>
+        <div class="section-label">After you ship</div>
+        <h2 class="hub-heading reveal">Full-potential map</h2>
+        <p class="hub-lead reveal"><strong>Do not start here.</strong> Finish Beginner and one ship walkthrough first. Then Intermediate and Advanced cover:</p>
+        <div class="card-grid cols-2 reveal">
+          <article class="card"><h3>Plan + AGENTS.md</h3><p>Design before edits; project rules every session inherits.</p></article>
+          <article class="card"><h3>Safety stack</h3><p>Modes · allow/deny · OS sandbox—three layers.</p></article>
+          <article class="card"><h3>Skills · MCP · hooks</h3><p>Reusable playbooks and external app tools.</p></article>
+          <article class="card"><h3>Headless + dashboard</h3><p>CI scripts, ACP, multi-session overview.</p></article>
+        </div>
+      </div>
+      <div class="split-media square reveal">
+        <img src="assets/safety-shields.jpg" alt="" />
+        <span class="media-caption">Safety · systems · scale</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-band" id="tracks">
+    <div class="wrap">
+      <div class="section-label">Curriculum</div>
+      <h2 class="hub-heading reveal">Browse all five tracks</h2>
+      <p class="hub-lead reveal">Each card lists its lessons. Use the full path list below if you prefer a single checklist.</p>
+      <div class="card-grid cols-2" id="track-cards"></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap split">
+      <div>
+        <div class="section-label">Method</div>
+        <h2 class="hub-heading reveal">Do the labs on your computer</h2>
+        <ol class="steps reveal">
+          <li><strong>Words You’ll See</strong> — skim the glossary (optional, helpful).</li>
+          <li><strong>Getting Started</strong> — install and sign in.</li>
+          <li><strong>Your First Session</strong> — send a goal and approve a tool.</li>
+          <li><strong>The Grok Screen</strong> — history above, typing box below.</li>
+          <li><strong>Keyboard Basics</strong> — a few shortcuts you will use every day.</li>
+          <li><strong>First ship</strong> — finish the game walkthrough <em>or</em> the app walkthrough (finish one fully before switching).</li>
+          <li><strong>Intermediate → Advanced</strong> — only after you have shipped once.</li>
+        </ol>
+      </div>
+      <div class="split-media reveal">
+        <img src="assets/conversation.jpg" alt="" />
+        <span class="media-caption">History above · type below</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-label">All lessons</div>
+      <h2 class="hub-heading reveal">Full path in order</h2>
+      <p class="hub-lead reveal">Marks below show opened vs complete on this browser (saved locally only).</p>
+      <div class="path-list reveal" id="full-path"></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="callout tip reveal">
+        <div class="mark">Official docs</div>
+        <div>
+          <p>
+            This site holds your hand. For exact flags after a Grok update, use in-app
+            <code>/docs</code>, <code>/tutorial</code>, and files under <code>~/.grok/docs/user-guide/</code>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <h3>Start with words, then install.</h3>
+        <p>The glossary takes about ten minutes. Getting Started installs Grok on your computer.</p>
+      </div>
+      <div class="footer-links">
+        <a href="pages/00-glossary.html">Glossary</a>
+        <a href="pages/01-getting-started.html">Install</a>
+        <a href="pages/cheatsheet.html">Cheatsheet</a>
+      </div>
+    </div>
+  
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/progress-core.js"></script>
+  <script src="js/search-core.js"></script>
+  <script src="js/version-core.js"></script>
+  <script src="js/a11y-perf.js"></script>
+  <script src="js/curriculum.js"></script>
+  <script>
+    function renderHubProgress() {
+      GROK_ACADEMY.mount({ pageId: null });
+      const stats = GROK_ACADEMY.progressStats();
+      const next = GROK_ACADEMY.nextIncomplete();
+      const api = GROK_ACADEMY.progress();
+
+      const cta = GROK_ACADEMY.resolveHubPrimaryCta({
+        completed: stats.completed,
+        next,
+        base: ".",
+      });
+
+      const continueBtn = document.getElementById("continue-btn");
+      if (continueBtn) {
+        continueBtn.href = cta.href;
+        continueBtn.textContent = cta.heroLabel;
+      }
+      const continueMain = document.getElementById("continue-btn-main");
+      if (continueMain) {
+        continueMain.href = cta.href;
+        continueMain.textContent = cta.label;
+      }
+      const title = document.getElementById("continue-title");
+      const desc = document.getElementById("continue-desc");
+      if (title) title.textContent = cta.title;
+      if (desc) desc.innerHTML = cta.descHtml;
+
+      const hubLabel = document.getElementById("hub-progress-label");
+      if (hubLabel) {
+        hubLabel.innerHTML = `<strong>${stats.completed}</strong> / ${stats.total} complete · ${stats.opened} opened`;
+      }
+
+      // Practice-due cue (local only) + ship milestone framing
+      const cueEl = document.getElementById("practice-due-cue");
+      const cue = typeof GROK_ACADEMY.getPracticeDueCue === "function" ? GROK_ACADEMY.getPracticeDueCue() : null;
+      if (cueEl) {
+        if (cue) {
+          cueEl.hidden = false;
+          cueEl.innerHTML = `${cue.message} <a href="${cue.href}">Open practice</a>`;
+        } else {
+          cueEl.hidden = true;
+          cueEl.textContent = "";
+        }
+      }
+      const shipBtn = document.getElementById("ship-milestone-btn");
+      if (shipBtn && api) {
+        const wtDone = api.isCompleted("wt-game") || api.isCompleted("wt-app");
+        shipBtn.hidden = !!wtDone;
+        if (!wtDone) {
+          shipBtn.href = api.isCompleted("games") || api.isOpened("wt-game")
+            ? "pages/21-walkthrough-first-game.html"
+            : "pages/17-building-games.html";
+        }
+      }
+
+      document.getElementById("track-cards").innerHTML = GROK_ACADEMY.tracks.map((t) => {
+        const first = t.pages[0];
+        const lis = t.pages.map((p) => {
+          const done = api && api.isCompleted(p.id);
+          return `<li><a href="pages/${p.href}">${done ? "✓ " : ""}${p.title}</a><span>${p.time}</span></li>`;
+        }).join("");
+        return `<div class="track-card ${t.color}">
+          <div class="track-name">${t.name}</div>
+          <h3><a href="pages/${first.href}">${t.subtitle}</a></h3>
+          <p>${t.pages.length} lessons · <a href="pages/${first.href}">begin with ${first.title}</a></p>
+          <ul class="lessons">${lis}</ul>
+        </div>`;
+      }).join("");
+
+      document.getElementById("full-path").innerHTML = GROK_ACADEMY.flatPages().map((p, i) => {
+        const completed = api && api.isCompleted(p.id);
+        const opened = api && api.isOpened(p.id);
+        const cls = completed ? "completed" : opened ? "opened" : "";
+        const tag = completed ? "complete" : opened ? "opened" : "not started";
+        return `<a href="pages/${p.href}" class="${cls}">
+          <span class="num">${String(i + 1).padStart(2, "0")}</span>
+          <span class="title">${p.title}<br><span class="path-blurb">${p.blurb}</span></span>
+          <span class="meta">${p.track.name} · ${tag}</span>
+        </a>`;
+      }).join("");
+    }
+
+    window.GROK_ACADEMY_ON_PROGRESS = renderHubProgress;
+    renderHubProgress();
+
+    document.getElementById("reset-progress-btn")?.addEventListener("click", () => {
+      if (!confirm("Reset all academy progress on this browser? This cannot be undone.")) return;
+      GROK_ACADEMY.resetProgress();
+      renderHubProgress();
+    });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

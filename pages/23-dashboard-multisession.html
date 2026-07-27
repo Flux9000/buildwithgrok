@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Dashboard & Multi-Session — Build With Grok</title>
+  <meta name="description" content="Juggle parallel Grok sessions cleanly—dashboard overview, naming, worktrees, and patterns that keep context sane." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Agent Dashboard & Multi-Session</h1>
+          <p class="lead">Use several Grok chats at once—and keep them organized with names and a dashboard overview.</p>
+          <div class="lesson-prereq"><span>After your first ship</span><span>Advanced—skip until you need parallel chats</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#why">Why multi-session</a>
+<a href="#dashboard">Agent Dashboard</a>
+<a href="#patterns">Patterns that work</a>
+<a href="#hygiene">Hygiene</a>
+<a href="#lab">Lab</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Placement</div><div>
+<p>This is an <strong>advanced</strong> lesson. If you haven’t shipped Star Clicker Arena or Focus List yet, do that first—one solid session beats five half-finished ones.</p>
+</div></div>
+
+<h2 id="why">Why multi-session work exists</h2>
+<p>One chat has a limited <strong>context window</strong>. Parallel work (research in A, implement in B, review in C) is cleaner as separate sessions than one mega-thread. Multi-session tools help you overview and dispatch without losing the plot.</p>
+
+<h2 id="dashboard">Agent Dashboard</h2>
+<p>The <strong>Agent Dashboard</strong> is a control surface for sessions: see what’s running, jump between chats, queue replies, and start new work (sometimes in a git worktree).</p>
+<ul class="clean-list">
+  <li><strong>How to open it (try in order):</strong> type <code>/dashboard</code> or its alias <code>/sessions</code> in Grok (same command—official sessions guide); open the command palette with <kbd>Ctrl+P</kbd> and search for “dashboard”; or use any dashboard chord your build advertises in-app. If a shell subcommand exists on your version (<code>grok dashboard</code>), that works from a normal terminal too—confirm with <code>grok --help</code>.</li>
+  <li>Use it when you have more than one active chat and need an overview.</li>
+  <li>Always <code>/rename</code> sessions so the list is readable (example: “combat-slice”, “ci-fix”).</li>
+</ul>
+
+<div class="you-will-see"><strong>What success looks like</strong>
+<p>A list or board of sessions with statuses. <strong>If none of the open steps work:</strong> that feature may be missing on your build. Use two terminal windows instead, and <code>/rename</code> each session so you can tell them apart.</p>
+</div>
+
+<h2 id="patterns">Patterns that work</h2>
+<div class="card-grid cols-2">
+  <article class="card"><h3>Slice isolation</h3><p>One session per vertical slice or journey step. New session when the topic flips.</p></article>
+  <article class="card"><h3>Explore // implement</h3><p>Session A: read-only mapping. Session B: edits with tests. Link findings via a short NOTES.md in the repo.</p></article>
+  <article class="card"><h3>Worktree experiments</h3><p><code>grok --worktree=feat "…"</code> keeps risky branches off your main checkout.</p></article>
+  <article class="card"><h3>Background inside a session</h3><p>Long builds use background tasks (<a href="16-workflows-goals.html">Workflows lesson</a>); dashboards manage whole sessions.</p></article>
+</div>
+
+<h2 id="hygiene">Hygiene rules</h2>
+<ul class="clean-list">
+  <li>Rename sessions at milestones</li>
+  <li>Write decisions into the repo (AGENTS.md / DECISIONS.md)—don’t rely on five open chats as memory</li>
+  <li>Compact or close dead sessions</li>
+  <li>Never Always-approve on untrusted worktrees</li>
+</ul>
+
+<h2 id="lab">Lab</h2>
+<ol class="steps">
+  <li>Open two terminals in the same project (or use dashboard if available).</li>
+  <li>Session A: “List the top-level files only; do not edit.”</li>
+  <li>Session B: “Add a one-line comment to README if it exists; if not, say so.”</li>
+  <li><code>/rename</code> both sessions meaningfully.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can run two focused sessions without mixing goals, and you know where to look for a multi-session overview on your build.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Concepts first; use in-product <code>/docs</code> for version-exact flags (product is Beta).</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "dashboard" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

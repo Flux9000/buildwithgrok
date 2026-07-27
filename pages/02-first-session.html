@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your First Session — Build With Grok</title>
+  <meta name="description" content="From opening Grok to a finished mini-task: what a turn is, how to write clear goals, how @ works, and what to do when Grok asks permission." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Your First Session</h1>
+          <p class="lead">Open Grok in a folder, send a clear goal, approve a tool if asked, and check that the result is correct.</p>
+          <div class="lesson-prereq"><span>Finish <a href="01-getting-started.html">Getting Started</a> first</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#open">Open a session safely</a>
+<a href="#loop">What happens when you send a message</a>
+<a href="#prompt">How to write instructions Grok can follow</a>
+<a href="#at">Point at files with @</a>
+<a href="#approve">When Grok asks permission</a>
+<a href="#verify">Always say how to check the work</a>
+<a href="#steer">Change course while Grok is working</a>
+<a href="#lab">Guided lab</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Prerequisites</div><div>
+<p>Complete <a href="01-getting-started.html">Getting Started</a> so <code>grok</code> runs and you can sign in. You do not need to know how to program yet—we use tiny practice files.</p>
+</div></div>
+
+<figure class="figure"><img src="../assets/conversation.jpg" alt="Abstract view of chat history and input bar" /><figcaption>Top: conversation history (scrollback). Bottom: where you type (prompt).</figcaption></figure>
+
+<h2 id="open">Open a session safely</h2>
+<ol class="steps">
+  <li><strong>Open your terminal</strong> (the text command window from Lesson 1).</li>
+  <li><strong>Go to a project folder</strong>
+    <p>For practice, reuse the lab folder:</p>
+    <div class="pre-wrap"><pre><code>cd ~/tmp/grok-lab</code></pre></div>
+    <p>If that folder does not exist, recreate it as in Lesson 1. For real work later, <code>cd</code> into your game or app folder instead.</p>
+  </li>
+  <li><strong>Start Grok</strong>
+    <p>Type <code>grok</code> and press Enter. Wait until you can type at the bottom of the screen.</p>
+  </li>
+</ol>
+<div class="you-will-see"><strong>What you will see</strong>
+<ul>
+  <li>A large history area (may be empty or show a welcome).</li>
+  <li>A typing area at the bottom—this is the <strong>prompt</strong>.</li>
+  <li>Your words appear in the history after you press Enter.</li>
+</ul>
+</div>
+<p class="why">Why start inside a project folder? Grok focuses on the files around you. Starting in the right folder prevents it from editing the wrong place.</p>
+
+<h2 id="loop">What happens when you send a message (the “turn”)</h2>
+<p>One <strong>turn</strong> is one full round of work:</p>
+<ol class="steps">
+  <li><strong>You send a goal</strong>
+    <p>You type what you want and press Enter. Clear goals work better than vague ones (examples below).</p>
+  </li>
+  <li><strong>Grok plans and uses tools</strong>
+    <p>A <strong>tool</strong> is an action Grok takes: open a file, edit a file, run a command, or search the web. You will see each action appear in the history area above as it happens.</p>
+  </li>
+  <li><strong>You may get a permission question</strong>
+    <p>By default Grok often asks before changing files or running shell commands. That is intentional safety—not an error.</p>
+  </li>
+  <li><strong>Grok continues until the goal is met—or asks you something</strong>
+    <p>If your message said “run the tests and fix failures,” a good run keeps going until tests pass or it truly cannot.</p>
+  </li>
+  <li><strong>You reply with the next instruction</strong>
+    <p>Conversations are multi-turn. Each new message can refine the work.</p>
+  </li>
+</ol>
+
+<h2 id="prompt">How to write instructions Grok can follow</h2>
+<p>Grok is powerful, not psychic. A strong message has five parts. You can write them as a short list:</p>
+<div class="pre-wrap"><pre><code>Goal: what “done” looks like for a human user
+Context: which files matter (or “look around first”)
+Constraints: rules (no new libraries, keep the same style, …)
+Non-goals: what to leave alone
+Verification: how to prove it worked (a command or manual check)</code></pre></div>
+
+<div class="plain-box"><strong>Plain English translation</strong>
+<p><em>Goal</em> = the outcome. <em>Context</em> = where to look. <em>Constraints</em> = guardrails. <em>Non-goals</em> = do not wander. <em>Verification</em> = the test you will believe.</p>
+</div>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Too vague</div><p>“Fix the game, something is broken.”</p></div>
+  <div class="prompt-box good"><div class="label">Clear enough to act</div><p>“Open hi.js. Change the greeting from hi to hello. Do not create new files. When done, show me the full file contents.”</p></div>
+</div>
+
+<p>When you know file names and tests exist, include them:</p>
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Vague (real project)</div><p>“Combat is wrong.”</p></div>
+  <div class="prompt-box good"><div class="label">Strong (real project)</div><p>“In combat-helpers.js, critical hits seem to add strength twice. Add a failing test if tests exist, fix the formula, run the project’s test command until it passes.”</p></div>
+</div>
+
+<h2 id="at">Point at files with @</h2>
+<p>Typing <code>@</code> in the prompt opens a <strong>file picker</strong> (a searchable list of files). This attaches those files to your message so Grok does not have to guess which file you mean.</p>
+<ol class="steps">
+  <li>Click in the prompt (bottom).</li>
+  <li>Type <code>@</code>.</li>
+  <li>Start typing a file name (for example <code>hi</code>).</li>
+  <li>Use arrow keys to highlight a file, press Enter to attach it.</li>
+  <li>Finish your sentence after the attachment, then send.</li>
+</ol>
+<div class="pre-wrap"><pre><code>@hi.js
+Please add a comment at the top that says practice file.</code></pre></div>
+<p>Useful patterns (you will grow into these):</p>
+<div class="pre-wrap"><pre><code>@src/main.js           <span class="comment"># whole file</span>
+@src/main.js:10-50     <span class="comment"># only lines 10–50</span>
+@src/                  <span class="comment"># browse a folder</span>
+@!.env                 <span class="comment"># include a hidden file (the ! matters)</span></code></pre></div>
+<p class="why">Why bother? Attaching the right file is the #1 way beginners get accurate edits on the first try.</p>
+
+<h2 id="approve">When Grok asks permission</h2>
+<p>A <strong>permission prompt</strong> is a pause that asks you to allow a tool. Read it. If the command looks destructive (deleting everything, force-pushing git, weird network calls), deny and ask Grok to explain.</p>
+<dl class="def-list">
+  <dt>Ask mode (default)</dt>
+  <dd>Grok asks before many edits and shell commands. Best while learning.</dd>
+  <dt>Always-approve (sometimes called YOLO)</dt>
+  <dd>Skips most questions. Faster; only use on machines and projects you fully trust. Toggle later with <code>/always-approve</code> or the keyboard shortcut covered in the keyboard lesson. You can also start with <code>grok --yolo</code>.</dd>
+  <dt>Auto mode</dt>
+  <dd>A middle ground: safe actions may auto-run; riskier ones still ask. Available when enabled as <code>/auto</code>.</dd>
+</dl>
+<div class="callout warn"><div class="mark">Simple safety rule</div><div>
+<p>While learning: stay in default ask mode. Never always-approve on a folder full of secrets or on someone else’s untrusted project.</p>
+</div></div>
+
+<h2 id="verify">Always say how to check the work</h2>
+<p>If you do not define “done,” Grok may stop too early or polish the wrong thing. Put the check in the message:</p>
+<ul>
+  <li><strong>Command check:</strong> “Run <code>npm test</code> and fix until it passes.” (Only if that project uses npm tests—ask Grok how to test if you are unsure.)</li>
+  <li><strong>File check:</strong> “Show me the full contents of hi.js when finished.”</li>
+  <li><strong>Human check:</strong> “I will open index.html in a browser; there must be no errors in the console.”</li>
+</ul>
+<p class="why">This single habit separates toy demos from reliable engineering with an AI pair.</p>
+
+<h2 id="steer">Change course while Grok is working</h2>
+<ul class="clean-list">
+  <li><strong>Cancel:</strong> Press <kbd>Esc</kbd> to stop the current turn (in normal setups). Your draft text is usually kept.</li>
+  <li><strong>Queue a follow-up:</strong> While Grok is busy, type another message and press Enter—it often waits in line for after the current turn.</li>
+  <li><strong>Correct course:</strong> After it finishes, say exactly what to stop doing: “Ignore styling. Only fix the test failure.”</li>
+</ul>
+<p>You will learn more keys in the Keyboard lesson. For now, <kbd>Esc</kbd> and clear follow-ups are enough.</p>
+
+<h2 id="lab">Guided lab — a complete mini session</h2>
+<ol class="steps">
+  <li><strong>Enter the lab folder and start Grok</strong>
+    <div class="pre-wrap"><pre><code>cd ~/tmp/grok-lab
+grok</code></pre></div>
+  </li>
+  <li><strong>Attach the file and give a full instruction</strong>
+    <p>Type <code>@</code>, select <code>hi.js</code>, then send:</p>
+    <div class="pre-wrap"><pre><code>@hi.js
+Goal: print both a greeting and the current year.
+Constraints: keep this as a simple script; do not add libraries.
+Verification: show me the final file contents in your reply.</code></pre></div>
+  </li>
+  <li><strong>Approve edits if asked</strong> — read the proposal first.</li>
+  <li><strong>Read Grok’s reply</strong> — does it show the final file? If not, send: “Please print the full final contents of hi.js.”</li>
+  <li><strong>Optional rename</strong> — type <code>/rename first-session-lab</code> and Enter so you can find this chat later.</li>
+  <li><strong>Leave cleanly</strong> — type <code>/quit</code> when finished (or leave the window open if you are continuing to the next lesson).</li>
+</ol>
+
+<div class="if-stuck"><strong>If something goes wrong</strong>
+<ul>
+  <li><strong>@ does nothing:</strong> Click the bottom prompt first so it is focused, then type @.</li>
+  <li><strong>Grok edited the wrong file:</strong> Say “Revert that. Only edit hi.js.” Better: use @ next time.</li>
+  <li><strong>You approved something scary:</strong> Stop with Esc. Ask Grok to undo. If you use Git (later), restore from version control.</li>
+</ul>
+</div>
+
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can start Grok in a folder, send a goal with verification, use @ at least once, handle a permission prompt calmly, and understand what a “turn” is.</p>
+</div></div>
+
+<div class="callout tip" id="first-win-session" data-first-win>
+  <div class="mark">First wins ✓</div>
+  <div>
+    <p>
+      If the lab worked, you have two real wins: Grok is installed, and you can run a full session with a goal, @file, and a permission check.
+      <strong>Next big win:</strong> finish a
+      <a href="21-walkthrough-first-game.html">First Game</a> or
+      <a href="22-walkthrough-first-app.html">First App</a> walkthrough (express path).
+      Screen and Keyboard lessons help if the terminal feels new—skip them only if you already know the UI.
+    </p>
+  </div>
+</div>
+
+<div class="callout tip" id="next-step-tui"><div class="mark">What to do next</div><div>
+<p>Next: <a href="03-tui-mastery.html"><strong>The Grok Screen</strong></a>, then the keyboard lesson. After Beginner, ship a game or app walkthrough.</p>
+</div></div>
+
+        
+<section class="self-check" data-self-check id="self-check" data-lesson-id="first">
+  <h2>Self-check</h2>
+  <p>Answer to confirm you understood this lesson. You can still mark the lesson complete after.</p>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. What is a “turn”?</legend>
+      <label><input type="radio" name="q1" value="wrong" /> Restarting the computer</label>
+      <label><input type="radio" name="q1" value="right" /> One round: you send a goal, Grok works, then finishes or waits</label>
+      <label><input type="radio" name="q1" value="wrong2" /> Only running slash commands</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Opening a page in this site counts as…</legend>
+      <label><input type="radio" name="q2" value="wrong" /> Mastering the skill forever</label>
+      <label><input type="radio" name="q2" value="right" /> Opened (not the same as completed)</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. What should a strong prompt include?</legend>
+      <label><input type="radio" name="q3" value="right" /> A goal and how you will verify it worked</label>
+      <label><input type="radio" name="q3" value="wrong" /> Only “make it better”</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>No prior knowledge assumed. Glossary: <a href="00-glossary.html">Words You’ll See</a>.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "first" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

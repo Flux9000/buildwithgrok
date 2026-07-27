@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Rules — Build With Grok</title>
+  <meta name="description" content="Teach Grok your project once using a simple text file—no prior knowledge of ‘agents’ required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Project Rules</h1>
+          <p class="lead">Put standing rules in AGENTS.md so every new session already knows how your project works.</p>
+          <div class="lesson-prereq"><span>You have a project folder you can open in Grok</span></div>
+        </header>
+        
+<h2>The problem this solves</h2>
+<p>Without notes, every new Grok session starts slightly lost: What test command? Which folder holds art? Are we allowed to add libraries? You end up retyping the same speech every day.</p>
+<p><strong>Project rules</strong> are Markdown files (human-readable text) that Grok loads automatically and treats as standing instructions for that project.</p>
+
+<h2>The main file: AGENTS.md</h2>
+<p>Create a file named exactly <code>AGENTS.md</code> in the root of your project (the top folder you <code>cd</code> into before running <code>grok</code>).</p>
+<ol class="steps">
+  <li>Open your project in any editor (or ask Grok to create the file).</li>
+  <li>Add short sections in plain English (template below).</li>
+  <li>Save. Start a <em>new</em> Grok session in that folder (<code>/new</code> or restart <code>grok</code>).</li>
+  <li>Ask: “Summarize the project rules you are following.” Grok should reflect your file.</li>
+</ol>
+
+<div class="pre-wrap"><pre><code># AGENTS.md
+
+## What this project is
+A small browser game. Players move and fight one enemy.
+
+## How to run it
+Open index.html in a browser. Tests: run `npm test` in the project root.
+
+## Rules for code
+- Prefer simple JavaScript modules.
+- Do not add new frameworks without asking me first.
+- Keep combat math in js/combat-helpers.js when possible.
+
+## Definition of done
+1. Tests pass when we have them
+2. Game still boots to a playable screen
+3. Do not make huge unrelated refactors</code></pre></div>
+
+<div class="plain-box"><strong>Other file names</strong>
+<p>Grok also notices names like <code>CLAUDE.md</code> for compatibility. One clear <code>AGENTS.md</code> is enough to start. Global defaults can live in <code>~/.grok/AGENTS.md</code> for all projects.</p>
+</div>
+
+<div class="callout lab"><div class="mark">Lab</div><div>
+<p>Write a 10-line AGENTS.md for any project today. New session → ask Grok to restate how to run tests. If it is wrong, fix the file, not the chat.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. AGENTS.md is best thought of as…</legend>
+      <label><input type="radio" name="ag1" value="right" /> Standing project rules Grok should follow every session</label>
+      <label><input type="radio" name="ag1" value="wrong" /> A secret password file</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. After you change AGENTS.md, a good check is…</legend>
+      <label><input type="radio" name="ag2" value="right" /> Start a new session and ask Grok to restate the rules</label>
+      <label><input type="radio" name="ag2" value="wrong" /> Never open Grok again</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> · every lesson assumes you may be new to the idea.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "rules" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

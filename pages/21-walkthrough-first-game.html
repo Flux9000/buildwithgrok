@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Walkthrough: Your First Game — Build With Grok</title>
+  <meta name="description" content="A complete start-to-finish build of Star Clicker Arena in the browser—exact prompts to copy, prompts to avoid, and playtest steps at every phase." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Walkthrough: Your First Game</h1>
+          <p class="lead">Build a tiny browser game with copy-paste prompts. Do the phases in order—do not skip ahead.</p>
+          <div class="lesson-prereq"><span>Required: <a href="01-getting-started.html">Install</a> + <a href="02-first-session.html">First Session</a></span><span>About 45–90 minutes</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this walkthrough</strong>
+<a href="#promise">What you will build</a>
+<a href="#need">What you need</a>
+<a href="#rules">Prompt rules (use vs avoid)</a>
+<a href="#phase0">Phase 0 — Create the project</a>
+<a href="#phase1">Phase 1 — Project brain (AGENTS + SLICE)</a>
+<a href="#phase2">Phase 2 — Scaffold playable files</a>
+<a href="#phase3">Phase 3 — Core gameplay</a>
+<a href="#phase4">Phase 4 — Juice &amp; polish</a>
+<a href="#phase5">Phase 5 — Finish &amp; next steps</a>
+<a href="#troubleshoot">Troubleshooting</a>
+</nav>
+
+<div class="callout tip wt-spy-host" id="phase-progress-panel" data-walkthrough-spy-host>
+  <div class="mark">Your walkthrough progress</div>
+  <div>
+    <p data-phase-summary>Phases complete: 0 / 6</p>
+    <p>Check each phase when you finish it. All six required phases must be checked for this walkthrough to count as <strong>complete</strong> (opening the page is not enough).</p>
+  </div>
+</div>
+
+
+<div class="callout tip"><div class="mark">How to use this walkthrough</div><div>
+<p>Do phases in order: <strong>0 → 1 → 2…</strong> Copy the “Send this” prompts exactly the first time. Do not polish art until the game can win and lose.</p>
+</div></div>
+
+<div class="callout tip"><div class="mark">Time &amp; difficulty</div><div>
+<p><strong>About 45–90 minutes.</strong> You only need Grok and a web browser—no Unity, Node, or extra installers. Finished game opens as <code>index.html</code>.</p>
+</div></div>
+
+<h2 id="promise">What you will build</h2>
+<p><strong>Star Clicker Arena</strong> — a tiny browser game:</p>
+<ul>
+  <li>A player circle you move with <strong>WASD</strong> or arrow keys</li>
+  <li>One enemy that chases you</li>
+  <li><strong>Space</strong> to attack when close (enemy loses HP)</li>
+  <li>On-screen HP for you and the enemy</li>
+  <li><strong>You Win</strong> / <strong>You Lose</strong> messages and a Restart button</li>
+</ul>
+<p>That is a complete <strong>vertical slice</strong>: move, fight, win/lose. Not an RPG. Not multiplayer. Not a full art pipeline.</p>
+
+<figure class="figure"><img src="../assets/game-pipeline.jpg" alt="Game from sprites to playable scene" /><figcaption>Your goal today: playable loop first, pretty second.</figcaption></figure>
+
+<h2 id="need">What you need</h2>
+<ul>
+  <li>Grok installed and signed in (<a href="01-getting-started.html">Getting Started</a>)</li>
+  <li>Comfort sending a prompt and approving a file edit (<a href="02-first-session.html">First Session</a>)</li>
+  <li>A web browser (Chrome, Safari, Firefox, Edge…)</li>
+  <li>A terminal window</li>
+</ul>
+<p><strong>Permission tip:</strong> Stay in default <strong>ask</strong> mode. Approve file creates/edits for this project folder only. Deny anything that looks unrelated.</p>
+
+<h2 id="rules">Prompt rules for this walkthrough</h2>
+<div class="prompt-pair">
+  <div class="prompt-box good"><div class="label">DO use prompts that…</div>
+  <p style="margin:0">Name one goal · list constraints · define how you will test · say what is out of scope · attach files with <code>@</code> when they exist</p>
+  </div>
+  <div class="prompt-box bad"><div class="label">DO NOT use prompts that…</div>
+  <p style="margin:0">Ask for “a full game” · stack five features at once · skip verification · invite new frameworks · say “make it awesome” with no definition</p>
+  </div>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Avoid saying</th><th>Why it fails</th><th>Say instead</th></tr></thead>
+<tbody>
+<tr><td>“Make me a cool game”</td><td>No scope, no done condition</td><td>The Phase prompts below, copy-pasted</td></tr>
+<tr><td>“Add multiplayer and levels and shop”</td><td>Never finishes</td><td>One slice only (already defined)</td></tr>
+<tr><td>“Use React + Vite + Phaser + TypeScript”</td><td>Setup rabbit hole for a first game</td><td>“Vanilla HTML/CSS/JS, open index.html”</td></tr>
+<tr><td>“Just figure it out”</td><td>No verification</td><td>“I will open index.html and …”</td></tr>
+<tr><td>“Refactor everything cleanly first”</td><td>Polish without play</td><td>“Smallest code that plays; polish later”</td></tr>
+</tbody></table></div>
+
+<!-- PHASE 0 -->
+<h2 id="phase0" data-phase-section="0">Phase 0 — Create the project folder</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="0" />
+    <span>I finished Phase 0</span>
+  </label>
+
+  <span data-phase-badge-host="0"></span>
+</div>
+
+<p>Do this in your <strong>normal terminal</strong> (not inside Grok yet).</p>
+<ol class="steps">
+  <li><strong>Create and enter a new folder</strong>
+    <div class="pre-wrap" data-phase-prompt="0"><pre><code>mkdir -p ~/projects/star-clicker-arena
+cd ~/projects/star-clicker-arena
+pwd</code></pre></div>
+    <p>Confirm the path ends with <code>star-clicker-arena</code>.</p>
+  </li>
+  <li><strong>Start Grok in that folder</strong>
+    <div class="pre-wrap"><pre><code>grok</code></pre></div>
+  </li>
+  <li><strong>Name the session</strong> so you can find it later:
+    <div class="pre-wrap"><pre><code>/rename star-clicker-walkthrough</code></pre></div>
+  </li>
+</ol>
+<div class="you-will-see"><strong>What you will see</strong>
+<p>Grok’s interface with an empty or welcome history, typing box at the bottom, and you are “inside” the empty project folder.</p>
+</div>
+
+<!-- PHASE 1 -->
+<h2 id="phase1" data-phase-section="1">Phase 1 — Project brain (AGENTS.md + SLICE.md)</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="1" />
+    <span>I finished Phase 1</span>
+  </label>
+
+  <span data-phase-badge-host="1"></span>
+</div>
+
+<p>Before any game code, give Grok standing rules and a slice definition as files on disk.</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Set up a game project however you want with best practices.”</p>
+  </div>
+  <div class="prompt-box good"><div class="label">Send this exact prompt</div>
+  <p style="margin:0;font-size:0.9rem">Copy everything in the box below into Grok and press Enter.</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="1"><pre><code>Goal: Create two markdown files that will guide all later work.
+
+Create AGENTS.md with:
+- Project name: Star Clicker Arena
+- Stack: vanilla HTML, CSS, and JavaScript only (no frameworks, no build step)
+- How to run: open index.html in a browser
+- Rules: keep code simple; prefer few files; do not add npm unless I ask
+- Definition of done for any task: game still opens via index.html with no console errors
+
+Create SLICE.md with this vertical slice (do not expand scope):
+- Player moves with WASD and arrow keys
+- One enemy chases the player slowly
+- Space attacks if the player is close enough; enemy loses HP
+- Player has HP; touching the enemy damages the player on a cooldown
+- On-screen HP text for player and enemy
+- Enemy HP 0 → "You Win"; player HP 0 → "You Lose"
+- Restart button reloads the match
+- Out of scope: multiplayer, levels, inventory, sound (unless free and tiny later), particle engines, external assets required to play
+
+Verification: show me the full contents of both files when done.
+Do not create game code yet.</code></pre></div>
+
+<ol class="steps">
+  <li>Approve file creation if Grok asks.</li>
+  <li>Read the files in Grok’s reply (or open them in any editor).</li>
+  <li>If scope crept in (React, webpack, and similar options), send:
+    <div class="pre-wrap"><pre><code>Remove any mention of frameworks or build tools.
+Stack must stay vanilla HTML/CSS/JS only. Update the files.</code></pre></div>
+  </li>
+</ol>
+<div class="callout lab"><div class="mark">Phase 1 done when</div><div>
+<p><code>AGENTS.md</code> and <code>SLICE.md</code> exist in the folder and match the slice above.</p>
+</div></div>
+
+<!-- PHASE 2 -->
+<h2 id="phase2" data-phase-section="2">Phase 2 — Scaffold playable files</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="2" />
+    <span>I finished Phase 2</span>
+  </label>
+
+  <span data-phase-badge-host="2"></span>
+</div>
+
+<p>Now create the empty structure of the game—still not final combat polish.</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Build the whole game perfectly with beautiful art and a menu system.”</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="2"><pre><code>@AGENTS.md @SLICE.md
+
+Goal: Scaffold the game so I can open index.html and see a canvas or playfield with placeholder shapes.
+
+Create:
+- index.html — loads css/style.css and js/main.js
+- css/style.css — dark background, centered play area, readable HUD text
+- js/main.js — starts a requestAnimationFrame loop, draws a player circle and an enemy circle, shows placeholder HP text
+
+Constraints:
+- Vanilla HTML/CSS/JS only
+- No npm, no bundler
+- Keep everything easy to read for a beginner
+- Follow SLICE.md scope; movement/combat can be stubs but the page must run
+
+Verification:
+1. List the files you created
+2. Tell me exactly how to open the game on my computer
+3. I will open index.html and should see two shapes and HP text with no browser console errors
+
+After scaffolding, stop and wait for my next message.</code></pre></div>
+
+<ol class="steps">
+  <li>Approve creates/edits.</li>
+  <li><strong>You</strong> open the game:
+    <ul>
+      <li><strong>macOS:</strong> <code>open index.html</code> from the project folder in a second terminal, or double-click <code>index.html</code> in Finder.</li>
+      <li><strong>Windows:</strong> double-click <code>index.html</code> or drag it into a browser window.</li>
+      <li><strong>Linux:</strong> <code>xdg-open index.html</code> or open the file from the file manager.</li>
+    </ul>
+  </li>
+  <li>Open the browser console (often Right-click → Inspect → Console). Confirm no red errors.</li>
+</ol>
+<div class="you-will-see"><strong>What success looks like</strong>
+<p>A browser tab with a dark page, two circles (or similar), and HP labels. It does not need to feel “fun” yet—it only needs to load cleanly.</p>
+</div>
+<div class="if-stuck"><strong>If the page is blank or broken</strong>
+<ul>
+  <li>Tell Grok: <code>@index.html @js/main.js @css/style.css The page is blank / console shows: [paste error]. Fix only what is required to render the playfield.</code></li>
+  <li>Hard-refresh the browser (Mac: Cmd+Shift+R, Windows: Ctrl+Shift+R).</li>
+</ul>
+</div>
+<div class="callout lab"><div class="mark">Phase 2 done when</div><div>
+<p>You can open <code>index.html</code> and see the playfield without console errors.</p>
+</div></div>
+
+<!-- PHASE 3 -->
+<h2 id="phase3" data-phase-section="3">Phase 3 — Core gameplay (the real slice)</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="3" />
+    <span>I finished Phase 3</span>
+  </label>
+
+  <span data-phase-badge-host="3"></span>
+</div>
+
+<p>Implement movement, chase, attack, damage, win/lose, restart—still simple shapes.</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Make combat deep with combos, crits, status effects, and AI personalities.”</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="3"><pre><code>@SLICE.md @AGENTS.md @js/main.js @index.html @css/style.css
+
+Goal: Fully implement the vertical slice in SLICE.md using the existing files.
+
+Requirements:
+- WASD + arrow key movement for the player; keep player inside the playfield
+- Enemy constantly moves toward the player at a slower speed
+- Space: if distance to enemy is within attack range, enemy HP decreases; small cooldown so holding space is not instant win
+- Contact damage: if enemy touches player, player HP decreases on a short cooldown
+- HUD shows Player HP and Enemy HP as numbers
+- When enemy HP ≤ 0: freeze gameplay, show "You Win"
+- When player HP ≤ 0: freeze gameplay, show "You Lose"
+- Restart button (or on-screen button) resets HP and positions and resumes play
+- Keep vanilla HTML/CSS/JS; no new libraries
+
+Non-goals: sound, particles, multiple enemies, spritesheets, mobile touch (optional later)
+
+Verification checklist (respond with each item checked):
+1. How to move
+2. How to attack
+3. How contact damage works
+4. How to win / lose / restart
+5. Confirm no new dependencies were added
+
+I will playtest manually after you finish. Fix any issues I report next.</code></pre></div>
+
+<ol class="steps">
+  <li>Approve edits.</li>
+  <li>Refresh the browser.</li>
+  <li><strong>Playtest script (you do this):</strong>
+    <ol>
+      <li>Move with WASD — player should move.</li>
+      <li>Let the enemy approach — it should chase.</li>
+      <li>Press Space near the enemy — enemy HP drops.</li>
+      <li>Let the enemy touch you — your HP drops.</li>
+      <li>Win once and lose once (you can ask Grok for a temporary debug boost if needed).</li>
+      <li>Press Restart — a new match should start.</li>
+    </ol>
+  </li>
+</ol>
+
+<p>If something fails, use a <strong>bug report prompt</strong> (good pattern forever):</p>
+<div class="pre-wrap"><pre><code>@js/main.js @SLICE.md
+
+Bug: [what you did] → [what you expected] → [what happened instead].
+Browser console errors (if any): [paste]
+Fix the smallest change that solves it. Do not add features.</code></pre></div>
+
+<div class="callout lab"><div class="mark">Phase 3 done when</div><div>
+<p>You can move, fight, win, lose, and restart without console errors. Scope still matches SLICE.md.</p>
+</div></div>
+
+<!-- PHASE 4 -->
+<h2 id="phase4" data-phase-section="4">Phase 4 — Light juice (optional but satisfying)</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="4" />
+    <span>I finished Phase 4</span>
+  </label>
+
+  <span data-phase-badge-host="4"></span>
+</div>
+
+<p>Only after Phase 3 works. Keep it small.</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Make it AAA quality with cinematic lighting.”</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="4"><pre><code>@js/main.js @css/style.css @index.html @SLICE.md
+
+Goal: Small polish pass only. Gameplay rules stay identical.
+
+Add:
+- Distinct colors for player vs enemy
+- Brief flash or scale pulse on the enemy when hit
+- Clearer win/lose panel styling (readable, centered)
+- Show attack cooldown or a simple "Ready/Cooling" text if easy
+
+Constraints:
+- No new libraries
+- No new game mechanics
+- Keep performance fine on a laptop
+
+Verification: I refresh index.html, complete one fight, and everything from Phase 3 still works.</code></pre></div>
+
+<!-- PHASE 5 -->
+<h2 id="phase5" data-phase-section="5">Phase 5 — Finish line</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="5" />
+    <span>I finished Phase 5</span>
+  </label>
+
+  <span data-phase-badge-host="5"></span>
+</div>
+
+<ol class="steps">
+  <li><strong>Ask Grok for a README</strong>
+    <div class="pre-wrap" data-phase-prompt="5"><pre><code>@AGENTS.md @SLICE.md
+
+Write a short README.md for beginners:
+- what the game is
+- how to open it
+- controls
+- what is intentionally out of scope
+No badges, no install steps for Node.</code></pre></div>
+  </li>
+  <li><strong>Rename session</strong> (if not already): <code>/rename star-clicker-done</code></li>
+  <li><strong>Celebrate</strong> — you shipped a real game with Grok.</li>
+</ol>
+
+<div class="card-grid cols-2">
+  <article class="card"><h3>You now know how to…</h3><p>Slice scope, write AGENTS rules, scaffold, implement, playtest, bug-report, polish last.</p></article>
+  <article class="card"><h3>Natural next upgrades</h3><p>Second enemy type · simple sound · sprite images · score timer — <strong>one at a time</strong> with verification each time.</p></article>
+</div>
+
+<div class="pre-wrap"><pre><code><span class="comment"># Example next feature prompt (after finish)</span>
+@js/main.js @SLICE.md
+Add a score that counts seconds survived until win or lose.
+Show it in the HUD. Do not change combat math.
+Verification: I can see score increase while playing; resets on Restart.</code></pre></div>
+
+<h2 id="troubleshoot">Troubleshooting</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Problem</th><th>What to do</th></tr></thead>
+<tbody>
+<tr><td>Grok added npm/React</td><td>“Revert frameworks. Vanilla only per AGENTS.md. Remove package.json if created.”</td></tr>
+<tr><td>Keys do nothing</td><td>Click the game page so it has focus; report if still broken with @js/main.js</td></tr>
+<tr><td>Too hard / too easy</td><td>“Lower enemy speed by half” or “player attack damage +1” — one balance change per prompt</td></tr>
+<tr><td>Session feels confused</td><td><code>/compact keep SLICE and file layout</code> or <code>/new</code> and @ the key files again</td></tr>
+<tr><td>You over-approved a bad edit</td><td>Ask Grok to undo; or copy good file contents from an earlier reply; use Git if you know it</td></tr>
+</tbody></table></div>
+
+<div class="callout lab"><div class="mark">Walkthrough complete when</div><div>
+<p>You can open <code>~/projects/star-clicker-arena/index.html</code>, play a full match to win and to lose, restart, and explain your controls to a friend.</p>
+</div></div>
+
+<p>Related: <a href="17-building-games.html">Building Games (concepts)</a> · <a href="19-prompt-craft.html">Prompt Craft</a> · next walkthrough <a href="22-walkthrough-first-app.html">First App</a></p>
+
+        
+<div class="callout tip" id="next-step-after-game"><div class="mark">What to do next</div><div>
+<p>You finished the game walkthrough. <strong>Default next:</strong> <a href="18-building-apps.html">How App Projects Work</a> then the <a href="22-walkthrough-first-app.html">First App walkthrough</a>. If you only wanted a game, go to Intermediate <a href="24-day2-git.html">Day-2 Git with Grok</a> next.</p>
+</div></div>
+
+        
+<section class="self-check" data-self-check id="self-check" data-lesson-id="wt-game">
+  <h2>Self-check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. When should you check “I finished Phase N”?</legend>
+      <label><input type="radio" name="q1" value="right" /> After you actually finished that phase’s work and verification</label>
+      <label><input type="radio" name="q1" value="wrong" /> As soon as you open the walkthrough page</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. The game stack for this walkthrough is…</legend>
+      <label><input type="radio" name="q2" value="right" /> Vanilla HTML/CSS/JS opened as index.html</label>
+      <label><input type="radio" name="q2" value="wrong" /> Unity + npm required on day one</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. What makes this walkthrough “complete” in the main path?</legend>
+      <label><input type="radio" name="q3" value="right" /> All required phases checked</label>
+      <label><input type="radio" name="q3" value="wrong" /> Only scrolling to the bottom</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Copy prompts exactly at first. Customize only after the slice works.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/walkthrough-chrome.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "wt-game" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

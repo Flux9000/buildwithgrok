@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+*.log
+.idea/
+.vscode/
+
+# Deploy artifacts (source at repo root is the site)
+dist-deploy/
+buildwithgrok-deploy.zip

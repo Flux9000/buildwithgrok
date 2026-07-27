@@ -1,0 +1,124 @@
+{
+  "source": {
+    "grokVersion": "0.2.112",
+    "docs": "~/.grok/docs/user-guide/04-slash-commands.md",
+    "binary": "~/.grok/bin/grok (strings inspection)",
+    "captured": "2026-07-27"
+  },
+  "notes": [
+    "Official user-guide lists shell + pager builtins with aliases.",
+    "Some pager commands appear in the binary menu but are abbreviated in the public guide (/help, /find, /jump, /dashboard, /tasks, /queue, /recap, /share, /debug, /gboom).",
+    "/auto only appears when auto permission-mode feature is enabled.",
+    "/memory /flush /dream require memory enabled; /remember is always available.",
+    "/goal appears when goal mode is enabled for the session.",
+    "Skills with user-invocable:true also appear as /skill-name (not listed here)."
+  ],
+  "builtins": {
+    "session": [
+      { "cmd": "/new", "aliases": ["/clear"] },
+      { "cmd": "/resume", "aliases": [] },
+      { "cmd": "/compact", "aliases": [] },
+      { "cmd": "/context", "aliases": [] },
+      { "cmd": "/session-info", "aliases": ["/status", "/info"] },
+      { "cmd": "/fork", "aliases": [] },
+      { "cmd": "/rewind", "aliases": [] },
+      { "cmd": "/rename", "aliases": ["/title"] },
+      { "cmd": "/copy", "aliases": [] },
+      { "cmd": "/export", "aliases": [] },
+      { "cmd": "/quit", "aliases": ["/exit"] },
+      { "cmd": "/home", "aliases": ["/welcome"] },
+      { "cmd": "/edit-prompt", "aliases": [] },
+      { "cmd": "/find", "aliases": [] },
+      { "cmd": "/jump", "aliases": [] },
+      { "cmd": "/recap", "aliases": ["/summarize"] },
+      { "cmd": "/share", "aliases": [] }
+    ],
+    "model_mode": [
+      { "cmd": "/model", "aliases": ["/m"] },
+      { "cmd": "/effort", "aliases": [] },
+      { "cmd": "/always-approve", "aliases": [] },
+      { "cmd": "/auto", "aliases": [], "gated": "feature auto permission-mode" },
+      { "cmd": "/plan", "aliases": [] },
+      { "cmd": "/view-plan", "aliases": ["/show-plan", "/plan-view"] },
+      { "cmd": "/multiline", "aliases": ["/ml"] },
+      { "cmd": "/history", "aliases": [] },
+      { "cmd": "/vim-mode", "aliases": [] },
+      { "cmd": "/minimal", "aliases": [] },
+      { "cmd": "/fullscreen", "aliases": ["/full"] },
+      { "cmd": "/compact-mode", "aliases": [] }
+    ],
+    "memory": [
+      { "cmd": "/remember", "aliases": [] },
+      { "cmd": "/memory", "aliases": ["/mem"], "gated": "memory enabled" },
+      { "cmd": "/flush", "aliases": [], "gated": "memory enabled" },
+      { "cmd": "/dream", "aliases": [], "gated": "memory enabled" }
+    ],
+    "extensions": [
+      { "cmd": "/skills", "aliases": [] },
+      { "cmd": "/plugins", "aliases": [] },
+      { "cmd": "/marketplace", "aliases": [] },
+      { "cmd": "/hooks", "aliases": [] },
+      { "cmd": "/mcps", "aliases": [] },
+      { "cmd": "/config-agents", "aliases": ["/agents"] },
+      { "cmd": "/personas", "aliases": [] }
+    ],
+    "media": [
+      { "cmd": "/imagine", "aliases": [] },
+      { "cmd": "/imagine-video", "aliases": [] }
+    ],
+    "automation": [
+      { "cmd": "/loop", "aliases": [] },
+      { "cmd": "/goal", "aliases": [], "gated": "goal mode enabled" },
+      { "cmd": "/deep-research", "aliases": [] },
+      { "cmd": "/workflow", "aliases": [] },
+      { "cmd": "/workflows", "aliases": [] },
+      { "cmd": "/dashboard", "aliases": ["/sessions"] },
+      { "cmd": "/tasks", "aliases": [] },
+      { "cmd": "/queue", "aliases": [] }
+    ],
+    "help_account_ui": [
+      { "cmd": "/help", "aliases": [] },
+      { "cmd": "/docs", "aliases": ["/howto", "/guides"] },
+      { "cmd": "/tutorial", "aliases": ["/tour", "/onboarding"] },
+      { "cmd": "/doctor", "aliases": ["/terminal-setup", "/terminal-check", "/terminal-info"] },
+      { "cmd": "/theme", "aliases": ["/t"] },
+      { "cmd": "/settings", "aliases": ["/config", "/preferences", "/prefs"] },
+      { "cmd": "/timestamps", "aliases": [] },
+      { "cmd": "/btw", "aliases": [] },
+      { "cmd": "/login", "aliases": [] },
+      { "cmd": "/logout", "aliases": [] },
+      { "cmd": "/usage", "aliases": ["/cost"] },
+      { "cmd": "/privacy", "aliases": [] },
+      { "cmd": "/feedback", "aliases": [] },
+      { "cmd": "/import-claude", "aliases": [] },
+      { "cmd": "/release-notes", "aliases": ["/changelog"] },
+      { "cmd": "/debug", "aliases": [] },
+      { "cmd": "/voice", "aliases": [] },
+      { "cmd": "/toggle-mouse-reporting", "aliases": [] },
+      { "cmd": "/announcements", "aliases": [], "args": "hide|show", "framing": "Show or hide product announcement banners (Usage: /announcements hide|show)." },
+      { "cmd": "/transcript", "aliases": [], "framing": "View the full conversation transcript in your pager ($PAGER)." },
+      { "cmd": "/expand", "aliases": [], "gated": "minimal mode only", "framing": "Re-print the last collapsed block, fully expanded. Only available in minimal mode (--minimal)." }
+    ],
+    "hidden_easter_eggs": [
+      {
+        "cmd": "/gboom",
+        "aliases": [],
+        "framing": "Hidden easter egg (binary label). Mini game-style overlay; needs a graphics-capable terminal (kitty, Ghostty, WezTerm, iTerm2). Not a primary learning path."
+      },
+      {
+        "cmd": "/scroll-debug",
+        "aliases": [],
+        "framing": "Developer/debug scroll diagnostics HUD. Advanced; not for everyday learners."
+      }
+    ]
+  },
+  "false_or_non_commands": [
+    "/yolo",
+    "/alwaysapprove",
+    "/comp"
+  ],
+  "notes_false": [
+    "/yolo is a CLI flag alias for --always-approve, not a slash command.",
+    "/comp is only a filter prefix example for /compact, not a command name."
+  ]
+}

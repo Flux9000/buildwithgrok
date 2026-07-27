@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Getting Started — Build With Grok</title>
+  <meta name="description" content="We open a terminal together, install Grok Build, sign in, and prove it works—with every term explained as we go." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Getting Started</h1>
+          <p class="lead">Install Grok Build, sign in, and prove it works. Every new word is explained as you go.</p>
+          <div class="lesson-prereq"><span>Optional first: <a href="00-glossary.html">Words You’ll See</a></span><span>Need: computer + internet</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#before">Before you begin</a>
+<a href="#what">What Grok Build is (in plain English)</a>
+<a href="#terminal">Open a terminal</a>
+<a href="#install">Install Grok</a>
+<a href="#auth">Sign in (authenticate)</a>
+<a href="#verify">Check that it works</a>
+<a href="#modes">Three ways to run Grok (only the first matters today)</a>
+<a href="#lab">Guided lab</a>
+</nav>
+
+<div class="callout tip"><div class="mark">How to use this lesson</div><div>
+<p>Do the steps in order on your computer. If a word is new, open <a href="00-glossary.html">Words You’ll See</a> in another tab. Use the “What you will see” boxes to confirm each step worked.</p>
+</div></div>
+
+<h2 id="before">Before you begin</h2>
+<p>You need:</p>
+<ul>
+  <li>A computer running <strong>macOS</strong>, <strong>Linux</strong>, or <strong>Windows</strong>.</li>
+  <li>An internet connection (for install and sign-in).</li>
+  <li>Permission to install software (on work machines, you may need IT approval).</li>
+  <li>A way to sign in to Grok (a browser account, or later an API key from the provider console).</li>
+</ul>
+<p>You do <strong>not</strong> need to already know programming, Git, or AI tools. We will introduce each idea when you need it.</p>
+
+<h2 id="what">What Grok Build is (in plain English)</h2>
+<p><strong>Grok Build</strong> is a program you run in a terminal. You type goals in normal language—like “add a button that saves the form” or “fix the failing test.” Grok can then:</p>
+<ul>
+  <li><strong>Read</strong> files in your project so it understands the code.</li>
+  <li><strong>Edit</strong> files (show you the changes, and usually ask permission first).</li>
+  <li><strong>Run commands</strong> such as tests or installers (again, often with permission).</li>
+  <li><strong>Search the web</strong> for documentation when needed.</li>
+</ul>
+<p class="why">Why not only use a website chatbot? Grok works inside <em>your project folder</em>. It can take multi-step actions—read, edit, run commands—until a goal is done, not just answer questions.</p>
+
+<div class="plain-box">
+  <strong>Simple picture</strong>
+  <p>Imagine a junior engineer at your keyboard. You describe the outcome. They open files, edit, run tests, and report back. You stay in charge of goals and approvals.</p>
+</div>
+
+<div class="stat-strip">
+  <div class="stat"><div class="n">TUI</div><div class="l">Normal day-to-day use</div></div>
+  <div class="stat"><div class="n">-p</div><div class="l">Scripts later—skip for now</div></div>
+  <div class="stat"><div class="n">ACP</div><div class="l">Connect to editors (later)</div></div>
+  <div class="stat"><div class="n">MCP</div><div class="l">Extra plugins—skip for now</div></div>
+</div>
+<p>For this site you only need the first mode: type <code>grok</code>, talk to it, get work done. Learn the others in Advanced.</p>
+
+<h2 id="terminal">Step 1 — Open a terminal</h2>
+<p>A <strong>terminal</strong> is a text window where you type commands.</p>
+<ul>
+  <li><strong>macOS:</strong> Open Spotlight (Cmd+Space), type <code>Terminal</code>, press Enter. Or find Terminal in Applications → Utilities.</li>
+  <li><strong>Windows:</strong> Install <a href="https://gitforwindows.org/">Git for Windows</a> and open <strong>Git Bash</strong> (easiest match to Mac/Linux commands), <em>or</em> use PowerShell with the PowerShell installer below.</li>
+  <li><strong>Linux:</strong> Open your distro’s Terminal app (often Ctrl+Alt+T).</li>
+</ul>
+<div class="you-will-see"><strong>What you will see</strong>
+<p>A window with a blinking cursor after a short line of text (the “prompt” from the operating system—not Grok yet). That line often includes your username and a folder name. You type on that line and press Enter to run a command.</p>
+</div>
+
+<h2 id="install">Step 2 — Install Grok</h2>
+<p>Copy one of the following blocks into your terminal, then press <kbd>Enter</kbd>. This downloads the official installer and runs it.</p>
+
+<h3>macOS, Linux, or Windows Git Bash</h3>
+<div class="pre-wrap"><pre><code>curl -fsSL https://x.ai/cli/install.sh | bash</code></pre></div>
+<p>What this means, piece by piece:</p>
+<ul>
+  <li><code>curl</code> downloads a file from the internet.</li>
+  <li>The URL is the official install script.</li>
+  <li><code>| bash</code> means “run that script.”</li>
+</ul>
+
+<h3>Windows PowerShell (if you prefer PowerShell)</h3>
+<div class="pre-wrap"><pre><code>irm https://x.ai/cli/install.ps1 | iex</code></pre></div>
+<p>The PowerShell installer also adds Grok’s folder to your User PATH so the <code>grok</code> command is found later. You may need to <strong>close and reopen</strong> the terminal after install.</p>
+
+<div class="you-will-see"><strong>What success looks like</strong>
+<p>The script prints progress and finishes without a scary red error. Then you can run version check (next section). If the terminal says <code>command not found: grok</code>, close the terminal completely, open a new one, and try again. PATH updates often need a new window.</p>
+</div>
+
+<div class="if-stuck"><strong>If install fails</strong>
+<ul>
+  <li>Check you are online.</li>
+  <li>On corporate networks, the download may be blocked—try another network or ask IT to allow the install domain.</li>
+  <li>Read the last 10 lines of error text carefully; they usually name the real problem (permission denied, network timeout, and similar options).</li>
+</ul>
+</div>
+
+<p>Optional: install a specific version (only if a tutorial asks for one):</p>
+<div class="pre-wrap"><pre><code>curl -fsSL https://x.ai/cli/install.sh | bash -s 0.1.42</code></pre></div>
+
+<p>Later, to update to the newest version anytime:</p>
+<div class="pre-wrap"><pre><code>grok update</code></pre></div>
+
+<h2 id="auth">Step 3 — Sign in (authenticate)</h2>
+<p><strong>Authenticate</strong> means “prove who you are so Grok can use your account.”</p>
+
+<h3>Option A — Browser login (recommended for learning)</h3>
+<ol class="steps">
+  <li><strong>Type this and press Enter</strong>
+    <p><code>grok</code></p>
+  </li>
+  <li><strong>Watch for a browser window</strong>
+    <p>Grok should open your web browser so you can sign in with your account (grok.com / SpaceXAI OAuth). Complete the sign-in like any normal website login.</p>
+  </li>
+  <li><strong>Return to the terminal</strong>
+    <p>When login succeeds, the terminal becomes the full Grok interface (or shows that you are ready). Credentials are saved under your home folder in a file named roughly <code>~/.grok/auth.json</code> so you are not asked every time.</p>
+  </li>
+</ol>
+
+<div class="you-will-see"><strong>What you will see after login</strong>
+<p>A full-screen (or almost full-screen) Grok interface: space for conversation history and a place to type at the bottom. That bottom box is the <strong>prompt</strong> where you talk to Grok. Lesson 2 walks through using it.</p>
+</div>
+
+<p>Useful related commands (you can run these from a normal terminal when Grok is not already open):</p>
+<div class="pre-wrap"><pre><code>grok login              <span class="comment"># sign in again or switch accounts</span>
+grok login --device-auth  <span class="comment"># for remote machines without a browser</span>
+grok logout             <span class="comment"># sign out and clear saved login</span></code></pre></div>
+
+<div class="callout warn"><div class="mark">Security (please read)</div><div>
+<p>The saved login file is like a key to your account. Do not email it, paste it into chat, or commit it to Git. Prefer turning on full-disk encryption on your laptop (FileVault on Mac, BitLocker on Windows, and similar options).</p>
+</div></div>
+
+<h3>Option B — API key (for servers and automation later)</h3>
+<p>An <strong>API key</strong> is a long secret string from a developer console that proves your identity without a browser. Beginners can skip this until they need scripts or CI.</p>
+<div class="pre-wrap"><pre><code>export XAI_API_KEY="xai-paste-your-key-here"
+grok</code></pre></div>
+<p>On Windows PowerShell the first line looks different; use the docs for your shell when you get there. Never put real keys into screenshots or public repos.</p>
+
+<h2 id="verify">Step 4 — Check that it works</h2>
+<p>In a <strong>new</strong> terminal window (not necessarily inside Grok), run these one at a time:</p>
+<div class="pre-wrap"><pre><code>grok --version</code></pre></div>
+<p>You should see a version number. That proves the program is installed and on your PATH.</p>
+<div class="pre-wrap"><pre><code>grok models</code></pre></div>
+<p>Lists AI models available to you (names of engines Grok can use). You do not need to pick one yet; defaults are fine.</p>
+<p>Inside an open Grok session later, you can type <code>/doctor</code> and press Enter. That runs a health check for terminal features (colors, clipboard, and similar options) and suggests fixes. We cover slash commands more in later lessons—for now, know that anything starting with <code>/</code> is a control command for Grok itself.</p>
+
+<h2 id="modes">Three ways to run Grok (only the first matters today)</h2>
+<p>You will almost always use #1 for learning and building.</p>
+<div class="card-grid cols-3">
+  <article class="card"><div class="icon">1</div><h3>Interactive TUI</h3><p>Type <code>grok</code> in a project folder. Full screen, approvals, menus. <strong>Start here.</strong></p></article>
+  <article class="card"><div class="icon violet">2</div><h3>Headless</h3><p><code>grok -p "do this task"</code> runs once and prints a result. For scripts later—not required today.</p></article>
+  <article class="card"><div class="icon amber">3</div><h3>Agent mode</h3><p>Connects Grok to editors/IDEs. Advanced; ignore until the automation lesson.</p></article>
+</div>
+
+<p>Handy launch patterns you will learn over time (do not memorize yet):</p>
+<div class="pre-wrap"><pre><code><span class="comment"># open Grok in the current folder</span>
+grok
+
+<span class="comment"># continue your most recent chat in this folder</span>
+grok -c
+
+<span class="comment"># skip most “may I?” prompts (only on trusted machines)</span>
+grok --yolo</code></pre></div>
+
+<h2 id="lab">Guided lab — first proof it works</h2>
+<p>Follow every step exactly. This creates a tiny practice folder so you cannot hurt a real project.</p>
+<ol class="steps">
+  <li><strong>Confirm install</strong>
+    <p>In the terminal, run <code>grok --version</code>. Write down the version you see.</p>
+  </li>
+  <li><strong>Create a practice folder</strong>
+    <p>Run these lines one by one (or as a group):</p>
+    <div class="pre-wrap"><pre><code>mkdir -p ~/tmp/grok-lab
+cd ~/tmp/grok-lab
+echo 'console.log("hi")' &gt; hi.js
+pwd</code></pre></div>
+    <p><code>mkdir</code> creates folders. <code>cd</code> moves you into them. The <code>echo … &gt; hi.js</code> line creates a tiny JavaScript file that prints “hi”. <code>pwd</code> prints where you are—confirm it ends with <code>grok-lab</code>.</p>
+  </li>
+  <li><strong>Start Grok in that folder</strong>
+    <p>Run <code>grok</code>. Sign in if asked. Wait until you can type at the bottom.</p>
+  </li>
+  <li><strong>Send this exact first message</strong>
+    <p>Type (or paste) the following, then press Enter:</p>
+    <div class="pre-wrap"><pre><code>Read the file hi.js in this folder. Add a second line that prints the current year using JavaScript. Then show me what changed.</code></pre></div>
+  </li>
+  <li><strong>If Grok asks permission to edit</strong>
+    <p>Read the summary. Choose the option that allows the edit (wording varies; look for Allow / Approve / Yes). This is normal and good—you are in control.</p>
+  </li>
+  <li><strong>Confirm on disk</strong>
+    <p>Leave Grok with <code>/quit</code> if you want a plain terminal, or open a second terminal window. Run:</p>
+    <div class="pre-wrap"><pre><code>cd ~/tmp/grok-lab
+cat hi.js</code></pre></div>
+    <p>You should see two lines: the original “hi” and something involving a year. If yes—you completed Lesson 1.</p>
+  </li>
+</ol>
+
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can install Grok, sign in, start it inside a folder, send a plain-English request, approve an edit if asked, and see the file change on disk.</p>
+</div></div>
+
+<div class="callout tip" id="first-win-install" data-first-win>
+  <div class="mark">First win ✓</div>
+  <div>
+    <p>
+      If the lab above worked—you <strong>just got a real first win</strong>: Grok runs on your machine and can change a file with your OK.
+      Mark this lesson complete, then open <a href="02-first-session.html"><strong>Your First Session</strong></a>
+      (clearer goals + verify every time). After that, your next big win is a
+      <a href="21-walkthrough-first-game.html">First Game</a> or
+      <a href="22-walkthrough-first-app.html">First App</a> walkthrough.
+    </p>
+  </div>
+</div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. Before you run <code>grok</code>, you should usually…</legend>
+      <label><input type="radio" name="gs1" value="right" /> <code>cd</code> into the project folder you want Grok to work in</label>
+      <label><input type="radio" name="gs1" value="wrong" /> Stay in a random system directory and hope for the best</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. When Grok asks to edit a file, the safe beginner habit is…</legend>
+      <label><input type="radio" name="gs2" value="right" /> Read the summary, then allow only if it matches your request</label>
+      <label><input type="radio" name="gs2" value="wrong" /> Always mash Always-approve so you never see prompts</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+<div class="callout tip"><div class="mark">Next lesson</div><div>
+<p><a href="02-first-session.html">Your First Session</a> teaches how to write better instructions, attach files, and verify work every time—still assuming you are new.</p>
+</div></div>
+
+        
+<div class="callout tip" id="next-step-session"><div class="mark">What to do next</div><div>
+<p><strong>Next:</strong> <a href="02-first-session.html">Your First Session</a>—send a real goal and approve a tool.
+  <strong>Express path after that:</strong> Screen + Keyboard help, or jump toward a
+  <a href="21-walkthrough-first-game.html">ship walkthrough</a> when you can already open Grok and approve tools.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Written so you do not need prior Grok or terminal expertise. Official detail: <code>~/.grok/docs/user-guide/</code> and in-app <code>/docs</code>.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "start" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "grok-build-tutorial",
+  "private": true,
+  "description": "Grok Build Academy static site",
+  "scripts": {
+    "test": "node tests/progress-unit.mjs && node tests/search-unit.mjs && node tests/version-unit.mjs && node tests/walkthrough-chrome-unit.mjs && node tests/a11y-perf-unit.mjs && node tests/slash-accuracy-unit.mjs && node tests/practice-cue-unit.mjs && node tests/academy-integrity.mjs",
+    "test:practice": "node tests/practice-cue-unit.mjs",
+    "test:progress": "node tests/progress-unit.mjs",
+    "test:search": "node tests/search-unit.mjs",
+    "test:version": "node tests/version-unit.mjs",
+    "test:walkthrough": "node tests/walkthrough-chrome-unit.mjs",
+    "test:a11y": "node tests/a11y-perf-unit.mjs",
+    "test:slash": "node tests/slash-accuracy-unit.mjs",
+    "test:integrity": "node tests/academy-integrity.mjs",
+    "serve": "python3 -m http.server 8765"
+  }
+}

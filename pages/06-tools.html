@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Built-in Tools — Build With Grok</title>
+  <meta name="description" content="What Grok is allowed to do on your computer—explained without assuming you know special tool names." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Built-in Tools</h1>
+          <p class="lead">Grok can read files, edit files, run commands, and more. You describe the goal; Grok chooses tools—and often asks permission.</p>
+          <div class="lesson-prereq"><span>Know what a “turn” is from <a href="02-first-session.html">First Session</a></span></div>
+        </header>
+        
+<figure class="figure square" style="max-width:400px;margin-inline:auto"><img src="../assets/tools.jpg" alt="Icons for edit search shell web" /><figcaption>Tools are Grok’s hands—not separate apps you open yourself.</figcaption></figure>
+
+<h2>What is a “tool” here?</h2>
+<p>When people say ChatGPT “can’t touch my files,” they mean it only replies with text. Grok has <strong>tools</strong>: built-in abilities to act on your computer and the internet. You usually do not type tool names. You describe a goal; Grok chooses tools.</p>
+<p>Still, knowing the toolkit helps you write better goals (“run the tests” implies the shell tool; “edit only this file” implies file tools).</p>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Tool idea</th><th>Plain English</th><th>Example goal that uses it</th></tr></thead>
+<tbody>
+<tr><td>Read / edit files</td><td>Open and change project files</td><td>“Fix the typo in README.md”</td></tr>
+<tr><td>Search project</td><td>Find text across files</td><td>“Find every use of damageMultiplier”</td></tr>
+<tr><td>Shell / terminal commands</td><td>Run programs like tests and builds</td><td>“Run npm test and fix failures”</td></tr>
+<tr><td>Web search / fetch</td><td>Look up docs online</td><td>“Use the current API for library X”</td></tr>
+<tr><td>To-do list</td><td>Track multi-step work in the UI</td><td>Large features with many steps</td></tr>
+<tr><td>Subagents</td><td>Spin up helper Grok sessions</td><td>“Research the codebase first, then implement”</td></tr>
+<tr><td>Images</td><td>Generate or edit pictures</td><td>“Create a simple potion icon”</td></tr>
+<tr><td>MCP tools</td><td>Talk to extra connected apps</td><td>Blender, issue trackers, and similar options</td></tr>
+</tbody></table></div>
+
+<h2>Permissions reminder</h2>
+<p>Many tools pause for your OK. That is normal. Reading is usually freer than writing or running commands.</p>
+
+<h2>How to aim Grok at the right tools</h2>
+<div class="card-grid cols-2">
+<article class="card"><h3>Say the verification command</h3><p>“After changes, run <code>npm test</code>.” Forces shell use and a success definition.</p></article>
+<article class="card"><h3>Limit the blast radius</h3><p>“Only edit files under css/. Do not touch server code.”</p></article>
+<article class="card"><h3>Ask for explore first</h3><p>“List the files involved and summarize; wait for my OK before editing.”</p></article>
+<article class="card"><h3>Background long jobs</h3><p>“Start the dev server in the background, then keep working on the UI.”</p></article>
+</div>
+
+<div class="callout lab"><div class="mark">Try this</div><div>
+<p>In ~/tmp/grok-lab ask: “Search this folder for any .js files, list their names, and do not edit anything.” You should see search/list behavior without file changes.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. A “tool” in Grok is…</legend>
+      <label><input type="radio" name="tq1" value="right" /> An action Grok can take (read/edit/run/search) that may ask permission</label>
+      <label><input type="radio" name="tq1" value="wrong" /> Only the mouse pointer</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Best way to force a verification step?</legend>
+      <label><input type="radio" name="tq2" value="right" /> Name the exact command (e.g. run npm test) in your goal</label>
+      <label><input type="radio" name="tq2" value="wrong" /> Say “make it good” with no test</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Plain-language path. <a href="00-glossary.html">Glossary</a> · <a href="cheatsheet.html">Cheatsheet</a></p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "tools" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

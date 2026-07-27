@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Words You’ll See — Build With Grok</title>
+  <meta name="description" content="Plain-English glossary for Build With Grok. No prior Grok, terminal, or programming experience needed." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Words You’ll See</h1>
+          <p class="lead">Plain meanings for the words you will see in this site. Skim once. Come back when a later lesson uses a word you forgot.</p>
+          <div class="lesson-prereq"><span>No prerequisites</span><span>Start here if words feel new</span></div>
+        </header>
+        
+<div class="callout tip"><div class="mark">Start here if words feel new</div><div>
+<p>This is a dictionary—not a test. Skim the headings, then open <a href="01-getting-started.html">Getting Started</a>. Return any time a word confuses you.</p>
+</div></div>
+
+<nav class="on-this-page"><strong>Jump to</strong>
+<a href="#basics">Computer basics</a>
+<a href="#grok-words">Grok Build words</a>
+<a href="#dev-words">Software project words</a>
+<a href="#safety-words">Safety words</a>
+</nav>
+
+<h2 id="basics">Computer basics we will use</h2>
+<dl class="def-list">
+  <dt>Terminal (also: shell, command line)</dt>
+  <dd>A text window where you type commands for the computer. On a Mac, open the app named <strong>Terminal</strong>. On Windows, use <strong>PowerShell</strong>, <strong>Windows Terminal</strong>, or <strong>Git Bash</strong>. Grok Build runs inside a terminal.</dd>
+  <dt>Command</dt>
+  <dd>A short line of text you type and run by pressing Enter. Example: <code>grok --version</code> asks the computer to print which version of Grok is installed.</dd>
+  <dt>Folder / directory</dt>
+  <dd>A place that holds files. Paths look like <code>~/projects/my-game</code>. The character <code>~</code> means "my home folder."</dd>
+  <dt>Working directory</dt>
+  <dd>The folder your terminal is “in” right now. Grok usually works on files inside that folder (your project).</dd>
+  <dt>PATH</dt>
+  <dd>A list of folders your computer searches when you type a program name like <code>grok</code>. Installers usually add Grok to PATH so the name works from any folder.</dd>
+  <dt>Keyboard shortcut / chord</dt>
+  <dd>Keys pressed together. <kbd>Ctrl+O</kbd> means hold Control (on Mac, often Control—not Command—unless we say Cmd) and press O. We always spell shortcuts out when they matter.</dd>
+</dl>
+
+<h2 id="grok-words">Grok Build words</h2>
+<dl class="def-list">
+  <dt>Grok Build</dt>
+  <dd>An AI coding assistant that lives in your terminal. You describe a goal in English; it can read files, edit them, and run commands (with your permission).</dd>
+  <dt>Agent</dt>
+  <dd>Software that takes multi-step actions toward a goal—not just chat. Grok is an agent: it plans, uses tools, checks results, and continues.</dd>
+  <dt>TUI (Terminal User Interface)</dt>
+  <dd>The full-screen Grok interface inside the terminal: history above, typing box below, menus, colors. This is the normal way humans use Grok day to day.</dd>
+  <dt>Prompt</dt>
+  <dd>(1) The text box at the bottom where you type instructions. (2) The message you send (“fix the login bug”). Both meanings appear in this site.</dd>
+  <dt>Scrollback</dt>
+  <dd>The history area above the prompt. It shows your messages, Grok’s answers, and tool results (file edits, command output).</dd>
+  <dt>Turn</dt>
+  <dd>One round: you send a message, Grok works (possibly for a while), then finishes or waits for you. While a turn is running, Grok is “busy.”</dd>
+  <dt>Tool</dt>
+  <dd>An action Grok can take: read a file, edit a file, run a shell command, search the web, and more. Tools may ask for your approval first.</dd>
+  <dt>Session</dt>
+  <dd>One saved conversation with history. Sessions are stored on disk so you can leave and come back later.</dd>
+  <dt>Slash command</dt>
+  <dd>A special instruction that starts with <code>/</code>, like <code>/help</code>-style menus. Example: type <code>/new</code> and press Enter to start a fresh session. Not the same as chatting with the AI—these control Grok itself.</dd>
+  <dt>Context / context window</dt>
+  <dd>How much of the conversation and files Grok can “see” at once. Long chats fill it up. Commands like <code>/compact</code> free space by summarizing older parts.</dd>
+  <dt>Diff</dt>
+  <dd>A view of what changed in a file: lines added and removed. When Grok edits code, you can read the diff to understand the change.</dd>
+  <dt>Headless mode</dt>
+  <dd>Running Grok with a single prompt from the command line (often <code>grok -p "…"</code>) without the interactive full-screen UI. Used for scripts and automation.</dd>
+  <dt>Always-approve (sometimes called YOLO)</dt>
+  <dd>A mode where Grok does not stop to ask permission for most tools. Faster, riskier. Only use on computers and projects you trust.</dd>
+</dl>
+
+<h2 id="dev-words">Software project words</h2>
+<dl class="def-list">
+  <dt>Repository (repo)</dt>
+  <dd>Your project folder, often tracked by Git. “Open the repo” means open that project’s folder in the terminal.</dd>
+  <dt>Git</dt>
+  <dd>A common tool that records versions of your files so you can undo and share changes. Helpful with Grok so you can reverse bad edits.</dd>
+  <dt>Test / test suite</dt>
+  <dd>Small programs that check your code automatically. “Run the tests” means run a command (often <code>npm test</code>) that reports pass/fail.</dd>
+  <dt>Stack</dt>
+  <dd>The technologies your project uses (e.g. “vanilla JavaScript in the browser,” “Unity C#,” “React + Node”).</dd>
+  <dt>CI (Continuous Integration)</dt>
+  <dd>Automated checks that run on a server when you push code—tests, lint, builds. Headless Grok can plug into CI later; you do not need CI on day one.</dd>
+</dl>
+
+<h2 id="safety-words">Safety words</h2>
+<dl class="def-list">
+  <dt>Permission prompt</dt>
+  <dd>A pause where Grok asks “May I edit this file?” or “May I run this command?” You choose allow or deny.</dd>
+  <dt>Agent Dashboard</dt>
+  <dd>A multi-session overview for jumping between Grok chats, dispatching work, and seeing what is running. Advanced—learn after your first ship.</dd>
+  <dt>Sandbox</dt>
+  <dd>Optional OS-level limits so Grok’s processes can only write certain folders. Extra protection for untrusted code.</dd>
+  <dt>Credentials / API key</dt>
+  <dd>Secrets that prove who you are. Treat them like passwords. Never paste them into public chat or commit them to Git.</dd>
+</dl>
+
+<div class="callout lab"><div class="mark">Ready?</div><div>
+<p>You do not need to know every word yet. Continue to <a href="01-getting-started.html"><strong>Getting Started</strong></a>—we will open the terminal and install Grok step by step.</p>
+</div></div>
+
+        
+<div class="callout tip" id="next-step-install"><div class="mark">What to do next</div><div>
+<p>When you are ready, go to <a href="01-getting-started.html"><strong>Getting Started</strong></a> and install Grok.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Written so you do not need prior Grok or terminal expertise. Official detail: <code>~/.grok/docs/user-guide/</code> and in-app <code>/docs</code>.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "glossary" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

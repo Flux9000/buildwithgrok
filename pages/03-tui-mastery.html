@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Grok Screen — Build With Grok</title>
+  <meta name="description" content="A guided tour of every major part of Grok’s on-screen interface—history, prompt, focus, and menus—assuming you have never used a TUI before." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>The Grok Screen</h1>
+          <p class="lead">Two main parts of the Grok screen: history above, typing box below.</p>
+          <div class="lesson-prereq"><span>Finish <a href="02-first-session.html">Your First Session</a> first</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#map">Map of the screen</a>
+<a href="#scrollback">The history area (scrollback)</a>
+<a href="#prompt">The typing area (prompt)</a>
+<a href="#focus">Focus: which part is “active”</a>
+<a href="#slash">Slash commands in one minute</a>
+<a href="#modes">Fullscreen vs minimal (optional)</a>
+<a href="#lab">Lab</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Big idea</div><div>
+<p>The TUI is just two main regions: <strong>history above</strong>, <strong>typing below</strong>. Everything else is a menu or popup on top of those.</p>
+</div></div>
+
+<h2 id="map">Map of the screen</h2>
+<div class="card-grid cols-2">
+  <article class="card"><h3>1. Scrollback (history)</h3><p>Your past messages, Grok’s answers, thinking notes, and tool results (including file diffs and command output). Scroll here to review what happened.</p></article>
+  <article class="card"><h3>2. Prompt (input)</h3><p>Where you type the next instruction, attach files with @, or run slash commands that start with /.</p></article>
+</div>
+<p>Optional panes you may meet later: a list of to-dos, a queue of follow-up messages, settings screens. You do not need them on day one.</p>
+
+<h2 id="scrollback">The history area (scrollback) in detail</h2>
+<p>Each piece of history is an “entry” or “block.” Examples:</p>
+<ul>
+  <li>Your user message</li>
+  <li>Grok’s written answer (often with formatted text and code)</li>
+  <li>A tool call such as “edited hi.js” with a expandable diff</li>
+  <li>A shell command and its printed output</li>
+</ul>
+<p><strong>Why collapse blocks?</strong> Long command logs get huge. Collapsing hides detail until you need it so you can skim.</p>
+<ul>
+  <li>Press <kbd>Tab</kbd> until focus is in the history (not the typing box).</li>
+  <li>Move with the arrow keys.</li>
+  <li>Collapse/expand with left/right arrows.</li>
+  <li>Press <kbd>Enter</kbd> on a block to open a larger viewer when available.</li>
+</ul>
+<div class="you-will-see"><strong>What “focused” means</strong>
+<p>Only one region accepts keys at a time. If you type letters and they do not appear in the bottom box, focus is probably on the history—press <kbd>Tab</kbd> to return to the prompt.</p>
+</div>
+
+<h2 id="prompt">The typing area (prompt) in detail</h2>
+<p>Click the bottom area (or Tab until the cursor is there). Then you can:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>You want to…</th><th>Do this</th></tr></thead>
+<tbody>
+<tr><td>Send a normal request</td><td>Type English, press Enter</td></tr>
+<tr><td>Attach a file</td><td>Type <code>@</code> and pick a file</td></tr>
+<tr><td>Control Grok (not chat)</td><td>Type <code>/</code> and pick a command</td></tr>
+<tr><td>Recall an old message you typed</td><td>With an empty prompt, press ↑</td></tr>
+<tr><td>Paste an image (when supported)</td><td>Paste from clipboard or drag a file in</td></tr>
+</tbody></table></div>
+<p>There is also a <strong>shell mode</strong>: on an empty prompt type <code>!</code> to run a one-off terminal command through Grok’s UI. Beginners can ignore this until comfortable; the normal English prompt is enough.</p>
+
+<h2 id="focus">Focus: which part is “active”</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Goal</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Type to Grok</td><td>Focus the prompt (Tab or click bottom)</td></tr>
+<tr><td>Read / collapse history</td><td>Focus scrollback (Tab), then arrows</td></tr>
+<tr><td>Stop Grok mid-work</td><td>Esc (details in Keyboard lesson)</td></tr>
+<tr><td>Start a brand new chat</td><td><code>/new</code> or the new-session shortcut</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="mark">Important</div><div>
+<p>Esc is <strong>not</strong> “unfocus.” Esc cancels work, clears the draft (with a double-tap in some states), or opens rewind. If you only wanted to stop typing in a menu, use Esc once to close the menu—read on-screen hints when they appear.</p>
+</div></div>
+
+<h2 id="slash">Slash commands in one minute</h2>
+<p>When you type <code>/</code> at the start of the prompt, Grok opens a searchable menu of <strong>commands that control the app</strong>, not messages to the AI persona.</p>
+<ul>
+  <li><code>/new</code> — start a clean conversation</li>
+  <li><code>/quit</code> — exit Grok</li>
+  <li>Slash menu discovery: keep typing to filter, e.g. <code>/comp</code> finds <code>/compact</code>; or run <code>/help</code> for the help browser</li>
+</ul>
+<p>The full encyclopedia is a later lesson. For now: <code>/</code> means “control panel.”</p>
+
+<h2 id="modes">Fullscreen vs minimal (optional knowledge)</h2>
+<p>Grok can draw its UI in different styles:</p>
+<ul>
+  <li><strong>Fullscreen (default for many setups):</strong> dedicated TUI look with themes.</li>
+  <li><strong>Minimal:</strong> sits more like plain terminal text. Themes work differently.</li>
+</ul>
+<p>Switch with <code>/minimal</code> or <code>/fullscreen</code> if you ever need to. You can ignore this until something looks wrong in your terminal app.</p>
+
+<h2 id="lab">Lab — learn the two panes</h2>
+<ol class="steps">
+  <li>Start Grok in any folder.</li>
+  <li>Send: <code>Reply with exactly the words: panes practice</code>.</li>
+  <li>Press Tab to move focus to the history. Select your message and Grok’s reply with arrows.</li>
+  <li>Press Tab again so you can type. Send a second message: <code>Thanks — end of practice.</code></li>
+  <li>Type <code>/</code> and browse the command list without running anything scary. Press Esc if you need to close the menu.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can explain scrollback vs prompt, move focus with Tab, and open the slash menu on purpose.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. On the Grok screen, history is…</legend>
+      <label><input type="radio" name="tui1" value="right" /> Above — past messages and tool results</label>
+      <label><input type="radio" name="tui1" value="wrong" /> Always hidden forever</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. The typing box is…</legend>
+      <label><input type="radio" name="tui2" value="right" /> Below — where you type goals and slash commands</label>
+      <label><input type="radio" name="tui2" value="wrong" /> Only available after Always-approve</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>No prior knowledge assumed. Glossary: <a href="00-glossary.html">Words You’ll See</a>.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "tui" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

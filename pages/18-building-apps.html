@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building Apps — Build With Grok</title>
+  <meta name="description" content="How to drive Grok for product work using user journeys, plan mode, and verification—without assuming product-management experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Building Apps</h1>
+          <p class="lead">Before the full walkthrough: write a short user journey, then build one step at a time with checks.</p>
+          <div class="lesson-prereq"><span>Finish <a href="04-keyboard.html">Keyboard Basics</a> first</span><span>Next: full app walkthrough</span></div>
+        </header>
+        
+<h2>Apps vs games (same Grok skills)</h2>
+<p>An <strong>app</strong> here means a useful product: website, tools, multiplayer services, internal dashboards. You still use folders, AGENTS.md, clear goals, and verification—the content of the goals changes.</p>
+
+<h2>Start from a user journey</h2>
+<p>A <strong>user journey</strong> is the path a person takes through your product, written as a story:</p>
+<div class="pre-wrap"><pre><code>1. Visit homepage while logged out
+2. Sign up with email
+3. Create a project
+4. Invite a friend
+5. Edit a document together</code></pre></div>
+<p>Put this in <code>JOURNEY.md</code>. Build one step at a time until that step works for a human.</p>
+
+<ol class="steps">
+  <li><strong>Write journey + AGENTS.md</strong> (how to run, test, and start the dev server).</li>
+  <li><strong>Use plan mode for big structure</strong> — auth, database tables, API shapes.</li>
+  <li><strong>Implement one journey step</strong> with a verification sentence in every prompt.</li>
+  <li><strong>Manually click through</strong> the happy path yourself.</li>
+  <li><strong>Then</strong> empty states, errors, loading spinners (ask for them explicitly).</li>
+</ol>
+
+<div class="pre-wrap"><pre><code>/plan
+Add email/password signup and login.
+Sessions should keep users logged in.
+Protect the /app page so logged-out users are redirected.
+Verification: I can register, log in, open /app, log out, and get redirected.</code></pre></div>
+
+<div class="callout tip"><div class="mark">Secrets</div><div>
+<p>Never paste production passwords into Grok. Teach variable <em>names</em> in AGENTS.md (DATABASE_URL) and keep real values in private env files that are not committed to Git.</p>
+</div></div>
+
+<div class="callout lab"><div class="mark">Lab</div><div>
+<p>Pick one journey step only (e.g. “static homepage with a working Sign up button that shows a form”). Finish that before anything else.</p>
+</div></div>
+
+<div class="callout tip"><div class="mark">Want a full script?</div><div>
+<p>Follow the copy-paste guide: <a href="22-walkthrough-first-app.html"><strong>Walkthrough: Your First App (Focus List)</strong></a> — journey file, shell UI, features, localStorage, and exact good vs bad prompts.</p>
+</div></div>
+
+        
+<div class="callout lab"><div class="mark">What to do next</div><div>
+<p>This lesson is short on purpose. When you finish reading, open <a href="22-walkthrough-first-app.html"><strong>Walkthrough: First App</strong></a> and follow every phase in order.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> always available.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "apps" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

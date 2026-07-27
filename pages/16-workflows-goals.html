@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workflows, Goals & Loops — Build With Grok</title>
+  <meta name="description" content="Timers, background tasks, goals, and multi-agent workflows—when to leave plain chat and which tool to pick." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Workflows, Goals & Loops</h1>
+          <p class="lead">When plain chat is not enough: timers (/loop), long goals, and multi-agent workflows.</p>
+          <div class="lesson-prereq"><span>Comfortable with <a href="07-sessions-memory.html">sessions</a> and <a href="08-permissions-safety.html">permissions</a></span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#when">When chat isn’t enough</a>
+<a href="#loop">/loop</a>
+<a href="#tasks">Tasks, queue, monitors</a>
+<a href="#goal">/goal</a>
+<a href="#workflow">Workflows</a>
+<a href="#lab">Lab</a>
+</nav>
+
+<h2 id="when">When ordinary chat isn’t enough</h2>
+<p>Use these tools when work is <strong>repetitive</strong>, <strong>long-running</strong>, or needs <strong>structured multi-agent</strong> stages. Day-to-day shipping still uses normal prompts + verification.</p>
+
+<h2 id="loop">/loop — recurring prompts</h2>
+<div class="pre-wrap"><pre><code>/loop 10m Run the project tests if present and report pass or fail only.
+/loop 1h Summarize new git commits since yesterday in 5 bullets.</code></pre></div>
+<ul>
+  <li>Minimum interval typically <strong>60 seconds</strong></li>
+  <li>Jobs expire after a limited lifetime (on the order of days)</li>
+  <li>Don’t spawn dozens of loops—they share your attention and quotas</li>
+</ul>
+<p>If <code>/loop</code> does not appear in your slash menu, your version may not enable it yet. Check <code>/docs</code>, or skip this feature for now.</p>
+
+<h2 id="tasks">Tasks, queue, and monitors</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Tool</th><th>What it’s for</th><th>How you touch it</th></tr></thead>
+<tbody>
+<tr><td>Background shell</td><td>Long builds/servers while you keep chatting</td><td>Ask Grok to background; or <kbd>Ctrl+B</kbd> on a running command</td></tr>
+<tr><td>Tasks pane</td><td>See background tasks, subagents, scheduled work</td><td><code>/tasks</code>; full TUI also <kbd>Ctrl+G</kbd> (minimal mode may use Ctrl+G for external edit—prefer <code>/tasks</code> if unsure)</td></tr>
+<tr><td>Prompt queue</td><td>Stack follow-ups while a turn runs</td><td>Type+Enter to queue; send-now chords; list with <code>/queue</code></td></tr>
+<tr><td>monitor</td><td>Stream filtered log lines into the session</td><td>Agent tool; use line-buffered filters</td></tr>
+</tbody></table></div>
+
+<h2 id="goal">/goal — long objectives with proof</h2>
+<div class="pre-wrap"><pre><code>/goal Migrate tests to the new folder layout without breaking npm test
+/goal status
+/goal pause
+/goal resume
+/goal clear</code></pre></div>
+<p>Goals are for multi-hour migrations—not typos. Completion should require evidence, not vibes.</p>
+
+<h2 id="workflow">Workflows &amp; deep research</h2>
+<p><code>/workflow</code> runs saved multi-agent scripts (project <code>.grok/workflows/</code> or user workflows). <code>/workflows</code> is the run dashboard. <code>/deep-research</code> starts structured research with verification.</p>
+<p class="why">Authoring Rhai workflows is advanced. As a learner, run shared workflows when a teammate provides one; learn authoring after you’ve shipped interactively.</p>
+
+<div class="callout tip"><div class="mark">Related</div><div>
+<p>For <strong>multiple concurrent Grok sessions</strong> (not just tools inside one chat), see <a href="23-dashboard-multisession.html">Agent Dashboard &amp; Multi-Session</a>.</p>
+</div></div>
+
+<h2 id="lab">Lab</h2>
+<ol class="steps">
+  <li>Start a 60s or 2m loop that only prints the time or checks a local file exists—then cancel/remove it so it doesn’t linger.</li>
+  <li>Start a long <code>sleep 20</code> via Grok shell and background it; confirm you can keep typing.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You know which tool is for timers vs live logs vs multi-hour goals vs multi-agent scripts.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Concepts first; use in-product <code>/docs</code> for version-exact flags (product is Beta).</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "workflows" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

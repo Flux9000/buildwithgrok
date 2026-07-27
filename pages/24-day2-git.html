@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Day-2 Git with Grok — Build With Grok</title>
+  <meta name="description" content="After your first ship: use git status and diff safely with Grok, review commits, and keep the human in charge of history." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Day-2 Git with Grok</h1>
+          <p class="lead">You shipped something. Now save it with git—safely—with Grok as a helper, not the boss of your history.</p>
+          <div class="lesson-prereq">
+            <span>After a First Ship walkthrough (game or app) or any project you care about</span>
+            <span>~20 min</span>
+          </div>
+        </header>
+
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#why">Why day-2</a>
+<a href="#words">Words you need</a>
+<a href="#who">Who decides what</a>
+<a href="#status">Status &amp; diff</a>
+<a href="#commit">Commit habits</a>
+<a href="#lab">Lab</a>
+<a href="#done">Done when</a>
+</nav>
+
+<div class="callout tip"><div class="mark">Big idea</div><div>
+<p><strong>Git is a save system for code.</strong> Grok can run git commands and draft commit messages. <em>You</em> decide what gets recorded forever—especially force pushes, history rewrites, and commits of secrets.</p>
+</div></div>
+
+<h2 id="why">Why “day 2”?</h2>
+<p>Day 1 was shipping something that runs. Day 2 is not becoming a git expert. It is learning enough to:</p>
+<ul>
+  <li>See what changed (<code>status</code>, <code>diff</code>)</li>
+  <li>Save a checkpoint you could return to (<code>commit</code>)</li>
+  <li>Stop Grok from “helpfully” rewriting history or committing junk</li>
+</ul>
+<p>If you have never installed git, do that first on your machine, then come back. This lesson assumes <code>git --version</code> works in a terminal.</p>
+
+<h2 id="words">Words you need (plain English)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Word</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><strong>Repository (repo)</strong></td><td>A project folder where git is tracking history</td></tr>
+<tr><td><strong>Commit</strong></td><td>A saved snapshot with a short message (“what changed and why”)</td></tr>
+<tr><td><strong>Status</strong></td><td>Which files are new, changed, or staged</td></tr>
+<tr><td><strong>Diff</strong></td><td>The line-by-line change since the last commit</td></tr>
+<tr><td><strong>Stage</strong></td><td>Mark which changes go into the <em>next</em> commit</td></tr>
+<tr><td><strong>Branch</strong></td><td>A named line of work (start with <code>main</code> only)</td></tr>
+</tbody></table></div>
+
+<h2 id="who">Who decides what (Grok vs you)</h2>
+<div class="two-col">
+<div>
+<h4>Usually fine for Grok (with you watching)</h4>
+<ul>
+  <li><code>git status</code>, <code>git diff</code>, <code>git log -5</code></li>
+  <li>Draft a commit message from the diff</li>
+  <li>Stage specific files you named</li>
+  <li>Create a commit <em>after you approve</em> the message and file list</li>
+</ul>
+</div>
+<div>
+<h4>Human decides (or forbid by default)</h4>
+<ul>
+  <li>Force push, hard reset, history rewrite</li>
+  <li>Commit of <code>.env</code>, keys, passwords, huge binaries</li>
+  <li>“Clean” the repo by deleting untracked work you still need</li>
+  <li>Pushing to a shared remote without your OK</li>
+</ul>
+</div>
+</div>
+<p class="why">Stay on <strong>Ask</strong> permission mode while learning git. If Grok wants a destructive command, deny it and say: “Only status, diff, and a normal commit—no force or reset.”</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Fix the repo however you want—use force push if needed.”</p>
+  </div>
+  <div class="prompt-box good"><div class="label">Send this kind of prompt</div>
+  <p style="margin:0">“Run <code>git status</code> and <code>git diff</code>. Summarize changes. Propose a commit message. Do <strong>not</strong> commit until I say yes. Never force push or reset.”</p>
+  </div>
+</div>
+
+<h2 id="status">Status &amp; diff (your daily loop)</h2>
+<p>Before any commit—yours or Grok’s—run the same two checks:</p>
+<ol class="steps">
+  <li><strong>Status</strong> — what is dirty?
+    <div class="pre-wrap"><pre><code>git status</code></pre></div>
+  </li>
+  <li><strong>Diff</strong> — what actually changed?
+    <div class="pre-wrap"><pre><code>git diff
+git diff --staged</code></pre></div>
+  </li>
+</ol>
+<p>Ask Grok to explain the diff in plain English, then skim the real lines yourself for secrets and accidental files.</p>
+
+<div class="callout warn"><div class="mark">Secrets check</div><div>
+<p>If the diff shows API keys, tokens, or passwords, <strong>do not commit</strong>. Remove them from the files, add the secret path to <code>.gitignore</code>, and rotate the key if it already leaked into chat history or a remote.</p>
+</div></div>
+
+<h2 id="commit">Commit habits that keep you safe</h2>
+<ol class="steps">
+  <li><strong>Small commits</strong> — one idea per commit when you can (e.g. “Add restart button”, not “misc fixes”).</li>
+  <li><strong>You own the message</strong> — Grok drafts; you edit. Prefer present tense: “Add win screen” over “Fixed stuff”.</li>
+  <li><strong>Stage intentionally</strong> — prefer naming files over blind <code>git add .</code> until you trust the tree.
+    <div class="pre-wrap"><pre><code>git add index.html css/style.css js/main.js
+git commit -m "Add restart button and win message"</code></pre></div>
+  </li>
+  <li><strong>Verify</strong> — <code>git status</code> should be clean (or only show work you left out on purpose).</li>
+</ol>
+
+<div class="pre-wrap"><pre><code>Goal: Help me prepare a safe git commit. Do not commit yet.
+
+1. Run git status and git diff in this project.
+2. List files that should and should not be committed.
+3. Draft a one-line commit message.
+4. Stop and wait for my yes/no before any git add or git commit.
+5. Never use force, reset --hard, or push unless I explicitly ask.</code></pre></div>
+
+<h2 id="lab">Lab</h2>
+<p>Use the project from your ship walkthrough (or any practice folder with a few changed files).</p>
+<ol class="steps">
+  <li>In a terminal, <code>cd</code> into the project. If git is not initialized yet:
+    <div class="pre-wrap"><pre><code>git init
+git status</code></pre></div>
+  </li>
+  <li>Start Grok in that folder. Stay on <strong>Ask</strong> mode.</li>
+  <li>Send the “Goal: Help me prepare a safe git commit…” prompt above (copy the whole box).</li>
+  <li>Read Grok’s summary. Open the real <code>git diff</code> yourself. Confirm no secrets.</li>
+  <li>If the draft message is good, reply: “Yes—stage only these files: …” and list them. Approve the commit command when Grok proposes it. If anything looks wrong, say “No commit. Stop.”</li>
+  <li>Run <code>git log -1 --oneline</code> and confirm the snapshot is yours.</li>
+</ol>
+
+<div class="callout lab" id="done"><div class="mark">Done when</div><div>
+<p>You can explain status vs diff in one sentence each; you have either made a reviewed commit with Grok’s help or deliberately stopped before a bad commit; and you know three git actions you will not let Grok do alone (force push, hard reset, commit of secrets).</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. Who should decide force push / hard reset?</legend>
+      <label><input type="radio" name="q1" value="wrong" /> Grok, if it thinks history is messy</label>
+      <label><input type="radio" name="q1" value="right" /> You (the human)</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Best first step before a commit?</legend>
+      <label><input type="radio" name="q2" value="right" /> git status and git diff (and skim for secrets)</label>
+      <label><input type="radio" name="q2" value="wrong" /> git push --force immediately</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Grok drafts a commit message. You should…</legend>
+      <label><input type="radio" name="q3" value="wrong" /> Accept blindly every time</label>
+      <label><input type="radio" name="q3" value="right" /> Edit or approve after reading the diff</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+<p>Next in the path: Intermediate daily habits—start with <a href="05-slash-commands.html"><strong>Slash Commands</strong></a> if you have not already.</p>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> · every lesson assumes you may be new to the idea.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "git" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

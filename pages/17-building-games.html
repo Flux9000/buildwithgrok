@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building Games — Build With Grok</title>
+  <meta name="description" content="A gentle playbook for finishing playable game slices with Grok—definitions, prompts, and order of work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Building Games</h1>
+          <p class="lead">Before the full walkthrough: what a small complete game piece is, and the order of work that actually finishes.</p>
+          <div class="lesson-prereq"><span>Finish <a href="04-keyboard.html">Keyboard Basics</a> first</span><span>Next: full game walkthrough</span></div>
+        </header>
+        
+<figure class="figure"><img src="../assets/game-pipeline.jpg" alt="Sprites becoming a playable game" /><figcaption>Playable first. Pretty second.</figcaption></figure>
+
+<div class="callout tip"><div class="mark">You do not need to be a senior engineer</div><div>
+<p>You only need Beginner skills: open Grok in a folder and send a clear goal. We explain programming words when they appear.</p>
+</div></div>
+
+<h2>What “shipping a game with Grok” means</h2>
+<p>You still choose design and taste. Grok helps write code, fix errors, and wire assets faster. The winning strategy is a <strong>vertical slice</strong>.</p>
+
+<h3>Vertical slice (simple definition)</h3>
+<p>One tiny path a player can finish end-to-end—for example “move, hit one enemy, see health change, win or lose.” Not “all menus” with no play. Not “all art” with no controls.</p>
+<div class="pre-wrap"><pre><code><span class="comment"># Create SLICE.md in your game folder</span>
+Player can move with WASD.
+One enemy walks toward the player.
+Space attacks; enemy loses HP.
+When enemy HP is 0, show You Win.
+
+Out of scope for this slice: inventory, story, multiplayer.</code></pre></div>
+
+<h2>Step-by-step playbook</h2>
+<ol class="steps">
+  <li><strong>Write SLICE.md and AGENTS.md</strong>
+    <p>AGENTS.md should say how to open the game and how to run tests if any exist.</p>
+  </li>
+  <li><strong>Start Grok inside the game folder</strong>
+    <div class="pre-wrap"><pre><code>cd path/to/your-game
+grok</code></pre></div>
+  </li>
+  <li><strong>Build logic before polish</strong>
+    <p>Example prompt:</p>
+    <div class="pre-wrap"><pre><code>@SLICE.md @AGENTS.md
+Implement only the slice. Use the simplest code that works.
+If tests exist, add tests for damage math.
+Verification: explain how I manually play the slice in 3 steps.</code></pre></div>
+  </li>
+  <li><strong>Play it yourself</strong>
+    <p>Grok cannot replace you sitting down and pressing keys. Write bugs you feel into the next prompt.</p>
+  </li>
+  <li><strong>Then art and juice</strong>
+    <p>Sprites, particles, screenshake—after the slice is fun. Point Grok at a style guide file if you have one.</p>
+  </li>
+</ol>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Too big</div><p>“Make an open-world RPG with crafting.”</p></div>
+  <div class="prompt-box good"><div class="label">Slice-sized</div><p>“Add a 0.5s dash cooldown to the player. Show remaining cooldown in the HUD text. No other features.”</p></div>
+</div>
+
+<h2>If you use Unity or another heavy engine</h2>
+<ul>
+  <li>Tell Grok where scripts live (usually an Assets folder).</li>
+  <li>Put the exact build/play commands in AGENTS.md.</li>
+  <li>Long compiles: ask Grok to run them in the background and continue other work.</li>
+</ul>
+
+<div class="callout lab"><div class="mark">Lab</div><div>
+<p>Timebox 90 minutes. One verb + one obstacle + win condition. Commit or zip the folder when the slice works. That is a real finish.</p>
+</div></div>
+
+<div class="callout tip"><div class="mark">Want a full script?</div><div>
+<p>Follow the copy-paste, phase-by-phase guide: <a href="21-walkthrough-first-game.html"><strong>Walkthrough: Your First Game (Star Clicker Arena)</strong></a> — exact prompts to use, prompts to avoid, and playtest steps from empty folder to win/lose/restart.</p>
+</div></div>
+
+        
+<div class="callout lab"><div class="mark">What to do next</div><div>
+<p>This lesson is short on purpose. When you finish reading, open <a href="21-walkthrough-first-game.html"><strong>Walkthrough: First Game</strong></a> and follow every phase in order.</p>
+</div></div>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> always available.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "games" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

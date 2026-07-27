@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subagents & Personas — Build With Grok</title>
+  <meta name="description" content="Helper Grok sessions that research or work in parallel—explained like hiring temporary teammates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Subagents & Personas</h1>
+          <p class="lead">Subagents are helper chats with their own notes. Use them to research or work without flooding the main chat.</p>
+          <div class="lesson-prereq"><span>You are comfortable with one main session</span></div>
+        </header>
+        
+<h2>Analogy</h2>
+<p>Your main Grok chat is the lead engineer. A <strong>subagent</strong> is a teammate with a fresh notepad. They investigate or implement a side task, then report a summary back so the lead’s notepad does not overflow.</p>
+
+<h2>Common helper types</h2>
+<div class="card-grid cols-3">
+<article class="card"><h3>Explore</h3><p>Reads and searches; aimed at understanding. Good for “map how inventory works.”</p></article>
+<article class="card"><h3>Plan</h3><p>Designs an approach without editing product code.</p></article>
+<article class="card"><h3>General-purpose</h3><p>Full helper that can implement when delegated.</p></article>
+</div>
+
+<p>You usually do not manually spawn these at first—Grok does when the task is large. You can also ask in English: “Use an explore pass first; do not edit until you summarize findings.”</p>
+
+<h2>Personas</h2>
+<p>A <strong>persona</strong> is a tone/behavior overlay (“be extremely concise,” “always cite file paths”). Managed via <code>/personas</code>. Optional polish, not required to ship software.</p>
+
+<h2>Agents modal</h2>
+<p><code>/config-agents</code> lets advanced users define custom agent setups. Skip until defaults feel limiting.</p>
+
+<div class="callout tip"><div class="mark">Phrase to try</div><div>
+<p>Copy this into Grok when a task is large: “First explore the codebase read-only and list the files involved. Wait for my OK before changing anything.”</p>
+</div></div>
+
+<h2>Lab</h2>
+<ol class="steps">
+  <li>In a real project folder, start Grok and send the phrase above (or: “Use an explore pass first; do not edit until you summarize findings.”).</li>
+  <li>Read the summary. Confirm no product files were edited yet (or only exploration happened).</li>
+  <li>Only then send: “OK—implement the smallest fix based on that summary” <em>or</em> stop if you were only practicing exploration.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can explain: main session = lead chat; subagent = helper with its own notes; explore helpers should not edit until you say so. You have tried one explore-first prompt.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. A subagent is best described as…</legend>
+      <label><input type="radio" name="sa1" value="right" /> A helper chat with its own notes that can research or work in parallel</label>
+      <label><input type="radio" name="sa1" value="wrong" /> A replacement for installing Grok</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Use subagents when…</legend>
+      <label><input type="radio" name="sa2" value="right" /> You want research or side work without flooding the main chat</label>
+      <label><input type="radio" name="sa2" value="wrong" /> You need to fix a one-letter typo</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> · every lesson assumes you may be new to the idea.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "agents" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

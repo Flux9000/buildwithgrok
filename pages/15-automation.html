@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Headless & Agent Mode — Build With Grok</title>
+  <meta name="description" content="Script Grok and embed it in tools—headless flags that matter, ACP in one page, and a safety stack for automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Headless & Agent Mode</h1>
+          <p class="lead">Run Grok from scripts (headless) or inside editors (ACP)—after you can already ship in the normal screen.</p>
+          <div class="lesson-prereq"><span>Required: finish a <a href="21-walkthrough-first-game.html">game</a> or <a href="22-walkthrough-first-app.html">app</a> walkthrough first</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this page</strong>
+<a href="#modes">Two non-TUI modes</a>
+<a href="#headless">Headless power flags</a>
+<a href="#acp">Agent mode (ACP)</a>
+<a href="#safety">Automation safety stack</a>
+<a href="#lab">Lab</a>
+</nav>
+
+<div class="callout tip"><div class="mark">When you need this</div><div>
+<p>Finish a ship walkthrough in the normal Grok screen first. Headless and ACP build on that skill—they do not replace learning chat + tools + verify.</p>
+</div></div>
+
+<h2 id="modes">Two modes outside the normal screen</h2>
+<div class="card-grid cols-2">
+  <article class="card"><div class="icon">1</div><h3>Headless</h3><p><code>grok -p "…"</code> — one prompt (or a script). Tools may run. Grok prints text/JSON and exits.</p></article>
+  <article class="card"><div class="icon violet">2</div><h3>Agent mode (ACP)</h3><p>A long-running process your editor talks to. Example: <code>grok agent stdio</code>.</p></article>
+</div>
+
+<h2 id="headless">Headless flags (ideas that stay useful)</h2>
+<p>Grok Build is still Beta—flag names can change. Check <code>grok --help</code> or <code>/docs</code> before you rely on one. These <em>ideas</em> stay useful even if a name shifts:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Need</th><th>Typical flag / idea</th></tr></thead>
+<tbody>
+<tr><td>One-shot prompt</td><td><code>-p</code> / <code>--single</code></td></tr>
+<tr><td>Machine-readable output</td><td><code>--output-format json</code> or <code>streaming-json</code></td></tr>
+<tr><td>Skip prompts (trusted CI)</td><td><code>--always-approve</code> / <code>--yolo</code></td></tr>
+<tr><td>Cap runaway loops</td><td><code>--max-turns N</code></td></tr>
+<tr><td>Limit tools</td><td><code>--tools</code> allowlist / <code>--disallowed-tools</code> denylist</td></tr>
+<tr><td>Working directory</td><td><code>--cwd</code></td></tr>
+<tr><td>Extra rules text</td><td><code>--rules "…"</code></td></tr>
+<tr><td>Sandbox profile</td><td><code>--sandbox workspace|read-only|strict</code></td></tr>
+<tr><td>Session continuity</td><td><code>-c</code> continue / <code>-r</code> resume</td></tr>
+<tr><td>CI hygiene</td><td><code>--no-auto-update</code></td></tr>
+<tr><td>Feature offs</td><td>optional “turn off subagents / memory” flags when your version lists them</td></tr>
+</tbody></table></div>
+<div class="pre-wrap"><pre><code>cd ~/projects/my-app
+grok -p "Summarize what this repo does in 5 bullets" --output-format plain
+
+<span class="comment"># CI-shaped sketch (tighten deny + sandbox in real pipelines)</span>
+grok -p "Review git diff for security issues" \\
+  --output-format json \\
+  --always-approve \\
+  --max-turns 12 \\
+  --no-auto-update</code></pre></div>
+
+<h2 id="acp">Agent mode (ACP)</h2>
+<div class="pre-wrap"><pre><code>grok agent --always-approve stdio
+<span class="comment"># or serve over a local port when your client needs it</span></code></pre></div>
+<p>Your IDE extension starts this process. Daily product building still uses interactive <code>grok</code> unless you live in an ACP client.</p>
+
+<h2 id="safety">Automation safety stack</h2>
+<ul class="clean-list">
+  <li>API key auth for non-browser environments</li>
+  <li>Always-approve <strong>only</strong> with deny rules + sandbox + max-turns</li>
+  <li>Never log secrets in prompts that CI archives</li>
+  <li>Prefer read-only tool sets for review jobs</li>
+</ul>
+
+<h2 id="lab">Lab</h2>
+<ol class="steps">
+  <li>From a throwaway folder, run a headless summarize prompt (no YOLO required if read-only).</li>
+  <li>Re-run with <code>--output-format json</code> and open the JSON in a text editor—find the main text field.</li>
+  <li>Write which three flags you’d lock for a real CI review job.</li>
+</ol>
+<div class="callout lab"><div class="mark">Done when</div><div>
+<p>You can run <code>grok -p</code> successfully and name max-turns, output format, and always-approve as intentional choices—not defaults you ignore.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. Headless mode is for…</legend>
+      <label><input type="radio" name="au1" value="right" /> Running Grok from scripts (one-shot prompts) after you can already ship in the normal screen</label>
+      <label><input type="radio" name="au1" value="wrong" /> Skipping install entirely</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. For trusted automation, always-approve should come with…</legend>
+      <label><input type="radio" name="au2" value="right" /> Deny rules, limits like max-turns, and care about secrets</label>
+      <label><input type="radio" name="au2" value="wrong" /> No limits at all on a random laptop folder</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Concepts first; use in-product <code>/docs</code> for version-exact flags (product is Beta).</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "auto" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

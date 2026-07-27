@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Master Cheatsheet — Build With Grok</title>
+  <meta name="description" content="Quick lookup for commands and safe defaults. Use lessons for full explanations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Master Cheatsheet</h1>
+          <p class="lead">Quick lookup while you work. Open a linked lesson when you want the full story.</p>
+          <div class="lesson-prereq"><span>Reference—open while you work</span></div>
+        </header>
+        
+<p>This page is a <strong>lookup wall</strong>, not a tutorial. If a line is confusing, open the linked lesson or the <a href="00-glossary.html">Glossary</a>.</p>
+
+<h2>Everyday launch</h2>
+<div class="pre-wrap"><pre><code>cd path/to/project
+grok                 <span class="comment"># open interactive Grok here</span>
+grok -c              <span class="comment"># continue last session in this folder</span>
+grok --version
+grok update
+grok login
+grok logout</code></pre></div>
+
+<h2>While learning — safe defaults</h2>
+<ul class="clean-list">
+  <li>Stay in permission <strong>ask</strong> mode</li>
+  <li>Put verification in every real task</li>
+  <li>Use <code>@</code> when you know the file</li>
+  <li>Prefer small slices over mega-prompts</li>
+  <li>Write <code>AGENTS.md</code> early</li>
+</ul>
+
+<h2>Keys (plain English)</h2>
+<div class="pre-wrap"><pre><code>Enter     send message
+Tab       switch history ↔ typing box
+Esc       cancel work / close menus (careful with double-Esc)
+Ctrl+N    new session
+Ctrl+O    toggle always-approve (keep off at first)
+Shift+Tab cycle Normal / Plan / Always-approve
+Ctrl+P    command palette
+@         attach file
+/         slash commands</code></pre></div>
+
+<h2>Slash commands you will actually use early</h2>
+<div class="pre-wrap"><pre><code>/help  /new  /resume  /rename  /quit
+/compact keep &lt;notes&gt;
+/context  /session-info
+/plan  /view-plan
+/settings  /docs  /doctor  /tutorial</code></pre></div>
+<p>Full encyclopedia: <a href="05-slash-commands.html">Slash Commands lesson</a> (filter box included). There is <strong>no</strong> <code>/yolo</code> slash—use <code>/always-approve</code> or <code>grok --yolo</code> (CLI flag).</p>
+
+<input class="filter-box" id="cmd-filter" type="search" placeholder="Filter quick list…" />
+<div class="cmd-group">
+<div class="cmd-item"><h4>Session</h4><p>/new /resume /compact /context /session-info /fork /rewind /rename /copy /export /find /jump /recap /share /quit /home</p></div>
+<div class="cmd-item"><h4>Modes</h4><p>/model /effort /always-approve /auto (gated) /plan /view-plan /multiline /vim-mode /minimal /fullscreen /compact-mode</p></div>
+<div class="cmd-item"><h4>Memory</h4><p>/remember (always) · /memory /flush /dream (need memory enabled)</p></div>
+<div class="cmd-item"><h4>Extensions</h4><p>/skills /plugins /marketplace /hooks /mcps /config-agents /personas</p></div>
+<div class="cmd-item"><h4>Automation &amp; multi-session</h4><p>/loop /goal (gated) /deep-research /workflow /workflows /dashboard (/sessions) /tasks /queue</p></div>
+<div class="cmd-item"><h4>Help &amp; account</h4><p>/help /docs /tutorial /doctor /theme /settings /timestamps /btw /login /logout /usage /privacy /feedback /import-claude /release-notes /debug /announcements /transcript /expand (minimal)</p></div>
+<div class="cmd-item" data-easter-egg="gboom"><h4>Hidden / fun</h4><p><code>/gboom</code> — easter-egg mini overlay (graphics terminal). Not a learning path. See <a href="05-slash-commands.html#hidden">Slash Commands → Hidden</a>.</p></div>
+</div>
+
+<div class="callout tip"><div class="mark">Version truth</div><div>
+<p>Reconciled for Grok <strong>0.2.112</strong>. If something here disagrees with your install, trust in-app <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code>. Inventory file: <code>data/slash-commands-inventory.json</code>.</p>
+</div></div>
+
+        
+<h2>Multi-session &amp; automation quick map</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Need</th><th>Reach for</th></tr></thead>
+<tbody>
+<tr><td>Many sessions overview</td><td><code>/dashboard</code> · <code>grok dashboard</code> (when available)</td></tr>
+<tr><td>Recurring check</td><td><code>/loop 10m …</code></td></tr>
+<tr><td>Long shell job</td><td>Background · <kbd>Ctrl+B</kbd> · tasks pane</td></tr>
+<tr><td>Multi-hour migration</td><td><code>/goal</code></td></tr>
+<tr><td>Scripted one-shot</td><td><code>grok -p</code> + output format + max-turns</td></tr>
+<tr><td>External app tools</td><td>MCP · <code>/mcps</code> · <code>grok mcp …</code></td></tr>
+<tr><td>OS write limits</td><td><code>--sandbox workspace|read-only|strict</code></td></tr>
+</tbody></table></div>
+<p>Deep lessons: <a href="23-dashboard-multisession.html">Dashboard</a> · <a href="16-workflows-goals.html">Loops &amp; goals</a> · <a href="15-automation.html">Headless</a> · <a href="08-permissions-safety.html">Permissions vs sandbox</a> · <a href="14-mcp.html">MCP</a>.</p>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> always available.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "cheat" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

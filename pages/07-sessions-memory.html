@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sessions & Memory — Build With Grok</title>
+  <meta name="description" content="How chats are saved, resumed, compacted, and optionally remembered—without assuming you know what a context window is." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Sessions & Memory</h1>
+          <p class="lead">A session is one saved chat. Learn how to resume, rename, free space, and (optionally) use memory.</p>
+          <div class="lesson-prereq"><span>Finish at least one real Grok chat</span></div>
+        </header>
+        
+<h2>Sessions in everyday language</h2>
+<p>A <strong>session</strong> is one saved conversation with Grok: your messages, its answers, and tool history. Sessions are stored on your machine (under a folder like <code>~/.grok/sessions/</code>) so you can close the laptop and continue tomorrow.</p>
+
+<div class="table-wrap"><table>
+<thead><tr><th>You want to…</th><th>Do this</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td>Start clean</td><td><code>/new</code></td><td>New conversation, same project folder</td></tr>
+<tr><td>Continue yesterday</td><td><code>grok -c</code> in that folder</td><td>Reopens the most recent session there</td></tr>
+<tr><td>Pick an old chat</td><td><code>/resume</code></td><td>Shows a picker list</td></tr>
+<tr><td>Name it</td><td><code>/rename boss-fight</code></td><td>Easier to find later</td></tr>
+<tr><td>Free space in a long chat</td><td><code>/compact keep important decisions</code></td><td>Summarizes older turns (also auto-compacts near full context—default ~85%, tunable)</td></tr>
+<tr><td>See what is filling the desk</td><td><code>/context</code></td><td>Category breakdown of context use</td></tr>
+<tr><td>Quick summary without compacting</td><td><code>/recap</code></td><td>Summarize the session so far</td></tr>
+<tr><td>Try a side idea safely</td><td><code>/fork</code></td><td>Starts a side chat from this point (keeps history so far; original chat stays intact)</td></tr>
+<tr><td>Undo recent turns</td><td><code>/rewind</code></td><td>Rolls the session timeline back</td></tr>
+<tr><td>Search the transcript</td><td><code>/find keywords</code></td><td>Search the message history above the typing box</td></tr>
+</tbody></table></div>
+
+<div class="plain-box"><strong>Context window (simple version)</strong>
+<p>Grok can only pay attention to a limited amount of text at once—like a desk that holds a fixed number of pages. When the desk is full, old pages must be summarized or removed (<code>/compact</code>) or you start a new session and keep notes in project files. Grok also auto-compacts once usage hits the configured threshold (default 85% in the official session docs).</p>
+</div>
+
+<h2>Memory (optional)</h2>
+<p><strong>Memory</strong> tries to remember facts across sessions (your preferences, project decisions). It is experimental and off by default. Many people instead write an <code>AGENTS.md</code> file in the project (later lesson)—that is often clearer.</p>
+<p><strong>Always available:</strong> <code>/remember the build command is npm run build</code> saves one note immediately.</p>
+<p><strong>Require memory enabled</strong> (<code>--experimental-memory</code> or <code>GROK_MEMORY=1</code>, plus backend where needed):</p>
+<ul>
+  <li><code>/memory</code> (alias <code>/mem</code>) — browse/manage; <code>/memory on|off</code></li>
+  <li><code>/flush</code> — write session knowledge to memory now</li>
+  <li><code>/dream</code> — consolidate/reorganize memories</li>
+</ul>
+<p>Details are in the official memory guide; skip until you need cross-session recall.</p>
+
+<div class="callout lab"><div class="mark">Habit to build</div><div>
+<p>After each meaningful milestone, <code>/rename</code> the session and write two bullet notes into a project file called <code>DECISIONS.md</code>. Future-you (and future Grok) will thank you.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. A “session” is…</legend>
+      <label><input type="radio" name="sq1" value="right" /> One saved conversation (history + tools) you can resume later</label>
+      <label><input type="radio" name="sq1" value="wrong" /> Only your Wi‑Fi password</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Which memory command is always available without enabling experimental memory?</legend>
+      <label><input type="radio" name="sq2" value="right" /> <code>/remember</code></label>
+      <label><input type="radio" name="sq2" value="wrong" /> <code>/dream</code> (that needs memory enabled)</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Plain-language path. <a href="00-glossary.html">Glossary</a> · <a href="cheatsheet.html">Cheatsheet</a></p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "sessions" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

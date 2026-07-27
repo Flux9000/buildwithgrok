@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Configuration — Build With Grok</title>
+  <meta name="description" content="Settings without fear: when to use /settings, what config.toml is, and which knobs matter for beginners." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Configuration</h1>
+          <p class="lead">You can ignore most settings at first. When you need them: /settings, or a config file—explained simply.</p>
+          <div class="lesson-prereq"><span>Optional—read when you want themes or defaults</span></div>
+        </header>
+        
+<h2>You can ignore config at first</h2>
+<p>Grok works with defaults. Change settings only when you have a reason (theme hurts your eyes, you want Vim keys, you need a different default model).</p>
+
+<h2>Where settings live</h2>
+<ol class="steps">
+  <li><strong>Easiest:</strong> inside Grok, run <code>/settings</code> and click/toggle options.</li>
+  <li><strong>Advanced:</strong> edit a text file named <code>config.toml</code> in your Grok home folder: <code>~/.grok/config.toml</code>.</li>
+</ol>
+<p><code>~</code> means your user home directory. On Mac/Linux that is often <code>/Users/you</code> or <code>/home/you</code>. The file uses TOML: simple <code>key = value</code> settings grouped under headers like <code>[ui]</code>.</p>
+
+<div class="plain-box"><strong>Precedence (who wins if settings conflict)</strong>
+<p>Command-line flags beat environment variables beat config.toml beat built-in defaults. You rarely need this until something “won’t stick.”</p>
+</div>
+
+<h2>Examples you might actually change</h2>
+<div class="pre-wrap"><pre><code><span class="comment"># ~/.grok/config.toml  (create the file if missing)</span>
+[ui]
+vim_mode = false
+<span class="comment"># permission_mode = "ask"</span>
+
+[models]
+<span class="comment"># default = "grok-4.5"</span>
+
+[session]
+auto_compact_threshold_percent = 85</code></pre></div>
+<p>After editing, restart Grok so settings reload (unless the UI already applied them live).</p>
+
+<h2>Themes</h2>
+<p>Run <code>/theme</code> and arrow through previews. Minimal mode uses your terminal’s colors instead of fancy themes.</p>
+
+<h2>Models</h2>
+<p>A <strong>model</strong> is the AI engine behind answers. List them with <code>grok models</code> in a normal terminal, or <code>/model</code> inside Grok. Stick to defaults until you have a reason to switch (speed, cost, special features).</p>
+
+<div class="callout lab"><div class="mark">Safe practice</div><div>
+<p>Only change theme via <code>/theme</code> today. Avoid hand-editing config until you are comfortable recovering from a typo (broken config can confuse startup—rename the file aside if that happens).</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. As a beginner, the safest first place to change settings is…</legend>
+      <label><input type="radio" name="cfg1" value="right" /> <code>/settings</code> in Grok (guided UI)</label>
+      <label><input type="radio" name="cfg1" value="wrong" /> Randomly edit system files outside Grok</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. You should ignore most config until…</legend>
+      <label><input type="radio" name="cfg2" value="right" /> You have a real need (theme, model, a repeated friction)</label>
+      <label><input type="radio" name="cfg2" value="wrong" /> The first minute of install</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Plain-language path. <a href="00-glossary.html">Glossary</a> · <a href="cheatsheet.html">Cheatsheet</a></p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "config" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

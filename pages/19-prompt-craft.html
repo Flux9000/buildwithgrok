@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Craft — Build With Grok</title>
+  <meta name="description" content="A complete beginner’s guide to writing instructions Grok can execute reliably—including a copy-paste template and rewrites of weak prompts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Prompt Craft</h1>
+          <p class="lead">A five-part template for goals Grok can follow: goal, context, limits, non-goals, and how you will verify.</p>
+          <div class="lesson-prereq"><span>After your first session (or after a walkthrough)</span></div>
+        </header>
+        
+<h2>Why prompt craft matters</h2>
+<p>Grok is not rude when it misunderstands you—it is missing a clear contract. A <strong>prompt</strong> is simply the instruction you send. Better instructions → fewer wasted turns.</p>
+
+<h2>The five-part template (copy this)</h2>
+<div class="pre-wrap"><pre><code>Goal: &lt;what a human can see or do when finished&gt;
+Context: @files or “search the project for X first”
+Constraints: &lt;rules—stack, style, do not add dependencies&gt;
+Non-goals: &lt;what to ignore&gt;
+Verification:
+  1. &lt;command or check&gt;
+  2. &lt;manual check if needed&gt;</code></pre></div>
+
+<p>Fill every line even if short. Empty lines are where mistakes hide.</p>
+
+<h2>Worked examples</h2>
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Weak</div><p>“Add auth.”</p></div>
+  <div class="prompt-box good"><div class="label">Strong</div><p>“Goal: users can register and log in with email/password. Context: explore existing server folder first. Constraints: use our current database helper; no new auth vendors. Non-goals: OAuth, admin roles. Verification: register → login → visit /app succeeds; logged-out /app redirects.”</p></div>
+</div>
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Weak</div><p>“Make it pretty.”</p></div>
+  <div class="prompt-box good"><div class="label">Strong</div><p>“Goal: HP bar matches VISUAL-STYLE-GUIDE.md colors. Context: @css/style.css @VISUAL-STYLE-GUIDE.md. Constraints: no layout shift when HP changes. Verification: describe full/half/empty states; I will check in browser.”</p></div>
+</div>
+
+<h2>Steering phrases that help mid-project</h2>
+<ul class="clean-list">
+  <li>“Smallest change that meets verification—nothing extra.”</li>
+  <li>“Stop. Tests are failing—fix only the failures.”</li>
+  <li>“You added a feature I did not ask for; remove it.”</li>
+  <li>“Explain your plan in 5 bullets; wait for OK.”</li>
+  <li>“Summarize risks, then stop.”</li>
+</ul>
+
+<div class="callout lab"><div class="mark">Lab</div><div>
+<p>Rewrite your last vague request using the five-part template. Send both to Grok in a throwaway session and compare the quality of the first response.</p>
+</div></div>
+
+<section class="self-check" data-self-check>
+  <h2>Quick check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. A strong Grok goal usually includes…</legend>
+      <label><input type="radio" name="pr1" value="right" /> Goal, context, limits, non-goals, and how you will verify</label>
+      <label><input type="radio" name="pr1" value="wrong" /> Only “make it awesome” with no check</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. “Verification” means…</legend>
+      <label><input type="radio" name="pr2" value="right" /> How you will know the work is done (test, open a page, see a file)</label>
+      <label><input type="radio" name="pr2" value="wrong" /> Always turning on Always-approve</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p><a href="00-glossary.html">Glossary</a> always available.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "prompts" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

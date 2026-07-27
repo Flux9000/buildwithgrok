@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Walkthrough: Your First App — Build With Grok</title>
+  <meta name="description" content="A complete start-to-finish build of Focus List—a browser task app with localStorage—exact prompts to copy, anti-prompts, and a full test journey." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+      <style id="academy-critical">
+    html { background: #070a12; color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #070a12;
+      color: #f4f7fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    a { color: #38dff5; }
+    p, li { color: #c2cddc; }
+    .site-nav, [data-topnav] {
+      position: sticky; top: 0; z-index: 100; min-height: 56px;
+      background: rgba(7, 10, 18, 0.95);
+      border-bottom: 1px solid rgba(160, 176, 200, 0.16);
+      color: #f4f7fc;
+    }
+  </style>
+<link rel="stylesheet" href="../css/style.css?v=20260727h" />
+</head>
+<body class="has-sidebar design-system-v3-showcase">
+  <header class="site-nav" data-topnav></header>
+  <div class="layout">
+    <aside class="sidebar" data-sidebar></aside>
+    <div class="main-col">
+      <article class="wrap narrow prose">
+        <header class="lesson-header">
+          <div class="lesson-meta" data-lesson-meta></div>
+          <h1>Walkthrough: Your First App</h1>
+          <p class="lead">Build a tiny task app with copy-paste prompts. Do the phases in order—do not skip ahead.</p>
+          <div class="lesson-prereq"><span>Required: <a href="01-getting-started.html">Install</a> + <a href="02-first-session.html">First Session</a></span><span>About 45–90 minutes</span></div>
+        </header>
+        
+<nav class="on-this-page"><strong>On this walkthrough</strong>
+<a href="#promise">What you will build</a>
+<a href="#need">What you need</a>
+<a href="#rules">Prompt rules (use vs avoid)</a>
+<a href="#phase0">Phase 0 — Create the project</a>
+<a href="#phase1">Phase 1 — Journey + AGENTS</a>
+<a href="#phase2">Phase 2 — Static shell</a>
+<a href="#phase3">Phase 3 — Working features</a>
+<a href="#phase4">Phase 4 — Save data + polish</a>
+<a href="#phase5">Phase 5 — Finish</a>
+<a href="#troubleshoot">Troubleshooting</a>
+</nav>
+
+<div class="callout tip wt-spy-host" id="phase-progress-panel" data-walkthrough-spy-host>
+  <div class="mark">Your walkthrough progress</div>
+  <div>
+    <p data-phase-summary>Phases complete: 0 / 6</p>
+    <p>Check each phase when you finish it. All six required phases must be checked for this walkthrough to count as <strong>complete</strong> (opening the page is not enough).</p>
+  </div>
+</div>
+
+
+<div class="callout tip"><div class="mark">How to use this walkthrough</div><div>
+<p>Do phases in order (0 → 1 → 2…). Copy the “Send this” prompts the first time. Make add / complete / filter / delete work before extra polish.</p>
+</div></div>
+
+<div class="callout tip"><div class="mark">Time &amp; difficulty</div><div>
+<p><strong>About 45–90 minutes.</strong> No servers, databases, or accounts required. You will build a real mini app that runs by opening <code>index.html</code> and remembers data in the browser.</p>
+</div></div>
+
+<h2 id="promise">What you will build</h2>
+<p><strong>Focus List</strong> — a tiny personal task app:</p>
+<ul>
+  <li>Type a task and add it with a button or Enter</li>
+  <li>See a list of tasks</li>
+  <li>Mark a task complete / incomplete</li>
+  <li>Delete a task</li>
+  <li>Filter: All / Active / Done</li>
+  <li>Data saved in the browser (<strong>localStorage</strong>) so refresh keeps your list</li>
+  <li>Empty state when there are no tasks</li>
+</ul>
+<p>That is a complete <strong>user journey</strong> for a first app—not a social network, not login, not multiplayer sync.</p>
+
+<figure class="figure"><img src="../assets/mastery.jpg" alt="Developer building at a desk" /><figcaption>App path: journey → shell → features → save → polish.</figcaption></figure>
+
+<div class="plain-box"><strong>Word: localStorage</strong>
+<p>A small notebook the browser keeps per website/file origin. Your tasks stay after refresh on the same computer and browser—not a cloud account. Perfect for a first app.</p>
+</div>
+
+<h2 id="need">What you need</h2>
+<ul>
+  <li>Grok installed and signed in</li>
+  <li>Ability to approve file edits calmly</li>
+  <li>A desktop browser</li>
+</ul>
+
+<h2 id="rules">Prompt rules for this walkthrough</h2>
+<div class="prompt-pair">
+  <div class="prompt-box good"><div class="label">DO</div>
+  <p style="margin:0">One journey step at a time · attach files · require manual verification · ban unnecessary frameworks · ask for empty/error states explicitly</p>
+  </div>
+  <div class="prompt-box bad"><div class="label">DO NOT</div>
+  <p style="margin:0">“Build a full SaaS” · add login first · invent a backend · install React “because serious apps use it” · skip saving data until the UI works</p>
+  </div>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Avoid saying</th><th>Why</th><th>Say instead</th></tr></thead>
+<tbody>
+<tr><td>“Clone Todoist”</td><td>Infinite scope</td><td>Focus List feature list above</td></tr>
+<tr><td>“Use Next.js + Postgres + Auth”</td><td>Weeks of setup</td><td>Vanilla HTML/CSS/JS + localStorage</td></tr>
+<tr><td>“Make the UX world-class”</td><td>Vague</td><td>Concrete UI requirements per phase</td></tr>
+<tr><td>“Also add teams and comments”</td><td>Scope creep</td><td>One feature prompt after v1 works</td></tr>
+</tbody></table></div>
+
+<!-- PHASE 0 -->
+<h2 id="phase0" data-phase-section="0">Phase 0 — Create the project folder</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="0" />
+    <span>I finished Phase 0</span>
+  </label>
+
+  <span data-phase-badge-host="0"></span>
+</div>
+
+<ol class="steps">
+  <li>
+    <div class="pre-wrap" data-phase-prompt="0"><pre><code>mkdir -p ~/projects/focus-list
+cd ~/projects/focus-list
+pwd
+grok</code></pre></div>
+  </li>
+  <li><code>/rename focus-list-walkthrough</code></li>
+</ol>
+
+<!-- PHASE 1 -->
+<h2 id="phase1" data-phase-section="1">Phase 1 — Journey + project rules</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="1" />
+    <span>I finished Phase 1</span>
+  </label>
+
+  <span data-phase-badge-host="1"></span>
+</div>
+
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Scaffold a modern production app architecture.”</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="1"><pre><code>Goal: Create planning files only (no app UI code yet).
+
+Create AGENTS.md:
+- App name: Focus List
+- Stack: vanilla HTML, CSS, JavaScript only; no npm, no frameworks, no backend
+- Run: open index.html in a browser
+- Data: browser localStorage key focus-list-tasks
+- Rules: accessible labels, simple readable code, no drive-by refactors
+- Definition of done: open index.html, use the feature, refresh, data still there when relevant
+
+Create JOURNEY.md with this happy path:
+1. Open the app
+2. See an empty state message when there are no tasks
+3. Type a task title and add it
+4. See it in the list as active
+5. Mark it complete (it should look completed)
+6. Filter between All / Active / Done
+7. Delete a task
+8. Refresh the browser — tasks remain
+
+Out of scope: user accounts, sync across devices, due dates, tags, collaboration, PWA install prompts, dark-mode engines, component libraries
+
+Verification: print both files fully. Stop after that.</code></pre></div>
+
+<div class="callout lab"><div class="mark">Phase 1 done when</div><div>
+<p><code>AGENTS.md</code> and <code>JOURNEY.md</code> exist and scope is small.</p>
+</div></div>
+
+<!-- PHASE 2 -->
+<h2 id="phase2" data-phase-section="2">Phase 2 — Static shell (looks like an app, not fully wired)</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="2" />
+    <span>I finished Phase 2</span>
+  </label>
+
+  <span data-phase-badge-host="2"></span>
+</div>
+
+
+<div class="pre-wrap" data-phase-prompt="2"><pre><code>@AGENTS.md @JOURNEY.md
+
+Goal: Build the visual shell of Focus List so the page looks like the app.
+
+Create:
+- index.html
+- css/style.css
+- js/main.js
+
+UI must include:
+- App title "Focus List"
+- Text input with placeholder "What matters today?"
+- Add button
+- Filter controls: All | Active | Done
+- A list region (can show 2–3 fake sample tasks hard-coded for layout only)
+- A footer line for counts like "2 items left" (can be hard-coded temporarily)
+
+Constraints:
+- Vanilla only; no libraries
+- Clean, readable layout; good spacing; works on a laptop browser width
+- Use semantic HTML (header, main, ul/li, button, input label)
+
+Verification:
+1. Tell me how to open it
+2. I should see the full layout with no console errors
+3. Buttons do not need full behavior yet — but page must not look broken
+
+Stop when the shell looks good.</code></pre></div>
+
+<ol class="steps">
+  <li>Approve files.</li>
+  <li>Open <code>index.html</code> in your browser.</li>
+  <li>Confirm layout is readable. Hard-refresh if styles look stale.</li>
+</ol>
+<div class="callout lab"><div class="mark">Phase 2 done when</div><div>
+<p>You see a credible app layout with input, filters, and a list area.</p>
+</div></div>
+
+<!-- PHASE 3 -->
+<h2 id="phase3" data-phase-section="3">Phase 3 — Make features work (still in-memory OK)</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="3" />
+    <span>I finished Phase 3</span>
+  </label>
+
+  <span data-phase-badge-host="3"></span>
+</div>
+
+<p>Wire behavior. Saving across refresh comes in Phase 4 if not already included—many implementations will do both together; the prompt allows either order but requires working UI first.</p>
+
+<div class="prompt-pair">
+  <div class="prompt-box bad"><div class="label">Do not send</div>
+  <p>“Add authentication and a REST API for tasks.”</p>
+  </div>
+</div>
+
+<div class="pre-wrap" data-phase-prompt="3"><pre><code>@JOURNEY.md @AGENTS.md @index.html @css/style.css @js/main.js
+
+Goal: Implement the full happy path in JOURNEY.md.
+
+Behavior requirements:
+- Add task from input via Add button and Enter key; ignore empty/whitespace-only titles
+- Clear the input after adding
+- Each task shows title, a complete toggle (checkbox or button), and a delete button
+- Completed tasks are visually distinct (strike-through or muted style)
+- Filters: All / Active / Done — only matching tasks visible; active filter highlighted
+- Empty state: when the visible list is empty, show a friendly message
+- Item count text updates (e.g. "3 active left")
+- Remove any hard-coded fake tasks from the shell phase
+
+Data:
+- Keep tasks in a JavaScript array of objects { id, title, done }
+- Prefer implementing localStorage persistence now (key focus-list-tasks). If you split work, in-memory first is OK only if you clearly say persistence is next — but please implement persistence in this step if straightforward.
+
+Constraints:
+- No frameworks, no npm
+- No backend
+- Keep code beginner-readable; comment short section headers in main.js
+
+Verification checklist in your reply:
+1. How to add
+2. How to complete
+3. How to delete
+4. How filters work
+5. Whether refresh keeps data
+6. Confirm no dependencies added
+
+I will playtest with the journey steps next.</code></pre></div>
+
+<ol class="steps">
+  <li>Approve edits; refresh browser.</li>
+  <li><strong>Manual test (do every line):</strong>
+    <ol>
+      <li>Confirm empty state (delete samples if any remain).</li>
+      <li>Add three tasks.</li>
+      <li>Complete one.</li>
+      <li>Filter Active — completed hidden.</li>
+      <li>Filter Done — only completed.</li>
+      <li>Filter All — all visible.</li>
+      <li>Delete one task.</li>
+      <li>Refresh the page — remaining tasks should still be there if persistence was implemented.</li>
+    </ol>
+  </li>
+</ol>
+
+<p>Bug report template:</p>
+<div class="pre-wrap"><pre><code>@js/main.js @index.html
+
+Bug on journey step [number]: I did [x], expected [y], saw [z].
+Console: [paste or "none"]
+Fix minimal; do not add features.</code></pre></div>
+
+<div class="callout lab"><div class="mark">Phase 3 done when</div><div>
+<p>Add / complete / filter / delete all work during the session. Prefer persistence already working.</p>
+</div></div>
+
+<!-- PHASE 4 -->
+<h2 id="phase4" data-phase-section="4">Phase 4 — Persistence guarantee + polish</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="4" />
+    <span>I finished Phase 4</span>
+  </label>
+
+  <span data-phase-badge-host="4"></span>
+</div>
+
+
+<div class="pre-wrap" data-phase-prompt="4"><pre><code>@js/main.js @AGENTS.md @JOURNEY.md @css/style.css
+
+Goal: Guarantee localStorage persistence and a small polish pass.
+
+Requirements:
+- Save tasks to localStorage key focus-list-tasks whenever the list changes
+- Load tasks on startup; if missing/corrupt, start with []
+- After load, render list and counts correctly
+- Polish: focus ring styles for keyboard users; hover states on buttons; mobile-friendly padding
+- Optional: "Clear completed" button that removes done tasks (only if simple)
+
+Non-goals: sync, accounts, drag-and-drop reorder (unless already trivial)
+
+Verification:
+1. Add two tasks, complete one, refresh twice — state remains
+2. Explain how to wipe data manually if I want a reset (e.g. clear site data)
+3. No new libraries</code></pre></div>
+
+<div class="you-will-see"><strong>What success looks like</strong>
+<p>Close the tab, reopen <code>index.html</code>, and your tasks are still there. Filters and counts still make sense.</p>
+</div>
+
+<!-- PHASE 5 -->
+<h2 id="phase5" data-phase-section="5">Phase 5 — Finish line</h2>
+<div class="phase-check">
+  <label>
+    <input type="checkbox" data-phase-complete="5" />
+    <span>I finished Phase 5</span>
+  </label>
+
+  <span data-phase-badge-host="5"></span>
+</div>
+
+<ol class="steps">
+  <li>
+    <div class="pre-wrap" data-phase-prompt="5"><pre><code>@AGENTS.md @JOURNEY.md
+
+Write README.md for a total beginner:
+- what Focus List is
+- how to open it
+- features included
+- out of scope
+- where data is stored (localStorage)
+Keep it short.</code></pre></div>
+  </li>
+  <li><code>/rename focus-list-done</code></li>
+  <li>Show a friend: add a task, refresh, prove it saved.</li>
+</ol>
+
+<div class="card-grid cols-2">
+  <article class="card"><h3>You shipped an app if…</h3><p>Someone else can open the file, use the journey, and data survives refresh—without you explaining the code.</p></article>
+  <article class="card"><h3>Sensible next features (one prompt each)</h3><p>Edit title on double-click · due dates · export JSON · light/dark toggle — always include verification.</p></article>
+</div>
+
+<div class="pre-wrap"><pre><code><span class="comment"># Example next feature (after v1)</span>
+@js/main.js @index.html @css/style.css
+Add double-click on a task title to edit it inline; Enter saves, Escape cancels.
+Persist changes. Verification: edit a title, refresh, new title remains.
+No other features.</code></pre></div>
+
+<h2 id="troubleshoot">Troubleshooting</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Problem</th><th>Fix approach</th></tr></thead>
+<tbody>
+<tr><td>Data vanishes on refresh</td><td>Phase 4 prompt; ask Grok to log save/load in console temporarily</td></tr>
+<tr><td>Filters wrong</td><td>Report which filter + example tasks + expected visibility</td></tr>
+<tr><td>Grok added React/Vite</td><td>“Delete framework scaffolding. Vanilla only per AGENTS.md.”</td></tr>
+<tr><td>Styles not updating</td><td>Hard refresh; confirm css path in index.html</td></tr>
+<tr><td>Duplicate tasks on add</td><td>Bug prompt with exact steps; check event listeners bound twice</td></tr>
+</tbody></table></div>
+
+<div class="callout lab"><div class="mark">Walkthrough complete when</div><div>
+<p>You can run the full JOURNEY.md path without help, refresh, and still see your tasks.</p>
+</div></div>
+
+<p>Related: <a href="18-building-apps.html">Building Apps (concepts)</a> · <a href="21-walkthrough-first-game.html">First Game walkthrough</a> · <a href="19-prompt-craft.html">Prompt Craft</a></p>
+
+        
+<div class="callout tip" id="next-step-after-app"><div class="mark">What to do next</div><div>
+<p>You finished the app walkthrough. <strong>Default next:</strong> Intermediate <a href="24-day2-git.html"><strong>Day-2 Git with Grok</strong></a> (next lesson in the curriculum order), then Slash Commands.</p>
+</div></div>
+
+        
+<section class="self-check" data-self-check id="self-check" data-lesson-id="wt-app">
+  <h2>Self-check</h2>
+  <form data-self-check-form>
+    <fieldset>
+      <legend>1. Where does Focus List store tasks?</legend>
+      <label><input type="radio" name="q1" value="right" /> Browser localStorage</label>
+      <label><input type="radio" name="q1" value="wrong" /> A cloud database you must set up first</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Opening the walkthrough page alone means the walkthrough is complete.</legend>
+      <label><input type="radio" name="q2" value="wrong" /> True</label>
+      <label><input type="radio" name="q2" value="right" /> False — complete the phases</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Default next lesson after this walkthrough?</legend>
+      <label><input type="radio" name="q3" value="right" /> Day-2 Git with Grok (Intermediate)</label>
+      <label><input type="radio" name="q3" value="wrong" /> Jump randomly into MCP</label>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Check answers</button>
+    <p class="self-check-result" data-self-check-result hidden></p>
+  </form>
+</section>
+
+        <div data-pager></div>
+      </article>
+      <footer class="site-footer">
+        <div class="wrap narrow">
+          <div>
+            <h3>Build With Grok</h3>
+            <p>Copy prompts exactly at first. Customize only after the slice works.</p>
+          </div>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="00-glossary.html">Glossary</a>
+            <a href="cheatsheet.html">Cheatsheet</a>
+          </div>
+        </div>
+      
+    <div class="wrap footer-legal">
+      <p class="site-disclaimer" data-legal-disclaimer>
+        <strong>Disclaimer:</strong> Build With Grok is an independent learning site at buildwithgrok.com.
+        It is <strong>not affiliated with, endorsed by, or an official product of</strong> Grok, xAI, or SpaceXAI.
+        “Grok Build” and related marks belong to their respective owners. Content is community-written teaching material and may lag product changes—verify with in-product <code>/docs</code>.
+      </p>
+    </div>
+  </footer>
+    </div>
+  </div>
+  <script src="../js/progress-core.js"></script>
+  <script src="../js/search-core.js"></script>
+  <script src="../js/version-core.js"></script>
+  <script src="../js/walkthrough-chrome.js"></script>
+  <script src="../js/a11y-perf.js"></script>
+  <script src="../js/curriculum.js"></script>
+  <script>GROK_ACADEMY.mount({ pageId: "wt-app" });</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
