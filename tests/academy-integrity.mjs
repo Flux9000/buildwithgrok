@@ -270,13 +270,21 @@ for (const needle of [".version-ribbon", "data-version-ribbon", "version-ribbon-
 }
 if (!exists(path.join(ROOT, "tests/version-unit.mjs"))) fail("tests/version-unit.mjs missing");
 
-// Primary CTA: empty-state markup is Install; JS may rewrite label to Continue for returners
+// Primary CTA: single empty-state Install; JS may rewrite label to Continue for returners
 if (
   !hub.includes("continue-btn") ||
   (!/Install Grok Build|Continue/i.test(hub)) ||
   (!hub.includes("reset-progress") && !hub.includes("data-reset-progress"))
 ) {
   fail("hub missing primary CTA (Install/Continue) or reset control");
+}
+// Hub diet: exactly one data-hub-primary-cta (not dual Install buttons)
+const primaryCtaCount = (hub.match(/data-hub-primary-cta/g) || []).length;
+if (primaryCtaCount !== 1) {
+  fail(`hub diet expects exactly 1 data-hub-primary-cta, found ${primaryCtaCount}`);
+}
+if (hub.includes("continue-btn-main")) {
+  fail("hub diet removed second primary continue-btn-main");
 }
 if (!hub.includes("nextIncomplete") || !hub.includes("path-stepper") || !hub.includes("Five tracks")) {
   fail("hub missing nextIncomplete wiring or path stepper or Five tracks");
@@ -485,8 +493,13 @@ if (!/SpaceXAI|xAI/i.test(hub)) fail("hub disclaimer missing xAI/SpaceXAI");
 if (!hub.includes("data-first-value-framing") && !/First Ship|first ship|ship a tiny game/i.test(hub)) {
   fail("hub missing first-value / ship milestone framing");
 }
-if (!/first-ship-cta|ship-milestone|First win|First Ship/i.test(hub)) {
-  fail("hub missing first-ship CTA");
+// Ship findable: dedicated ship section and/or First Ship language (not three pre-ship CTAs)
+if (!/data-ship-entry|First Ship|walkthrough-first-game|First win/i.test(hub)) {
+  fail("hub missing First Ship entry / language");
+}
+// Hub diet item 3: no stack of pre-ship milestone CTAs outside #ship
+if (hub.includes("id=\"ship-milestone-btn\"") || hub.includes("id=\"first-ship-cta\"")) {
+  fail("hub diet removed competing pre-ship CTAs (ship-milestone / first-ship-cta)");
 }
 if (!cur.includes("getPracticeDueCue") || !cur.includes("LEGAL_DISCLAIMER_HTML")) {
   fail("curriculum missing practice-due cue or LEGAL_DISCLAIMER_HTML");
@@ -518,6 +531,22 @@ if (!hub.includes("data-express-path") && !hub.includes("express-path")) {
 if (!/Install[\s\S]{0,80}First Session[\s\S]{0,120}walkthrough/i.test(hub) &&
     !/01-getting-started[\s\S]{0,200}02-first-session[\s\S]{0,200}21-walkthrough/i.test(hub)) {
   fail("hub express path should name Install → First Session → walkthrough");
+}
+// Hub diet item 2: one syllabus surface (catalog disclosure + full-path), not dual expanded catalogs
+if (!hub.includes("data-hub-catalog") && !hub.includes("hub-catalog")) {
+  fail("hub missing collapsed curriculum catalog (data-hub-catalog)");
+}
+if (!hub.includes("id=\"full-path\"") && !hub.includes("id='full-path'")) {
+  fail("hub missing full-path syllabus list");
+}
+if (hub.includes("id=\"track-cards\"")) {
+  fail("hub diet: track-cards expanded catalog removed (use single full-path catalog)");
+}
+if (/Recommended path/i.test(hub) && /Glossary → Install → First session/i.test(hub)) {
+  fail("hub diet: redundant Welcome recommended-path restatement should be gone");
+}
+if (hub.includes("Do the labs on your computer") && hub.includes("<ol class=\"steps")) {
+  fail("hub diet: redundant Method steps list should be gone");
 }
 // no-JS beginners: primary href points at Getting Started, not glossary
 const primaryMatch = hub.match(/id="continue-btn"[^>]*href="([^"]+)"|href="([^"]+)"[^>]*id="continue-btn"/);
