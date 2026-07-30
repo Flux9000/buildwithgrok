@@ -62,30 +62,43 @@
   }
 
   function bindNav() {
-    const toggle = document.querySelector(".nav-toggle");
-    const drawer = document.querySelector(".nav-drawer");
-    const overlay = document.querySelector(".nav-overlay");
-    if (!toggle || !drawer) return;
-
+    // Event delegation: curriculum remounts refill .nav-drawer innerHTML on the hub
     const close = () => {
-      drawer.classList.remove("open");
+      const toggle = document.querySelector(".nav-toggle");
+      const drawer = document.querySelector(".nav-drawer");
+      const overlay = document.querySelector(".nav-overlay");
+      drawer?.classList.remove("open");
       overlay?.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
     };
     const open = () => {
-      drawer.classList.add("open");
+      const toggle = document.querySelector(".nav-toggle");
+      const drawer = document.querySelector(".nav-drawer");
+      const overlay = document.querySelector(".nav-overlay");
+      drawer?.classList.add("open");
       overlay?.classList.add("open");
-      toggle.setAttribute("aria-expanded", "true");
+      toggle?.setAttribute("aria-expanded", "true");
       document.body.style.overflow = "hidden";
     };
 
-    toggle.addEventListener("click", () => {
-      if (drawer.classList.contains("open")) close();
-      else open();
+    document.addEventListener("click", (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      if (t.closest(".nav-toggle")) {
+        const drawer = document.querySelector(".nav-drawer");
+        if (drawer?.classList.contains("open")) close();
+        else open();
+        return;
+      }
+      if (t.closest(".nav-overlay")) {
+        close();
+        return;
+      }
+      if (t.closest(".nav-drawer a")) {
+        close();
+      }
     });
-    overlay?.addEventListener("click", close);
-    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
   }
 
   backTop.addEventListener("click", () => {

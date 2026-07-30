@@ -243,28 +243,30 @@ window.GROK_ACADEMY.mount = function mount(opts = {}) {
     `;
   }
 
-  const sideHost = document.querySelector("[data-sidebar]");
-  if (sideHost) {
-    let html = `<div class="side-head">
+  // Full curriculum list for sidebar and/or mobile drawer (hub has no sidebar)
+  let navListHtml = `<div class="side-head">
       <a href="${this.homeHref()}" class="side-home">← Home</a>
       <p class="side-label">Your path · ${stats.completed}/${stats.total} complete</p>
     </div>`;
-    for (const track of this.tracks) {
-      html += `<div class="side-track">
+  for (const track of this.tracks) {
+    navListHtml += `<div class="side-track">
         <div class="side-track-name ${track.color}">${track.name}</div>
         <ul class="side-list">`;
-      for (const p of track.pages) {
-        const active = p.id === pageId ? " active" : "";
-        const completed = api && api.isCompleted(p.id) ? " completed" : "";
-        const opened = api && api.isOpened(p.id) && !(api && api.isCompleted(p.id)) ? " opened" : "";
-        html += `<li><a class="side-link${active}${completed}${opened}" href="${this.pageHref(p.href)}">
+    for (const p of track.pages) {
+      const active = p.id === pageId ? " active" : "";
+      const completed = api && api.isCompleted(p.id) ? " completed" : "";
+      const opened = api && api.isOpened(p.id) && !(api && api.isCompleted(p.id)) ? " opened" : "";
+      navListHtml += `<li><a class="side-link${active}${completed}${opened}" href="${this.pageHref(p.href)}">
           <span class="side-title">${p.title}</span>
           <span class="side-time">${p.time}</span>
         </a></li>`;
-      }
-      html += `</ul></div>`;
     }
-    sideHost.innerHTML = html;
+    navListHtml += `</ul></div>`;
+  }
+
+  const sideHost = document.querySelector("[data-sidebar]");
+  if (sideHost) {
+    sideHost.innerHTML = navListHtml;
   }
 
   let drawer = document.querySelector(".nav-drawer");
@@ -278,9 +280,9 @@ window.GROK_ACADEMY.mount = function mount(opts = {}) {
     drawer.setAttribute("aria-label", "Curriculum");
     document.body.append(overlay, drawer);
   }
-  drawer.innerHTML = sideHost
-    ? sideHost.innerHTML
-    : `<a href="${this.homeHref()}">Home</a>`;
+  // Always fill drawer with full curriculum (homepage has no [data-sidebar])
+  drawer.innerHTML = navListHtml;
+  drawer.setAttribute("data-nav-drawer-filled", "curriculum");
 
   const pagerHost = document.querySelector("[data-pager]");
   if (pagerHost && page) {

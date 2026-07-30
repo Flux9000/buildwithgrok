@@ -514,6 +514,11 @@ for (const { href } of pageEntries) {
 }
 if (scLessons < 14) fail(`need ≥14 lessons with self-checks (first-win floor), found ${scLessons}`);
 if (!exists(path.join(ROOT, "tests/practice-cue-unit.mjs"))) fail("tests/practice-cue-unit.mjs missing");
+// Mobile/hub curriculum drawer must always fill from tracks (not empty when no sidebar)
+if (!/drawer\.innerHTML\s*=\s*navListHtml/.test(cur) || !cur.includes("data-nav-drawer-filled")) {
+  fail("curriculum must fill nav-drawer with full curriculum on hub (no empty hamburger)");
+}
+
 
 // --- First-win funnel anchors ---
 if (!cur.includes("resolveHubPrimaryCta")) {
