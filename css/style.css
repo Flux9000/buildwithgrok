@@ -2966,3 +2966,63 @@ body::after {
 [data-hub-diet="v1"] .hub-hero .hub-sub {
   max-width: 40rem;
 }
+
+/* Step 1: lean hero first viewport */
+.hub-sub--lean {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+}
+.hero-meta--lean {
+  gap: 0.75rem;
+}
+.complete-hint--ribbon {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  max-width: 48ch;
+}
+.complete-hint--ribbon strong { color: var(--text-muted); }
+
+/* Step 3: First Ship product/outcome visual */
+.ship-product-visual {
+  margin: 0 0 1.75rem;
+  border-radius: var(--radius-lg, var(--radius));
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-soft);
+}
+.ship-product-visual img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+.ship-product-visual figcaption {
+  padding: 0.85rem 1.15rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+}
+.ship-product-visual figcaption strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.ship-card .btn-primary {
+  /* game stays primary solid; app uses ghost for hierarchy after hero Install */
+}
+.ship-card .btn-ship-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: none;
+}
+.ship-card .btn-ship-secondary:hover {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+}

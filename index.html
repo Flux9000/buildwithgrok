@@ -28,7 +28,7 @@
       color: #f4f7fc;
     }
   </style>
-<link rel="stylesheet" href="css/style.css?v=20260730a" />
+<link rel="stylesheet" href="css/style.css?v=20260730b" />
 </head>
 <body class="design-system-v3-showcase" data-showcase-site data-hub-diet="v1">
   <header class="site-nav" data-topnav></header>
@@ -43,12 +43,11 @@
       <span class="orb-c"></span>
     </div>
     <div class="wrap">
-      <div class="hub-kicker">Beginner-friendly · Plain English · Labs on your computer · buildwithgrok.com</div>
+      <div class="hub-kicker">Independent curriculum · Plain English · Labs on your machine</div>
       <h1>Build With Grok</h1>
-      <p class="hub-sub">
-        Go from zero to confident with <strong>Grok Build</strong>—the AI coding tool in your terminal.
-        Learn the basics, then <strong>build a tiny game or app</strong> with copy-paste prompts.
-        After you ship once, unlock daily habits and advanced power tools.
+      <!-- Step 1 hero diet: short value + one verb; progress honesty lives in ribbon -->
+      <p class="hub-sub hub-sub--lean" data-hero-lean>
+        Learn <strong>Grok Build</strong> in the terminal—then ship a tiny game or app with copy-paste prompts.
       </p>
       <div class="hero-actions" id="hero-actions" data-first-win-funnel>
         <!-- Single primary: empty → Install; returners → next incomplete via resolveHubPrimaryCta -->
@@ -56,10 +55,8 @@
         <a class="btn btn-ghost" href="#how" id="path-jump-cta">See the path</a>
         <a class="btn btn-ghost" href="pages/00-glossary.html" id="glossary-cta">Optional: glossary</a>
       </div>
-      <div class="hero-meta">
+      <div class="hero-meta hero-meta--lean">
         <span id="hub-progress-label"><strong>0</strong> / 26 complete</span>
-        <span data-first-value-framing><strong>First wins:</strong> install works, then finish a First Ship walkthrough</span>
-        <span class="hero-meta-quiet">Opened ≠ complete — mark done after each lab</span>
       </div>
     </div>
   </section>
@@ -74,6 +71,10 @@
               <div class="section-label">Your place</div>
               <p class="hub-heading hub-heading--inline" id="continue-title">Start here — install Grok Build</p>
               <p class="hub-lead hub-lead--compact" id="continue-desc">One next step. Progress stays in this browser only.</p>
+              <p class="complete-hint complete-hint--ribbon" data-progress-honesty>
+                Opening a page is <strong>opened</strong>, not complete—mark done after the lab.
+                <span data-first-value-framing>First win: install works, then a First Ship walkthrough.</span>
+              </p>
               <p class="hub-lead practice-due-cue" id="practice-due-cue" hidden data-practice-due></p>
             </div>
             <div class="progress-ribbon-actions">
@@ -173,10 +174,25 @@
         After install and First Session (Screen &amp; Keyboard help if you need them), pick one guide and finish it.
         Copy-paste prompts at every step.
       </p>
+
+      <!-- Step 3: product/outcome visual — what you actually build -->
+      <figure class="ship-product-visual reveal" data-ship-product-visual>
+        <img
+          src="assets/ship-celebrate.jpg"
+          alt="Celebrating a finished mini product built with Grok Build"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          <strong>What you ship:</strong> a playable game or a working mini app in the browser—
+          not slides. Finish one walkthrough end-to-end.
+        </figcaption>
+      </figure>
+
       <div class="card-grid cols-2 reveal">
         <article class="ship-card">
           <div class="ship-media">
-            <img src="assets/game-pipeline.jpg" alt="" />
+            <img src="assets/game-pipeline.jpg" alt="Game pipeline from idea to playable scene" loading="lazy" decoding="async" />
           </div>
           <div class="ship-body">
             <h3>First game: Star Clicker Arena</h3>
@@ -186,12 +202,12 @@
         </article>
         <article class="ship-card">
           <div class="ship-media">
-            <img src="assets/ship-celebrate.jpg" alt="" />
+            <img src="assets/tools.jpg" alt="Building a small app with tools and edits" loading="lazy" decoding="async" />
           </div>
           <div class="ship-body">
             <h3>First app: Focus List</h3>
             <p>Add, complete, filter, and delete tasks with browser save. A real micro-product, vanilla HTML/JS.</p>
-            <a class="btn btn-primary" href="pages/22-walkthrough-first-app.html" data-ship-walkthrough="app">Start app walkthrough</a>
+            <a class="btn btn-ship-secondary" href="pages/22-walkthrough-first-app.html" data-ship-walkthrough="app">Start app walkthrough</a>
           </div>
         </article>
       </div>
