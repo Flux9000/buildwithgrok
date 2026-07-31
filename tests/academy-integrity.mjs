@@ -530,6 +530,37 @@ if (!hub.includes("resolveHubPrimaryCta") || !hub.includes("data-first-win-funne
 if (!hub.includes("data-hub-primary-cta") || !/Install Grok Build/i.test(hub)) {
   fail("hub primary CTA markup should default to Install Grok Build");
 }
+// Hero mock terminal (macOS chrome + first-commands demo)
+if (!hub.includes("data-mock-terminal") || !hub.includes("mock-terminal")) {
+  fail("hub missing mock terminal root");
+}
+if (!/Grok Build — demo|Grok Build — demo/.test(hub) && !hub.includes("Grok Build — demo")) {
+  fail("hub mock terminal title bar must say Grok Build — demo");
+}
+if (!hub.includes("mt-traffic") || !hub.includes("mt-dot-red")) {
+  fail("hub mock terminal missing decorative traffic lights");
+}
+if (!/simulation/i.test(hub) || !/Install Grok Build to try these exact commands/i.test(hub)) {
+  fail("hub mock terminal missing simulation label");
+}
+if (!hub.includes("data-mt-pause") || !hub.includes("data-mt-replay")) {
+  fail("hub mock terminal missing Pause/Replay controls");
+}
+if (!hub.includes("mock-terminal.js") || !hub.includes("mountMockTerminal")) {
+  fail("hub must load mock-terminal.js and mount it");
+}
+if (!exists(path.join(ROOT, "js/mock-terminal.js"))) fail("js/mock-terminal.js missing");
+if (!exists(path.join(ROOT, "tests/mock-terminal-unit.mjs"))) fail("tests/mock-terminal-unit.mjs missing");
+const mtSrc = read(path.join(ROOT, "js/mock-terminal.js"));
+if (!mtSrc.includes("mkdir grok-projects") || !mtSrc.includes("cd grok-projects") || !/["']grok["']/.test(mtSrc)) {
+  fail("mock-terminal.js must script mkdir/cd/grok beginner commands");
+}
+if (!mtSrc.includes("prefers-reduced-motion") && !mtSrc.includes("prefersReducedMotion")) {
+  fail("mock-terminal.js must honor reduced motion");
+}
+if (!read(cssPath).includes(".mock-terminal") || !read(cssPath).includes(".mt-window")) {
+  fail("css missing mock terminal styles");
+}
 if (!hub.includes("data-express-path") && !hub.includes("express-path")) {
   fail("hub missing express-path callout");
 }

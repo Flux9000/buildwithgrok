@@ -3,7 +3,8 @@
   "private": true,
   "description": "Grok Build Academy static site",
   "scripts": {
-    "test": "node tests/progress-unit.mjs && node tests/search-unit.mjs && node tests/version-unit.mjs && node tests/walkthrough-chrome-unit.mjs && node tests/a11y-perf-unit.mjs && node tests/slash-accuracy-unit.mjs && node tests/practice-cue-unit.mjs && node tests/academy-integrity.mjs",
+    "test": "node tests/progress-unit.mjs && node tests/search-unit.mjs && node tests/version-unit.mjs && node tests/walkthrough-chrome-unit.mjs && node tests/a11y-perf-unit.mjs && node tests/slash-accuracy-unit.mjs && node tests/practice-cue-unit.mjs && node tests/mock-terminal-unit.mjs && node tests/academy-integrity.mjs",
+    "test:mock-terminal": "node tests/mock-terminal-unit.mjs",
     "test:practice": "node tests/practice-cue-unit.mjs",
     "test:progress": "node tests/progress-unit.mjs",
     "test:search": "node tests/search-unit.mjs",

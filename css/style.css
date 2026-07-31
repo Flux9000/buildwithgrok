@@ -2974,6 +2974,225 @@ body::after {
   line-height: 1.55;
   margin-bottom: 1.5rem;
 }
+
+/* ========== Hero mock macOS Terminal ========== */
+.hub-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem 2.25rem;
+  align-items: center;
+}
+.hub-hero-copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+@media (min-width: 960px) {
+  .hub-hero-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 440px);
+    gap: 2rem 2.5rem;
+  }
+  .mock-terminal {
+    justify-self: end;
+    width: 100%;
+    max-width: 460px;
+  }
+}
+
+.mock-terminal {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+}
+.mt-window {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(160, 176, 200, 0.18);
+  background: rgba(8, 12, 20, 0.72);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(60, 228, 247, 0.06),
+    0 0 48px rgba(60, 228, 247, 0.08);
+}
+.mt-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  background: linear-gradient(180deg, rgba(36, 42, 56, 0.95), rgba(18, 22, 32, 0.98));
+  border-bottom: 1px solid rgba(160, 176, 200, 0.12);
+  min-height: 36px;
+}
+.mt-traffic {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.mt-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: block;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.mt-dot-red { background: #ff5f57; }
+.mt-dot-yellow { background: #febc2e; }
+.mt-dot-green { background: #28c840; }
+.mt-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mt-titlebar-spacer {
+  width: 48px;
+  flex-shrink: 0;
+}
+.mt-screen {
+  font-family: "SF Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #d7e0ec;
+  background: #05080f;
+  min-height: 168px;
+  max-height: 220px;
+  overflow: auto;
+  padding: 0.85rem 0.95rem 1rem;
+  scrollbar-width: thin;
+}
+.mt-line { margin: 0 0 0.2rem; word-break: break-word; }
+.mt-prompt { color: var(--cyan); }
+.mt-cmd { color: #eef4fc; }
+.mt-dim { color: var(--text-dim); opacity: 0.9; }
+.mt-status { color: var(--cyan); opacity: 0.92; }
+.mt-final {
+  margin-top: 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  border-top: 1px solid rgba(160, 176, 200, 0.1);
+  padding-top: 0.5rem;
+}
+.mt-tui-banner {
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+.mt-tui-status {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  margin-bottom: 0.55rem;
+}
+.mt-prompt-char { color: var(--cyan); font-weight: 600; }
+.mt-cursor {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(60, 228, 247, 0.55);
+  animation: mt-blink 1s step-end infinite;
+}
+@keyframes mt-blink {
+  50% { opacity: 0; }
+}
+.mt-spinner {
+  display: inline-block;
+  width: 0.65em;
+  height: 0.65em;
+  border: 1.5px solid rgba(60, 228, 247, 0.25);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: mt-spin 0.7s linear infinite;
+  vertical-align: -0.05em;
+  margin-right: 0.25em;
+}
+@keyframes mt-spin {
+  to { transform: rotate(360deg); }
+}
+.mt-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem 0.85rem;
+  padding: 0.55rem 0.75rem 0.65rem;
+  background: rgba(10, 14, 22, 0.92);
+  border-top: 1px solid rgba(160, 176, 200, 0.1);
+}
+.mt-sim-label {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+  max-width: 28rem;
+}
+.mt-controls {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.mt-btn {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.32rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.mt-btn:hover:not(:disabled) {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: rgba(60, 228, 247, 0.08);
+}
+.mt-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+.mt-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Mobile: stack below CTAs, constrain height so Install stays primary */
+@media (max-width: 959px) {
+  .hub-hero-layout {
+    grid-template-columns: 1fr;
+  }
+  .mock-terminal {
+    max-width: none;
+    order: 2;
+  }
+  .hub-hero-copy {
+    order: 1;
+  }
+  .mt-screen {
+    min-height: 140px;
+    max-height: 180px;
+  }
+  .mt-window {
+    border-radius: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mt-cursor { animation: none; opacity: 1; }
+  .mt-spinner { animation: none; border-top-color: var(--cyan); opacity: 0.7; }
+}
 .hero-meta--lean {
   gap: 0.75rem;
 }

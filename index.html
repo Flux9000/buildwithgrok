@@ -28,7 +28,7 @@
       color: #f4f7fc;
     }
   </style>
-<link rel="stylesheet" href="css/style.css?v=20260730b" />
+<link rel="stylesheet" href="css/style.css?v=20260731t" />
 </head>
 <body class="design-system-v3-showcase" data-showcase-site data-hub-diet="v1">
   <header class="site-nav" data-topnav></header>
@@ -42,22 +42,52 @@
       <span class="orb-b"></span>
       <span class="orb-c"></span>
     </div>
-    <div class="wrap">
-      <div class="hub-kicker">Independent curriculum · Plain English · Labs on your machine</div>
-      <h1>Build With Grok</h1>
-      <!-- Step 1 hero diet: short value + one verb; progress honesty lives in ribbon -->
-      <p class="hub-sub hub-sub--lean" data-hero-lean>
-        Learn <strong>Grok Build</strong> in the terminal—then ship a tiny game or app with copy-paste prompts.
-      </p>
-      <div class="hero-actions" id="hero-actions" data-first-win-funnel>
-        <!-- Single primary: empty → Install; returners → next incomplete via resolveHubPrimaryCta -->
-        <a class="btn btn-primary" id="continue-btn" href="pages/01-getting-started.html" data-hub-primary-cta>Install Grok Build</a>
-        <a class="btn btn-ghost" href="#how" id="path-jump-cta">See the path</a>
-        <a class="btn btn-ghost" href="pages/00-glossary.html" id="glossary-cta">Optional: glossary</a>
+    <div class="wrap hub-hero-layout">
+      <div class="hub-hero-copy">
+        <div class="hub-kicker">Independent curriculum · Plain English · Labs on your machine</div>
+        <h1>Build With Grok</h1>
+        <p class="hub-sub hub-sub--lean" data-hero-lean>
+          Learn <strong>Grok Build</strong> in the terminal—then ship a tiny game or app with copy-paste prompts.
+        </p>
+        <div class="hero-actions" id="hero-actions" data-first-win-funnel>
+          <!-- Single primary: empty → Install; returners → next incomplete via resolveHubPrimaryCta -->
+          <a class="btn btn-primary" id="continue-btn" href="pages/01-getting-started.html" data-hub-primary-cta>Install Grok Build</a>
+          <a class="btn btn-ghost" href="#how" id="path-jump-cta">See the path</a>
+          <a class="btn btn-ghost" href="pages/00-glossary.html" id="glossary-cta">Optional: glossary</a>
+        </div>
+        <div class="hero-meta hero-meta--lean">
+          <span id="hub-progress-label"><strong>0</strong> / 26 complete</span>
+        </div>
       </div>
-      <div class="hero-meta hero-meta--lean">
-        <span id="hub-progress-label"><strong>0</strong> / 26 complete</span>
-      </div>
+
+      <!-- Mock macOS Terminal: first commands after install -->
+      <aside
+        class="mock-terminal"
+        data-mock-terminal
+        aria-label="Simulated Terminal demo of first Grok Build commands"
+      >
+        <div class="mt-window">
+          <div class="mt-titlebar">
+            <div class="mt-traffic" aria-hidden="true">
+              <span class="mt-dot mt-dot-red"></span>
+              <span class="mt-dot mt-dot-yellow"></span>
+              <span class="mt-dot mt-dot-green"></span>
+            </div>
+            <div class="mt-title">Grok Build — demo</div>
+            <div class="mt-titlebar-spacer" aria-hidden="true"></div>
+          </div>
+          <div class="mt-screen" data-mt-screen role="log" aria-live="polite" aria-relevant="additions"></div>
+          <div class="mt-toolbar">
+            <p class="mt-sim-label" data-mt-sim-label>
+              This is a simulation — Install Grok Build to try these exact commands.
+            </p>
+            <div class="mt-controls">
+              <button type="button" class="mt-btn" data-mt-pause aria-pressed="false">Pause</button>
+              <button type="button" class="mt-btn" data-mt-replay>Replay</button>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -259,6 +289,7 @@
   <script src="js/version-core.js"></script>
   <script src="js/a11y-perf.js"></script>
   <script src="js/curriculum.js"></script>
+  <script src="js/mock-terminal.js"></script>
   <script>
     function renderHubProgress() {
       GROK_ACADEMY.mount({ pageId: null });
@@ -325,6 +356,11 @@
       GROK_ACADEMY.resetProgress();
       renderHubProgress();
     });
+
+    // Hero mock terminal (auto-play on viewport; reduced-motion → final state)
+    if (window.GROK_MOCK_TERMINAL && typeof GROK_MOCK_TERMINAL.mountMockTerminal === "function") {
+      GROK_MOCK_TERMINAL.mountMockTerminal(document, window);
+    }
   </script>
   <script src="js/main.js"></script>
 </body>
