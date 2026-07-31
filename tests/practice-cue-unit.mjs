@@ -30,7 +30,50 @@ function assert(cond, msg) {
 assert(academy.title === "Build With Grok", "brand title Build With Grok");
 assert(typeof academy.getPracticeDueCue === "function", "getPracticeDueCue exists");
 assert(typeof academy.resolveHubPrimaryCta === "function", "resolveHubPrimaryCta exists");
+assert(typeof academy.resolveSmartStartView === "function", "resolveSmartStartView exists");
+assert(typeof academy.resolveTrackJourneyStatus === "function", "resolveTrackJourneyStatus exists");
 assert(/not affiliated/i.test(academy.LEGAL_DISCLAIMER_HTML), "disclaimer not affiliated");
+
+// Smart Start pure view-model
+const ssZero = academy.resolveSmartStartView({ completed: 0, total: 26, next: null, base: "." });
+assert(ssZero.mode === "zero", "smart start zero mode");
+assert(/three steps/i.test(ssZero.headline), "smart start zero headline");
+assert(/Install Grok Build/i.test(ssZero.primaryLabel), "smart start zero Install label");
+assert(/01-getting-started/.test(ssZero.primaryHref), "smart start zero href Getting Started");
+assert(ssZero.showSteps === true, "smart start zero shows steps");
+assert(/2 hours/i.test(ssZero.reassurance || ""), "smart start reassurance");
+
+const ssCont = academy.resolveSmartStartView({
+  completed: 3,
+  total: 26,
+  next: { id: "tui", href: "03-tui-mastery.html", title: "The Grok Screen" },
+  base: ".",
+});
+assert(ssCont.mode === "continue", "smart start continue mode");
+assert(/left off/i.test(ssCont.headline), "smart start continue headline");
+assert(ssCont.primaryLabel === "The Grok Screen", "smart start continue uses next lesson title");
+assert(/03-tui-mastery/.test(ssCont.primaryHref), "smart start continue href");
+assert(ssCont.progressLabel === "3/26 complete", "smart start progress label");
+assert(ssCont.showSteps === false, "smart start continue hides steps");
+
+const tjLocked = academy.resolveTrackJourneyStatus({
+  trackId: "advanced",
+  pageIds: ["rules", "mcp"],
+  completedIds: ["start"],
+  shipDone: false,
+});
+assert(tjLocked.locked === true, "advanced locked before first ship");
+assert(/after your first ship/i.test(tjLocked.badge), "advanced badge after first ship");
+
+const tjStart = academy.resolveTrackJourneyStatus({
+  trackId: "beginner",
+  pageIds: ["glossary", "start"],
+  completedIds: [],
+  openedIds: [],
+  shipDone: false,
+});
+assert(tjStart.badgeKind === "start", "beginner start-here badge");
+assert(tjStart.expandedDefault === true, "beginner expanded by default");
 assert(/SpaceXAI|xAI/i.test(academy.LEGAL_DISCLAIMER_HTML), "disclaimer names xAI/SpaceXAI");
 assert(/buildwithgrok\.com/i.test(academy.LEGAL_DISCLAIMER_HTML), "disclaimer names domain");
 

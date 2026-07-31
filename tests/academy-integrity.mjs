@@ -286,8 +286,14 @@ if (primaryCtaCount !== 1) {
 if (hub.includes("continue-btn-main")) {
   fail("hub diet removed second primary continue-btn-main");
 }
-if (!hub.includes("nextIncomplete") || !hub.includes("path-stepper") || !hub.includes("Five tracks")) {
-  fail("hub missing nextIncomplete wiring or path stepper or Five tracks");
+if (!hub.includes("nextIncomplete") || !hub.includes("Five tracks")) {
+  fail("hub missing nextIncomplete wiring or Five tracks");
+}
+if (!hub.includes("data-path-journey") && !hub.includes("journey-tracks")) {
+  fail("hub missing visual path journey");
+}
+if (!hub.includes("data-smart-start")) {
+  fail("hub missing Smart Start onboarding block");
 }
 
 // Phase 1: complete chrome, walkthrough phases, self-checks
@@ -561,28 +567,49 @@ if (!mtSrc.includes("prefers-reduced-motion") && !mtSrc.includes("prefersReduced
 if (!read(cssPath).includes(".mock-terminal") || !read(cssPath).includes(".mt-window")) {
   fail("css missing mock terminal styles");
 }
-if (!hub.includes("data-express-path") && !hub.includes("express-path")) {
-  fail("hub missing express-path callout");
+// Onboarding v2: Smart Start three-step zero state (no express-path wall)
+if (!/Start learning in three steps/i.test(hub)) {
+  fail("hub Smart Start zero-state headline missing");
 }
-if (!/Install[\s\S]{0,80}First Session[\s\S]{0,120}walkthrough/i.test(hub) &&
-    !/01-getting-started[\s\S]{0,200}02-first-session[\s\S]{0,200}21-walkthrough/i.test(hub)) {
-  fail("hub express path should name Install → First Session → walkthrough");
+if (!/Takes about 2 hours total to ship your first project/i.test(hub)) {
+  fail("hub Smart Start reassurance missing");
 }
-// Hub diet item 2: one syllabus surface (catalog disclosure + full-path), not dual expanded catalogs
+if (!/Install Grok Build[\s\S]{0,80}~5|~5–10 min/i.test(hub) && !hub.includes("~5–10 min")) {
+  fail("hub Smart Start micro-step Install timing missing");
+}
+if (!/First Session/i.test(hub) || !/~30 min/i.test(hub)) {
+  fail("hub Smart Start First Session step missing");
+}
+if (!/Ship your first game or app/i.test(hub)) {
+  fail("hub Smart Start ship step missing");
+}
+if (!cur.includes("resolveSmartStartView") || !cur.includes("resolveTrackJourneyStatus")) {
+  fail("curriculum missing Smart Start / track journey helpers");
+}
+// One syllabus surface: collapsed catalog
 if (!hub.includes("data-hub-catalog") && !hub.includes("hub-catalog")) {
   fail("hub missing collapsed curriculum catalog (data-hub-catalog)");
+}
+if (!/Browse all 26 lessons/i.test(hub)) {
+  fail("hub catalog control should say Browse all 26 lessons");
 }
 if (!hub.includes("id=\"full-path\"") && !hub.includes("id='full-path'")) {
   fail("hub missing full-path syllabus list");
 }
 if (hub.includes("id=\"track-cards\"")) {
-  fail("hub diet: track-cards expanded catalog removed (use single full-path catalog)");
+  fail("hub diet: track-cards expanded catalog removed");
 }
 if (/Recommended path/i.test(hub) && /Glossary → Install → First session/i.test(hub)) {
-  fail("hub diet: redundant Welcome recommended-path restatement should be gone");
+  fail("hub: redundant Welcome recommended-path restatement should be gone");
 }
 if (hub.includes("Do the labs on your computer") && hub.includes("<ol class=\"steps")) {
-  fail("hub diet: redundant Method steps list should be gone");
+  fail("hub: redundant Method steps list should be gone");
+}
+if (hub.includes("data-express-path") || hub.includes('id="express-path"')) {
+  fail("onboarding v2: remove dense express-path wall (path is Smart Start + journey)");
+}
+if (hub.includes('id="path-stepper"')) {
+  fail("onboarding v2: path-stepper replaced by journey-track cards");
 }
 // no-JS beginners: primary href points at Getting Started, not glossary
 const primaryMatch = hub.match(/id="continue-btn"[^>]*href="([^"]+)"|href="([^"]+)"[^>]*id="continue-btn"/);
@@ -803,8 +830,12 @@ if (!/id:\s*"intermediate"[\s\S]*?id:\s*"git"/m.test(cur)) {
 const hubHtml = read(path.join(ROOT, "index.html"));
 if (!/Five tracks/i.test(hubHtml)) fail("hub must say Five tracks (not Four)");
 if (/Four tracks/i.test(hubHtml)) fail("hub still says Four tracks");
-if (!/The Grok Screen/i.test(hubHtml) || !/Keyboard Basics/i.test(hubHtml)) {
-  fail("hub path must include The Grok Screen and Keyboard Basics before ship");
+// Beginner path still includes screen/keyboard lessons (curriculum graph; journey expands them)
+if (!/The Grok Screen/i.test(cur) || !/Keyboard Basics/i.test(cur)) {
+  fail("curriculum path must include The Grok Screen and Keyboard Basics before ship");
+}
+if (!hubHtml.includes("data-journey-tracks") && !hubHtml.includes("journey-tracks")) {
+  fail("hub must render journey tracks host");
 }
 
 // plan + subagents success gates

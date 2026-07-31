@@ -424,6 +424,116 @@ window.GROK_ACADEMY.resolveHubPrimaryCta = function resolveHubPrimaryCta(opts) {
   };
 };
 
+/**
+ * Smart Start view-model from local progress (zero vs has-progress).
+ * Pure helper — unit-testable without DOM.
+ *
+ * @param {{ completed?: number, total?: number, next?: { id?: string, href?: string, title?: string }|null, base?: string }} opts
+ * @returns {{ mode: "zero"|"continue"|"complete", headline: string, primaryLabel: string, primaryHref: string, progressLabel: string|null, reassurance: string|null, showSteps: boolean, viewPathHref: string }}
+ */
+window.GROK_ACADEMY.resolveSmartStartView = function resolveSmartStartView(opts) {
+  const o = opts || {};
+  const completed = Number(o.completed) || 0;
+  const total = Number(o.total) || 26;
+  const next = o.next || null;
+  const pagePrefix = o.base === ".." ? "" : "pages/";
+  const viewPathHref = "#path-journey";
+
+  if (completed < 1) {
+    return {
+      mode: "zero",
+      headline: "Start learning in three steps",
+      primaryLabel: "Install Grok Build",
+      primaryHref: `${pagePrefix}01-getting-started.html`,
+      progressLabel: null,
+      reassurance:
+        "Takes about 2 hours total to ship your first project. We’ll guide you the whole way.",
+      showSteps: true,
+      viewPathHref,
+    };
+  }
+
+  if (!next) {
+    return {
+      mode: "complete",
+      headline: "Path complete",
+      primaryLabel: "Open cheatsheet",
+      primaryHref: `${pagePrefix}cheatsheet.html`,
+      progressLabel: `${completed}/${total} complete`,
+      reassurance: null,
+      showSteps: false,
+      viewPathHref,
+    };
+  }
+
+  return {
+    mode: "continue",
+    headline: "Continue where you left off",
+    primaryLabel: next.title || "Continue learning",
+    primaryHref: `${pagePrefix}${next.href}`,
+    progressLabel: `${completed}/${total} complete`,
+    reassurance: null,
+    showSteps: false,
+    viewPathHref,
+  };
+};
+
+/**
+ * Status badge for a curriculum track on the hub journey map.
+ * @param {{ trackId: string, completedIds?: string[], shipDone?: boolean, pageIds?: string[] }} opts
+ * @returns {{ badge: string, badgeKind: string, locked: boolean, expandedDefault: boolean }}
+ */
+window.GROK_ACADEMY.resolveTrackJourneyStatus = function resolveTrackJourneyStatus(opts) {
+  const o = opts || {};
+  const trackId = o.trackId || "";
+  const completedIds = o.completedIds || [];
+  const pageIds = o.pageIds || [];
+  const shipDone = !!o.shipDone;
+  const doneSet = {};
+  completedIds.forEach((id) => {
+    doneSet[id] = true;
+  });
+  const allDone = pageIds.length > 0 && pageIds.every((id) => doneSet[id]);
+  const anyDone = pageIds.some((id) => doneSet[id]);
+  const openedSet = {};
+  (o.openedIds || []).forEach((id) => {
+    openedSet[id] = true;
+  });
+  const anyOpened = pageIds.some((id) => openedSet[id]);
+
+  if (allDone) {
+    return { badge: "Complete", badgeKind: "complete", locked: false, expandedDefault: false };
+  }
+
+  if (trackId === "beginner") {
+    if (anyDone || anyOpened) {
+      return { badge: "In progress", badgeKind: "progress", locked: false, expandedDefault: true };
+    }
+    return { badge: "Start here", badgeKind: "start", locked: false, expandedDefault: true };
+  }
+
+  if (trackId === "ship") {
+    if (anyDone || anyOpened) {
+      return { badge: "In progress", badgeKind: "progress", locked: false, expandedDefault: false };
+    }
+    return { badge: "Available", badgeKind: "available", locked: false, expandedDefault: false };
+  }
+
+  // intermediate / advanced / mastery soft-gate after first ship
+  if (!shipDone) {
+    return {
+      badge: "Available after your first ship",
+      badgeKind: "locked",
+      locked: true,
+      expandedDefault: false,
+    };
+  }
+  if (anyDone || anyOpened) {
+    return { badge: "In progress", badgeKind: "progress", locked: false, expandedDefault: false };
+  }
+  return { badge: "Available", badgeKind: "available", locked: false, expandedDefault: false };
+};
+
 window.GROK_ACADEMY.getPracticeDueCue = function getPracticeDueCue(opts) {
   const api = this.progress();
   if (!api) return null;
