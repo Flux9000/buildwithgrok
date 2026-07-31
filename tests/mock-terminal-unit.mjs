@@ -41,7 +41,23 @@ const finalText = finalLines.map((l) => l.text || "").join("\n");
 assert(finalText.includes("mkdir grok-projects"), "final state shows mkdir");
 assert(finalText.includes("cd grok-projects"), "final state shows cd");
 assert(finalText.includes("grok"), "final state shows grok");
-assert(/Grok Build/i.test(finalText) || finalLines.some((l) => /Grok Build/.test(l.text || "")), "final includes Grok Build banner");
+assert(/Grok Build/i.test(finalText), "final includes Grok Build branding");
+// Realistic TUI home markers (match real product home after `grok`)
+assert(!!api.TUI_HOME, "TUI_HOME config exported");
+assert(/~\/grok-projects/.test(api.TUI_HOME.cwd), "TUI cwd is ~/grok-projects");
+assert(
+  api.TUI_HOME.menu.some((m) => /New worktree/i.test(m.label)),
+  "TUI menu includes New worktree"
+);
+assert(
+  api.TUI_HOME.menu.some((m) => /Resume session/i.test(m.label)),
+  "TUI menu includes Resume session"
+);
+assert(/Grok 4\.5 is here/i.test(api.TUI_HOME.announce), "TUI announce Grok 4.5");
+assert(/always-approve/i.test(api.TUI_HOME.statusModel), "TUI status shows always-approve");
+const tuiPlain = api.getTuiHomePlainLines().join("\n");
+assert(/New worktree/.test(tuiPlain) && /Quit/.test(tuiPlain), "TUI plain lines include menu");
+assert(/Grok Build/.test(tuiPlain), "TUI plain lines include product footer");
 
 // Reduced-motion path: applyFinalState without running typewriter
 function makeFakeRoot() {
@@ -230,12 +246,15 @@ function makeHistoryRoot() {
   };
   globalThis.document = {
     createElement() {
+      const kids = [];
       const el = {
         className: "",
         _text: "",
         _html: "",
         parentNode: null,
+        children: kids,
         get textContent() {
+          if (kids.length) return kids.map((k) => k.textContent || "").join("");
           return this._text;
         },
         set textContent(v) {
@@ -249,7 +268,12 @@ function makeHistoryRoot() {
           this._html = String(v);
           this._text = String(v).replace(/<[^>]+>/g, "");
         },
-        appendChild() {},
+        setAttribute() {},
+        appendChild(child) {
+          kids.push(child);
+          child.parentNode = el;
+          return child;
+        },
       };
       return el;
     },

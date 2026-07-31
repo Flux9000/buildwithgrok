@@ -3061,11 +3061,11 @@ body::after {
   font-size: 0.78rem;
   line-height: 1.55;
   color: #d7e0ec;
-  background: #05080f;
-  min-height: 168px;
-  max-height: 220px;
+  background: #1a1b1e;
+  min-height: 200px;
+  max-height: 280px;
   overflow: auto;
-  padding: 0.85rem 0.95rem 1rem;
+  padding: 0.75rem 0.9rem 0.85rem;
   scrollbar-width: thin;
 }
 .mt-line { margin: 0 0 0.2rem; word-break: break-word; }
@@ -3076,21 +3076,87 @@ body::after {
 .mt-final {
   margin-top: 0.55rem;
   color: var(--text-muted);
+  font-size: 0.7rem;
+  border-top: 1px solid rgba(160, 176, 200, 0.12);
+  padding-top: 0.45rem;
+  line-height: 1.4;
+}
+
+/* Realistic Grok Build TUI home (post-`grok`) */
+.mt-tui-home {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100%;
+  color: #e4e4e7;
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+.mt-tui-cwd {
+  color: #a1a1aa;
+  margin-bottom: 0.85rem;
   font-size: 0.72rem;
-  border-top: 1px solid rgba(160, 176, 200, 0.1);
-  padding-top: 0.5rem;
 }
-.mt-tui-banner {
-  font-weight: 700;
-  color: var(--cyan);
-  letter-spacing: 0.04em;
-  margin-bottom: 0.25rem;
+.mt-tui-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+  max-width: 22rem;
 }
-.mt-tui-status {
-  color: var(--text-dim);
-  font-size: 0.72rem;
-  margin-bottom: 0.55rem;
+.mt-tui-menu-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #e4e4e7;
 }
+.mt-tui-menu-label { color: #f4f4f5; }
+.mt-tui-menu-keys {
+  color: #71717a;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.mt-tui-announce {
+  color: #fbbf24;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+.mt-tui-announce-hint {
+  color: #a1a1aa;
+  font-size: 0.7rem;
+  margin-bottom: 0.85rem;
+}
+.mt-tui-tip {
+  color: #71717a;
+  font-size: 0.68rem;
+  margin-bottom: 1.1rem;
+}
+.mt-tui-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.35rem 0 1.1rem;
+  min-height: 1.25em;
+}
+.mt-tui-input-prompt {
+  color: #e4e4e7;
+  font-weight: 600;
+}
+.mt-tui-statusbar {
+  color: #71717a;
+  font-size: 0.68rem;
+  text-align: center;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+.mt-tui-footer {
+  color: #a1a1aa;
+  font-size: 0.68rem;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.mt-tui-spacer { height: 0.35rem; line-height: 0.35rem; opacity: 0; }
+.mt-tui-menu-line { color: #e4e4e7; }
 .mt-prompt-char { color: var(--cyan); font-weight: 600; }
 .mt-cursor {
   display: inline-block;
@@ -3101,6 +3167,13 @@ body::after {
   background: var(--cyan);
   box-shadow: 0 0 10px rgba(60, 228, 247, 0.55);
   animation: mt-blink 1s step-end infinite;
+}
+.mt-cursor--block {
+  width: 0.65ch;
+  height: 1.1em;
+  background: #fafafa;
+  box-shadow: none;
+  opacity: 0.95;
 }
 @keyframes mt-blink {
   50% { opacity: 0; }
@@ -3181,8 +3254,8 @@ body::after {
     order: 1;
   }
   .mt-screen {
-    min-height: 140px;
-    max-height: 180px;
+    min-height: 168px;
+    max-height: 240px;
   }
   .mt-window {
     border-radius: 11px;

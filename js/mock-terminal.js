@@ -16,6 +16,22 @@
   const SIM_LABEL =
     "This is a simulation — Install Grok Build to try these exact commands.";
 
+  /** Simplified Grok Build home (matches real TUI home after `grok`). */
+  const TUI_HOME = {
+    cwd: "~/grok-projects",
+    menu: [
+      { label: "New worktree", keys: "ctrl+w" },
+      { label: "Resume session", keys: "ctrl+s" },
+      { label: "Changelog", keys: "" },
+      { label: "Quit", keys: "ctrl+q" },
+    ],
+    announce: "Grok 4.5 is here!",
+    announceHint: "Select 'Grok 4.5' under /model.",
+    tip: "Tip: Press Ctrl+O to toggle auto-approve mode.",
+    statusModel: "Grok 4.5 (high) · always-approve",
+    footer: "Grok Build 0.2.117 [stable] Beta",
+  };
+
   /** Ordered demo steps (data only — testable without DOM). */
   const DEMO_SEQUENCE = [
     { id: "prompt", kind: "prompt", text: PROMPT_HOME },
@@ -50,21 +66,129 @@
     }
   }
 
+  /** Plain-text lines describing the TUI home (for tests + reduced-motion final). */
+  function getTuiHomePlainLines() {
+    const lines = [TUI_HOME.cwd, ""];
+    TUI_HOME.menu.forEach((m) => {
+      lines.push(m.keys ? m.label + "  " + m.keys : m.label);
+    });
+    lines.push("");
+    lines.push(TUI_HOME.announce);
+    lines.push(TUI_HOME.announceHint);
+    lines.push("");
+    lines.push(TUI_HOME.tip);
+    lines.push("");
+    lines.push("> ");
+    lines.push("— " + TUI_HOME.statusModel + " —");
+    lines.push(TUI_HOME.footer);
+    return lines;
+  }
+
   function getFinalStateLines() {
-    return [
+    // Final reduced-motion view: shell history summary + real TUI home + sim note
+    const lines = [
       { cls: "mt-line mt-dim", text: PROMPT_HOME + CMD_MKDIR },
       { cls: "mt-line mt-dim", text: PROMPT_HOME + CMD_CD },
       { cls: "mt-line mt-dim", text: PROMPT_PROJ + CMD_GROK },
       { cls: "mt-line mt-status", text: LAUNCH_LINE },
-      { cls: "mt-tui-banner", text: "Grok Build" },
-      { cls: "mt-tui-status", text: "Ready · project: grok-projects" },
-      {
-        cls: "mt-line mt-prompt-line",
-        text: "› ",
-        cursor: true,
-      },
-      { cls: "mt-line mt-final", text: FINAL_SIM },
     ];
+    getTuiHomePlainLines().forEach((t) => {
+      if (t === TUI_HOME.announce) {
+        lines.push({ cls: "mt-tui-announce", text: t });
+      } else if (t === TUI_HOME.cwd) {
+        lines.push({ cls: "mt-tui-cwd", text: t });
+      } else if (t === "> ") {
+        lines.push({ cls: "mt-line mt-prompt-line", text: "> ", cursor: true });
+      } else if (t.indexOf(TUI_HOME.statusModel) !== -1) {
+        lines.push({ cls: "mt-tui-statusbar", text: t });
+      } else if (t === TUI_HOME.footer) {
+        lines.push({ cls: "mt-tui-footer", text: t });
+      } else if (t === TUI_HOME.tip) {
+        lines.push({ cls: "mt-tui-tip", text: t });
+      } else if (t === TUI_HOME.announceHint) {
+        lines.push({ cls: "mt-tui-announce-hint", text: t });
+      } else if (!t) {
+        lines.push({ cls: "mt-tui-spacer", text: " " });
+      } else {
+        lines.push({ cls: "mt-tui-menu-line", text: t });
+      }
+    });
+    lines.push({ cls: "mt-line mt-final", text: FINAL_SIM });
+    return lines;
+  }
+
+  /**
+   * Build DOM for simplified real Grok Build home screen.
+   * @param {Document} doc
+   * @returns {HTMLElement}
+   */
+  function buildTuiHomeEl(doc) {
+    const d = doc || (typeof document !== "undefined" ? document : null);
+    const wrap = d.createElement("div");
+    wrap.className = "mt-tui-home";
+    if (typeof wrap.setAttribute === "function") {
+      wrap.setAttribute("data-mt-tui-home", "true");
+    } else {
+      wrap["data-mt-tui-home"] = "true";
+    }
+
+    const cwd = d.createElement("div");
+    cwd.className = "mt-tui-cwd";
+    cwd.textContent = TUI_HOME.cwd;
+    wrap.appendChild(cwd);
+
+    const menu = d.createElement("div");
+    menu.className = "mt-tui-menu";
+    TUI_HOME.menu.forEach((item) => {
+      const row = d.createElement("div");
+      row.className = "mt-tui-menu-row";
+      const lab = d.createElement("span");
+      lab.className = "mt-tui-menu-label";
+      lab.textContent = item.label;
+      row.appendChild(lab);
+      if (item.keys) {
+        const keys = d.createElement("span");
+        keys.className = "mt-tui-menu-keys";
+        keys.textContent = item.keys;
+        row.appendChild(keys);
+      }
+      menu.appendChild(row);
+    });
+    wrap.appendChild(menu);
+
+    const ann = d.createElement("div");
+    ann.className = "mt-tui-announce";
+    ann.textContent = TUI_HOME.announce;
+    wrap.appendChild(ann);
+
+    const annHint = d.createElement("div");
+    annHint.className = "mt-tui-announce-hint";
+    annHint.textContent = TUI_HOME.announceHint;
+    wrap.appendChild(annHint);
+
+    const tip = d.createElement("div");
+    tip.className = "mt-tui-tip";
+    tip.textContent = TUI_HOME.tip;
+    wrap.appendChild(tip);
+
+    const promptRow = d.createElement("div");
+    promptRow.className = "mt-tui-input-row";
+    promptRow.innerHTML =
+      '<span class="mt-tui-input-prompt">&gt;</span>' +
+      '<span class="mt-cursor mt-cursor--block" aria-hidden="true"></span>';
+    wrap.appendChild(promptRow);
+
+    const status = d.createElement("div");
+    status.className = "mt-tui-statusbar";
+    status.textContent = "— " + TUI_HOME.statusModel + " —";
+    wrap.appendChild(status);
+
+    const foot = d.createElement("div");
+    foot.className = "mt-tui-footer";
+    foot.textContent = TUI_HOME.footer;
+    wrap.appendChild(foot);
+
+    return wrap;
   }
 
   /**
@@ -300,24 +424,12 @@
       await waitWhilePaused();
       if (abort) return;
 
-      // TUI frame (replaces shell history — intentional transition after launch)
+      // Real Grok Build home (replaces shell history after launch)
       screen.innerHTML = "";
-      const banner = document.createElement("div");
-      banner.className = "mt-tui-banner";
-      banner.textContent = "Grok Build";
-      const st = document.createElement("div");
-      st.className = "mt-tui-status";
-      st.textContent = "Ready · project: grok-projects";
-      const ready = document.createElement("div");
-      ready.className = "mt-line mt-prompt-line";
-      ready.innerHTML =
-        '<span class="mt-prompt-char">› </span><span class="mt-cursor" aria-hidden="true"></span>';
-      if (typeof screen.append === "function") screen.append(banner, st, ready);
-      else {
-        screen.appendChild(banner);
-        screen.appendChild(st);
-        screen.appendChild(ready);
-      }
+      if (root) root.setAttribute("data-mt-phase", "tui-home");
+      const tuiHome = buildTuiHomeEl(document);
+      screen.appendChild(tuiHome);
+      screen.scrollTop = 0;
       await wait(timing.tuiHoldMs);
       await waitWhilePaused();
       if (abort) return;
@@ -464,6 +576,7 @@
     DEMO_SEQUENCE,
     COMMAND_STRINGS,
     DEFAULT_TIMING,
+    TUI_HOME,
     PROMPT_HOME,
     PROMPT_PROJ,
     CMD_MKDIR,
@@ -474,6 +587,8 @@
     SIM_LABEL,
     prefersReducedMotion,
     getFinalStateLines,
+    getTuiHomePlainLines,
+    buildTuiHomeEl,
     createDemoController,
     mountMockTerminal,
   };
