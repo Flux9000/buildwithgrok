@@ -28,7 +28,7 @@
       color: #f4f7fc;
     }
   </style>
-<link rel="stylesheet" href="css/style.css?v=20260731v" />
+<link rel="stylesheet" href="css/style.css?v=20260731w" />
 </head>
 <body class="design-system-v3-showcase" data-showcase-site data-hub-diet="v1" data-onboarding="v2">
   <header class="site-nav" data-topnav></header>
@@ -49,10 +49,9 @@
         <p class="hub-sub hub-sub--lean" data-hero-lean>
           Learn <strong>Grok Build</strong> in the terminal—then ship a tiny game or app with copy-paste prompts.
         </p>
-        <div class="hero-actions" id="hero-actions" data-first-win-funnel>
-          <!-- Single primary: empty → Install; returners → next incomplete via resolveHubPrimaryCta -->
-          <a class="btn btn-primary" id="continue-btn" href="pages/01-getting-started.html" data-hub-primary-cta>Install Grok Build</a>
-          <a class="btn btn-ghost" href="#smart-start" id="path-jump-cta">Get started</a>
+        <!-- Hero: no competing solid Install CTA — Smart Start owns the primary learning action -->
+        <div class="hero-actions hero-actions--secondary" id="hero-actions" data-first-win-funnel>
+          <a class="btn btn-ghost" href="#smart-start" id="path-jump-cta">See how to start</a>
           <a class="btn btn-ghost" href="pages/00-glossary.html" id="glossary-cta">Optional: glossary</a>
         </div>
         <div class="hero-meta hero-meta--lean">
@@ -121,9 +120,11 @@
             </li>
           </ol>
           <div class="smart-start-actions">
+            <!-- Dominant hub primary for new users (not a software install action) -->
             <a
               class="btn btn-primary btn-smart-start"
               href="pages/01-getting-started.html"
+              data-hub-primary-cta
               data-smart-start-cta
               >Start Learning Now</a
             >
@@ -135,7 +136,10 @@
         <div class="smart-start-continue" data-smart-start-continue hidden>
           <h2 class="smart-start-headline" data-smart-start-continue-headline>Continue where you left off</h2>
           <div class="smart-start-continue-row">
-            <a class="btn btn-primary btn-smart-start" href="pages/01-getting-started.html" data-smart-start-continue-cta
+            <a
+              class="btn btn-primary btn-smart-start"
+              href="pages/01-getting-started.html"
+              data-smart-start-continue-cta
               >Continue</a
             >
             <span class="smart-start-progress-pill" data-smart-start-progress>0/26 complete</span>
@@ -143,8 +147,8 @@
           <a class="smart-start-view-path" href="#path-journey" data-smart-start-view-path>View full path</a>
           <p class="hub-lead practice-due-cue" id="practice-due-cue" hidden data-practice-due></p>
         </div>
-        <div class="smart-start-footer-tools">
-          <button type="button" class="btn btn-ghost btn-sm" id="reset-progress-btn" data-reset-progress>
+        <div class="smart-start-footer-tools" data-smart-start-tools>
+          <button type="button" class="btn btn-ghost btn-sm" id="reset-progress-btn" data-reset-progress hidden>
             Reset progress
           </button>
           <span class="smart-start-honesty" data-progress-honesty
@@ -230,31 +234,43 @@
   <script>
     const TRACK_JOURNEY_META = {
       beginner: {
-        icon: "01",
+        icon: "⌘",
+        iconLabel: "Beginner",
         desc: "Learn the basics and get comfortable in the terminal",
         time: "~1.5 hrs",
       },
       ship: {
-        icon: "02",
+        icon: "◆",
+        iconLabel: "First Ship",
         desc: "Build and ship a real tiny game or app",
         time: "~2 hrs",
       },
       intermediate: {
-        icon: "03",
+        icon: "⟳",
+        iconLabel: "Intermediate",
         desc: "Daily habits after your first ship",
         time: "~2–3 hrs",
       },
       advanced: {
-        icon: "04",
+        icon: "⚡",
+        iconLabel: "Advanced",
         desc: "Full power tools and advanced workflows",
         time: "~3–4 hrs",
       },
       mastery: {
-        icon: "05",
+        icon: "★",
+        iconLabel: "Mastery",
         desc: "Long-term practice and mastery plan",
         time: "Ongoing",
       },
     };
+
+    function setHubPrimaryAttr(el) {
+      document.querySelectorAll("[data-hub-primary-cta]").forEach((node) => {
+        node.removeAttribute("data-hub-primary-cta");
+      });
+      if (el) el.setAttribute("data-hub-primary-cta", "");
+    }
 
     function renderSmartStart(stats, next) {
       const view = GROK_ACADEMY.resolveSmartStartView({
@@ -265,6 +281,7 @@
       });
       const zeroEl = document.querySelector("[data-smart-start-zero]");
       const contEl = document.querySelector("[data-smart-start-continue]");
+      const resetBtn = document.getElementById("reset-progress-btn");
       if (!zeroEl || !contEl) return;
 
       if (view.mode === "zero") {
@@ -274,7 +291,9 @@
         if (cta) {
           cta.href = view.primaryHref;
           cta.textContent = view.primaryLabel;
+          setHubPrimaryAttr(cta);
         }
+        if (resetBtn) resetBtn.hidden = true;
       } else {
         zeroEl.hidden = true;
         contEl.hidden = false;
@@ -284,9 +303,11 @@
         if (cta) {
           cta.href = view.primaryHref;
           cta.textContent = view.primaryLabel;
+          setHubPrimaryAttr(cta);
         }
         const pill = contEl.querySelector("[data-smart-start-progress]");
         if (pill) pill.textContent = view.progressLabel || "";
+        if (resetBtn) resetBtn.hidden = false;
       }
     }
 
@@ -317,6 +338,8 @@
             shipDone,
           });
           const openAttr = status.expandedDefault ? " open" : "";
+          const badgeShort =
+            status.badgeKind === "locked" ? "After you ship" : status.badge;
           const lessons = track.pages
             .map((p) => {
               const done = api && api.isCompleted(p.id);
@@ -324,17 +347,17 @@
               return `<li><a href="pages/${p.href}">${done ? "✓ " : ""}${p.title}</a><span>${t}</span></li>`;
             })
             .join("");
-          return `<details class="journey-card ${track.color} is-${status.badgeKind}${
+          return `<details class="journey-card glass-card ${track.color} is-${status.badgeKind}${
             status.locked ? " is-locked" : ""
           }" data-journey-track="${track.id}"${openAttr}>
             <summary class="journey-card-summary">
-              <span class="journey-card-icon" aria-hidden="true">${meta.icon}</span>
+              <span class="journey-card-icon" aria-hidden="true" title="${meta.iconLabel || track.name}">${meta.icon}</span>
               <span class="journey-card-main">
                 <span class="journey-card-name">${track.name}</span>
                 <span class="journey-card-desc">${meta.desc}</span>
                 <span class="journey-card-meta">
                   <span class="journey-card-time">${meta.time}</span>
-                  <span class="journey-badge journey-badge--${status.badgeKind}">${status.badge}</span>
+                  <span class="journey-badge journey-badge--${status.badgeKind}">${badgeShort}</span>
                 </span>
               </span>
             </summary>
@@ -349,18 +372,6 @@
       const stats = GROK_ACADEMY.progressStats();
       const next = GROK_ACADEMY.nextIncomplete();
       const api = GROK_ACADEMY.progress();
-
-      // Hero primary only (one hub primary control)
-      const cta = GROK_ACADEMY.resolveHubPrimaryCta({
-        completed: stats.completed,
-        next,
-        base: ".",
-      });
-      const continueBtn = document.getElementById("continue-btn");
-      if (continueBtn) {
-        continueBtn.href = cta.href;
-        continueBtn.textContent = cta.heroLabel;
-      }
 
       const hubLabel = document.getElementById("hub-progress-label");
       if (hubLabel) {

@@ -270,21 +270,29 @@ for (const needle of [".version-ribbon", "data-version-ribbon", "version-ribbon-
 }
 if (!exists(path.join(ROOT, "tests/version-unit.mjs"))) fail("tests/version-unit.mjs missing");
 
-// Primary CTA: single empty-state Install; JS may rewrite label to Continue for returners
+// Primary learning CTA lives in Smart Start (Start Learning Now / next lesson) — not hero Install
 if (
-  !hub.includes("continue-btn") ||
-  (!/Install Grok Build|Continue/i.test(hub)) ||
+  (!/Start Learning Now|Continue/i.test(hub) && !hub.includes("data-smart-start-cta")) ||
   (!hub.includes("reset-progress") && !hub.includes("data-reset-progress"))
 ) {
-  fail("hub missing primary CTA (Install/Continue) or reset control");
+  fail("hub missing Smart Start primary learning CTA or reset control");
 }
-// Hub diet: exactly one data-hub-primary-cta (not dual Install buttons)
-const primaryCtaCount = (hub.match(/data-hub-primary-cta/g) || []).length;
+// Exactly one data-hub-primary-cta in HTML markup (exclude inline scripts)
+const hubMarkupOnly = hub.split(/<script[\s>]/i)[0] || hub;
+const primaryCtaCount = (hubMarkupOnly.match(/data-hub-primary-cta/g) || []).length;
 if (primaryCtaCount !== 1) {
-  fail(`hub diet expects exactly 1 data-hub-primary-cta, found ${primaryCtaCount}`);
+  fail(`hub expects exactly 1 data-hub-primary-cta in markup, found ${primaryCtaCount}`);
 }
 if (hub.includes("continue-btn-main")) {
   fail("hub diet removed second primary continue-btn-main");
+}
+// Hero must not compete with solid Install Grok Build primary
+const heroChunk = (hub.match(/id="hero-actions"[\s\S]*?<\/div>/) || [""])[0];
+if (/btn-primary[\s\S]{0,80}Install Grok Build|Install Grok Build[\s\S]{0,80}btn-primary/.test(heroChunk)) {
+  fail("hero must not show solid Install Grok Build primary (Smart Start owns start CTA)");
+}
+if (heroChunk.includes("data-hub-primary-cta")) {
+  fail("data-hub-primary-cta must not live in hero-actions (use Smart Start)");
 }
 if (!hub.includes("nextIncomplete") || !hub.includes("Five tracks")) {
   fail("hub missing nextIncomplete wiring or Five tracks");
@@ -530,11 +538,17 @@ if (!/drawer\.innerHTML\s*=\s*navListHtml/.test(cur) || !cur.includes("data-nav-
 if (!cur.includes("resolveHubPrimaryCta")) {
   fail("curriculum missing resolveHubPrimaryCta helper");
 }
-if (!hub.includes("resolveHubPrimaryCta") || !hub.includes("data-first-win-funnel")) {
+if (!cur.includes("resolveHubPrimaryCta") || !hub.includes("data-first-win-funnel")) {
   fail("hub missing first-win funnel wiring (resolveHubPrimaryCta / data-first-win-funnel)");
 }
-if (!hub.includes("data-hub-primary-cta") || !/Install Grok Build/i.test(hub)) {
-  fail("hub primary CTA markup should default to Install Grok Build");
+if (!hub.includes("resolveSmartStartView")) {
+  fail("hub must wire resolveSmartStartView for progress-aware Smart Start");
+}
+if (!hub.includes("data-hub-primary-cta") || !/Start Learning Now/i.test(hub)) {
+  fail("hub primary CTA markup should default to Start Learning Now on Smart Start");
+}
+if (!/data-hub-primary-cta[\s\S]{0,120}01-getting-started|01-getting-started[\s\S]{0,120}data-hub-primary-cta/.test(hub)) {
+  fail("hub primary CTA should still target Getting Started for empty progress");
 }
 // Hero mock terminal (macOS chrome + first-commands demo)
 if (!hub.includes("data-mock-terminal") || !hub.includes("mock-terminal")) {
@@ -614,15 +628,9 @@ if (hub.includes("data-express-path") || hub.includes('id="express-path"')) {
 if (hub.includes('id="path-stepper"')) {
   fail("onboarding v2: path-stepper replaced by journey-track cards");
 }
-// no-JS beginners: primary href points at Getting Started, not glossary
-const primaryMatch = hub.match(/id="continue-btn"[^>]*href="([^"]+)"|href="([^"]+)"[^>]*id="continue-btn"/);
-const primaryHref = primaryMatch ? (primaryMatch[1] || primaryMatch[2] || "") : "";
-if (!/01-getting-started/.test(primaryHref) && !hub.includes('href="pages/01-getting-started.html" data-hub-primary-cta') &&
-    !/data-hub-primary-cta[^>]*href="pages\/01-getting-started\.html"|href="pages\/01-getting-started\.html"[^>]*data-hub-primary-cta/.test(hub)) {
-  // soft: ensure at least one primary CTA targets install
-  if (!/data-hub-primary-cta[\s\S]{0,120}01-getting-started|01-getting-started[\s\S]{0,120}data-hub-primary-cta/.test(hub)) {
-    fail("hub primary CTA should target Getting Started for empty progress");
-  }
+// no-JS beginners: Smart Start primary targets Getting Started
+if (!/data-smart-start-cta[\s\S]{0,80}01-getting-started|01-getting-started[\s\S]{0,120}data-smart-start-cta|data-hub-primary-cta[\s\S]{0,80}01-getting-started/.test(hub)) {
+  fail("hub primary learning CTA should target Getting Started for empty progress");
 }
 const gsHtml = read(path.join(ROOT, "pages/01-getting-started.html"));
 if (!gsHtml.includes("data-first-win") && !/first win/i.test(gsHtml)) {
