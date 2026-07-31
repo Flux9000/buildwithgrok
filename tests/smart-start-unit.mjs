@@ -32,7 +32,7 @@ assert(typeof A.resolveTrackJourneyStatus === "function", "resolveTrackJourneySt
 
 const z = A.resolveSmartStartView({ completed: 0, total: 26, next: { id: "glossary" }, base: "." });
 assert(z.mode === "zero", "zero ignores next when completed 0");
-assert(z.primaryLabel === "Install Grok Build", "zero Install");
+assert(z.primaryLabel === "Start Learning Now", "zero Start Learning Now label");
 assert(/01-getting-started/.test(z.primaryHref), "zero → getting started");
 
 const mem = globalThis.GROK_PROGRESS_CORE.createMemoryStorage();

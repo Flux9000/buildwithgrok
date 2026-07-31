@@ -38,7 +38,8 @@ assert(/not affiliated/i.test(academy.LEGAL_DISCLAIMER_HTML), "disclaimer not af
 const ssZero = academy.resolveSmartStartView({ completed: 0, total: 26, next: null, base: "." });
 assert(ssZero.mode === "zero", "smart start zero mode");
 assert(/three steps/i.test(ssZero.headline), "smart start zero headline");
-assert(/Install Grok Build/i.test(ssZero.primaryLabel), "smart start zero Install label");
+assert(/Start Learning Now/i.test(ssZero.primaryLabel), "smart start zero learning CTA label");
+assert(!/Install Grok Build/i.test(ssZero.primaryLabel), "smart start zero does not say Install (not a software install button)");
 assert(/01-getting-started/.test(ssZero.primaryHref), "smart start zero href Getting Started");
 assert(ssZero.showSteps === true, "smart start zero shows steps");
 assert(/2 hours/i.test(ssZero.reassurance || ""), "smart start reassurance");

@@ -574,8 +574,11 @@ if (!/Start learning in three steps/i.test(hub)) {
 if (!/Takes about 2 hours total to ship your first project/i.test(hub)) {
   fail("hub Smart Start reassurance missing");
 }
-if (!/Install Grok Build[\s\S]{0,80}~5|~5–10 min/i.test(hub) && !hub.includes("~5–10 min")) {
+if (!hub.includes("~5–10 min")) {
   fail("hub Smart Start micro-step Install timing missing");
+}
+if (!/Start Learning Now/i.test(hub)) {
+  fail("hub Smart Start CTA should say Start Learning Now (not imply software install)");
 }
 if (!/First Session/i.test(hub) || !/~30 min/i.test(hub)) {
   fail("hub Smart Start First Session step missing");

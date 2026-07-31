@@ -443,7 +443,8 @@ window.GROK_ACADEMY.resolveSmartStartView = function resolveSmartStartView(opts)
     return {
       mode: "zero",
       headline: "Start learning in three steps",
-      primaryLabel: "Install Grok Build",
+      // Label is a learning CTA — does not install software (lesson teaches install)
+      primaryLabel: "Start Learning Now",
       primaryHref: `${pagePrefix}01-getting-started.html`,
       progressLabel: null,
       reassurance:
