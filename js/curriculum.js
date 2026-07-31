@@ -523,7 +523,7 @@ window.GROK_ACADEMY.resolveTrackJourneyStatus = function resolveTrackJourneyStat
   // intermediate / advanced / mastery soft-gate after first ship
   if (!shipDone) {
     return {
-      badge: "Available after your first ship",
+      badge: "Unlocks after first ship",
       badgeKind: "locked",
       locked: true,
       expandedDefault: false,

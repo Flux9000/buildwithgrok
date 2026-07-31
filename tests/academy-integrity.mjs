@@ -848,6 +848,12 @@ if (!/The Grok Screen/i.test(cur) || !/Keyboard Basics/i.test(cur)) {
 if (!hubHtml.includes("data-journey-tracks") && !hubHtml.includes("journey-tracks")) {
   fail("hub must render journey tracks host");
 }
+if (!hubHtml.includes("data-journey-panel") && !hubHtml.includes("journey-expand-panel")) {
+  fail("hub must have below-row journey expand panel");
+}
+if (!/Unlocks after first ship/i.test(cur)) {
+  fail("track journey locked badge should say Unlocks after first ship");
+}
 
 // plan + subagents success gates
 const planHtml = read(path.join(ROOT, "pages/12-plan-mode.html"));

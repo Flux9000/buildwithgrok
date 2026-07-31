@@ -28,7 +28,7 @@
       color: #f4f7fc;
     }
   </style>
-<link rel="stylesheet" href="css/style.css?v=20260731w" />
+<link rel="stylesheet" href="css/style.css?v=20260731x" />
 </head>
 <body class="design-system-v3-showcase" data-showcase-site data-hub-diet="v1" data-onboarding="v2">
   <header class="site-nav" data-topnav></header>
@@ -168,8 +168,18 @@
         Follow the tracks in order. Beginner first—then First Ship. Later tracks open after you ship.
       </p>
 
-      <div class="journey-track-grid reveal" id="journey-tracks" data-journey-tracks>
-        <!-- Filled by renderHubProgress from curriculum tracks -->
+      <div class="journey-track-grid reveal" id="journey-tracks" data-journey-tracks role="tablist" aria-label="Curriculum tracks">
+        <!-- Equal-height compact cards filled by renderHubProgress -->
+      </div>
+      <div
+        class="journey-expand-panel reveal"
+        id="journey-expand-panel"
+        data-journey-panel
+        role="region"
+        aria-live="polite"
+        hidden
+      >
+        <!-- Selected track lessons appear here (below the full card row) -->
       </div>
 
       <details class="hub-catalog reveal" id="curriculum-catalog" data-hub-catalog>
@@ -311,6 +321,71 @@
       }
     }
 
+    // Selected track for below-row lesson panel (Beginner starts selected)
+    let selectedJourneyTrackId = "beginner";
+
+    function buildJourneyLessonListHtml(track, api) {
+      if (!track) return "";
+      return track.pages
+        .map((p) => {
+          const done = api && api.isCompleted(p.id);
+          const t = p.time === "ref" ? "ref" : p.time;
+          return `<li><a href="pages/${p.href}">${done ? "✓ " : ""}${p.title}</a><span>${t}</span></li>`;
+        })
+        .join("");
+    }
+
+    function fillJourneyPanel(trackId, api) {
+      const panel = document.getElementById("journey-expand-panel");
+      if (!panel) return;
+      const track = GROK_ACADEMY.tracks.find((t) => t.id === trackId);
+      if (!track) {
+        panel.hidden = true;
+        panel.innerHTML = "";
+        return;
+      }
+      const meta = TRACK_JOURNEY_META[track.id] || {};
+      panel.hidden = false;
+      panel.setAttribute("data-journey-panel-track", track.id);
+      panel.innerHTML = `
+        <div class="journey-panel-head">
+          <span class="journey-panel-icon ${track.color}" aria-hidden="true">${meta.icon || "•"}</span>
+          <div>
+            <h3 class="journey-panel-title">${track.name}</h3>
+            <p class="journey-panel-desc">${meta.desc || track.subtitle}</p>
+          </div>
+        </div>
+        <ul class="journey-lesson-list journey-lesson-list--panel">${buildJourneyLessonListHtml(track, api)}</ul>
+      `;
+    }
+
+    function setJourneyCardActive(trackId, expanded) {
+      document.querySelectorAll("[data-journey-track]").forEach((btn) => {
+        const id = btn.getAttribute("data-journey-track");
+        const isOn = expanded && id === trackId;
+        btn.classList.toggle("is-active", isOn);
+        btn.setAttribute("aria-expanded", isOn ? "true" : "false");
+        btn.setAttribute("aria-selected", isOn ? "true" : "false");
+      });
+    }
+
+    function selectJourneyTrack(trackId, api, opts) {
+      const force = opts && opts.force;
+      const panel = document.getElementById("journey-expand-panel");
+      if (!panel) return;
+      if (!force && selectedJourneyTrackId === trackId && !panel.hidden) {
+        // Collapse on second click
+        selectedJourneyTrackId = null;
+        panel.hidden = true;
+        panel.innerHTML = "";
+        setJourneyCardActive(null, false);
+        return;
+      }
+      selectedJourneyTrackId = trackId;
+      fillJourneyPanel(trackId, api);
+      setJourneyCardActive(trackId, true);
+    }
+
     function renderJourneyTracks(api) {
       const host = document.getElementById("journey-tracks");
       if (!host) return;
@@ -322,8 +397,9 @@
         if (api && api.isOpened(p.id)) openedIds.push(p.id);
       });
 
+      // Compact equal-height cards only (lessons live in below-row panel)
       host.innerHTML = GROK_ACADEMY.tracks
-        .map((track) => {
+        .map((track, idx) => {
           const meta = TRACK_JOURNEY_META[track.id] || {
             icon: "•",
             desc: track.subtitle,
@@ -337,34 +413,50 @@
             openedIds,
             shipDone,
           });
-          const openAttr = status.expandedDefault ? " open" : "";
-          const badgeShort =
-            status.badgeKind === "locked" ? "After you ship" : status.badge;
-          const lessons = track.pages
-            .map((p) => {
-              const done = api && api.isCompleted(p.id);
-              const t = p.time === "ref" ? "ref" : p.time;
-              return `<li><a href="pages/${p.href}">${done ? "✓ " : ""}${p.title}</a><span>${t}</span></li>`;
-            })
-            .join("");
-          return `<details class="journey-card glass-card ${track.color} is-${status.badgeKind}${
-            status.locked ? " is-locked" : ""
-          }" data-journey-track="${track.id}"${openAttr}>
-            <summary class="journey-card-summary">
-              <span class="journey-card-icon" aria-hidden="true" title="${meta.iconLabel || track.name}">${meta.icon}</span>
-              <span class="journey-card-main">
-                <span class="journey-card-name">${track.name}</span>
-                <span class="journey-card-desc">${meta.desc}</span>
-                <span class="journey-card-meta">
-                  <span class="journey-card-time">${meta.time}</span>
-                  <span class="journey-badge journey-badge--${status.badgeKind}">${badgeShort}</span>
-                </span>
+          return `<button type="button"
+            class="journey-card glass-card ${track.color} is-${status.badgeKind}${
+              status.locked ? " is-locked" : ""
+            }"
+            data-journey-track="${track.id}"
+            role="tab"
+            id="journey-tab-${track.id}"
+            aria-controls="journey-expand-panel"
+            aria-expanded="false"
+            aria-selected="false">
+            <span class="journey-card-icon" aria-hidden="true">${meta.icon}</span>
+            <span class="journey-card-main">
+              <span class="journey-card-name">${track.name}</span>
+              <span class="journey-card-desc">${meta.desc}</span>
+              <span class="journey-card-meta">
+                <span class="journey-card-time">${meta.time}</span>
+                <span class="journey-badge journey-badge--${status.badgeKind}">${status.badge}</span>
               </span>
-            </summary>
-            <ul class="journey-lesson-list">${lessons}</ul>
-          </details>`;
+            </span>
+          </button>`;
         })
         .join("");
+
+      host.querySelectorAll("[data-journey-track]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectJourneyTrack(btn.getAttribute("data-journey-track"), api);
+        });
+        btn.addEventListener("keydown", (e) => {
+          if (e.key !== "Escape") return;
+          const panel = document.getElementById("journey-expand-panel");
+          if (!panel || panel.hidden) return;
+          e.preventDefault();
+          selectedJourneyTrackId = null;
+          panel.hidden = true;
+          panel.innerHTML = "";
+          setJourneyCardActive(null, false);
+        });
+      });
+
+      // Default: Beginner panel open (equal-height cards still)
+      if (!selectedJourneyTrackId) selectedJourneyTrackId = "beginner";
+      if (selectedJourneyTrackId) {
+        selectJourneyTrack(selectedJourneyTrackId, api, { force: true });
+      }
     }
 
     function renderHubProgress() {

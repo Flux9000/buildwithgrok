@@ -64,7 +64,7 @@ const tjLocked = academy.resolveTrackJourneyStatus({
   shipDone: false,
 });
 assert(tjLocked.locked === true, "advanced locked before first ship");
-assert(/after your first ship/i.test(tjLocked.badge), "advanced badge after first ship");
+assert(/Unlocks after first ship/i.test(tjLocked.badge), "advanced badge unlocks after first ship");
 
 const tjStart = academy.resolveTrackJourneyStatus({
   trackId: "beginner",
