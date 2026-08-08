@@ -12,8 +12,8 @@ window.GROK_ACADEMY = {
       color: "cyan",
       pages: [
         { id: "glossary", href: "00-glossary.html", title: "Words You’ll See", time: "10 min", blurb: "Plain meanings for every important word", keywords: ["glossary", "definitions", "vocabulary", "terms"] },
-        { id: "start", href: "01-getting-started.html", title: "Getting Started", time: "25 min", blurb: "Install Grok, sign in, prove it works", keywords: ["install", "signup", "login", "setup"] },
-        { id: "first", href: "02-first-session.html", title: "Your First Session", time: "30 min", blurb: "Send a goal, approve tools, check the result", keywords: ["first chat", "approve", "tools", "@files"] },
+        { id: "start", href: "01-getting-started.html", title: "Getting Started", time: "25 min", blurb: "Install Grok, sign in, prove it works", keywords: ["install", "signup", "login", "setup", "/onboarding", "/tutorial", "product tour"] },
+        { id: "first", href: "02-first-session.html", title: "Your First Session", time: "30 min", blurb: "Send a goal, approve tools, check the result", keywords: ["first chat", "approve", "tools", "@files", "/onboarding"] },
         { id: "tui", href: "03-tui-mastery.html", title: "The Grok Screen", time: "20 min", blurb: "History above, typing box below", keywords: ["tui", "terminal ui", "layout", "screen"] },
         { id: "keys", href: "04-keyboard.html", title: "Keyboard Basics", time: "15 min", blurb: "The few keys you need every day", keywords: ["shortcuts", "hotkeys", "ctrl", "escape"] },
       ],
@@ -37,7 +37,7 @@ window.GROK_ACADEMY = {
       color: "violet",
       pages: [
         { id: "git", href: "24-day2-git.html", title: "Day-2 Git with Grok", time: "20 min", blurb: "Status, diff, and safe commits after your first ship", keywords: ["git", "commit", "diff", "status", "day-2", "day2", "repository", "stage", "version control"] },
-        { id: "commands", href: "05-slash-commands.html", title: "Slash Commands", time: "30 min", blurb: "Commands that control Grok (start with /)", keywords: ["slash", "/help", "/compact", "commands", "/delete", "/undo", "/gboom", "easter egg"], verified: "2026-08-07", reviewEveryDays: 60 },
+        { id: "commands", href: "05-slash-commands.html", title: "Slash Commands", time: "30 min", blurb: "Commands that control Grok (start with /)", keywords: ["slash", "/help", "/compact", "commands", "/delete", "/undo", "/onboarding", "/tutorial", "/gboom", "easter egg"], verified: "2026-08-07", reviewEveryDays: 60 },
         { id: "tools", href: "06-tools.html", title: "Built-in Tools", time: "20 min", blurb: "What Grok can do on your computer", keywords: ["edit", "bash", "web search", "shell"] },
         { id: "sessions", href: "07-sessions-memory.html", title: "Sessions & Memory", time: "20 min", blurb: "Save chats, free space, optional memory", keywords: ["compact", "resume", "context", "memory", "/delete", "/undo"] },
         { id: "safety", href: "08-permissions-safety.html", title: "Permissions & Safety", time: "25 min", blurb: "Three safety layers, explained simply", keywords: ["sandbox", "permissions", "allow", "deny", "always-approve", "always allow", "yolo", "ask mode", "auto mode", "os sandbox"], verified: "2026-08-07", reviewEveryDays: 60 },
