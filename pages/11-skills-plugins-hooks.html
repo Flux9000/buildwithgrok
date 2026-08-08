@@ -59,8 +59,21 @@ user-invocable: true
 1. Reply with a cheerful greeting
 2. Ask what project folder we are in
 3. Stop — do not edit files</code></pre></div>
-<p>If <code>user-invocable: true</code>, you can also run it like <code>/hello-skill</code> from the slash menu.</p>
+<p>If <code>user-invocable: true</code> (the usual default when you create a skill), you can also run it like <code>/hello-skill</code> from the slash menu.</p>
+<div class="callout tip"><div class="mark">Important on Grok Build 1.0.0+</div><div>
+<p><strong>Not every skill is a slash command.</strong> Some bundled specialist skills ship with <code>user-invocable: false</code>. Grok can still load them when your task matches (game art pipelines, office-doc helpers, and similar), but they <strong>do not</strong> appear as <code>/skill-name</code> in the <code>/</code> menu. On recent installs that often includes bundled names like <code>game-asset-core</code>, <code>game-tilesets</code>, <code>docx</code>, <code>pdf</code>, and <code>pptx</code>—unless you override them with your own copy under <code>~/.grok/skills/</code>.</p>
+<p>If a skill you expected as <code>/something</code> is missing, check its <code>SKILL.md</code> frontmatter and trust in-product <code>/skills</code> / <code>/help</code> for <em>your</em> build. Built-in commands always win over a skill with the same name; use <code>/user:name</code> or <code>/local:name</code> when you need to force a skill scope.</p>
+</div></div>
 <p>Project skills can live in <code>.grok/skills/</code> inside a repo so teammates share them.</p>
+
+<h2>Coming from Claude, Cursor, or Codex?</h2>
+<p>Official product onboarding (<code>/tutorial</code>) points at skills that <strong>continue a recent session</strong> from another agent tool—when those skills are installed and invocable on your machine:</p>
+<ul class="clean-list">
+  <li><code>/resume-claude</code> — pick up a recent Claude Code session</li>
+  <li><code>/resume-codex</code> — pick up a recent Codex session</li>
+  <li><code>/resume-cursor</code> — pick up a recent Cursor session</li>
+</ul>
+<p>These are <strong>skills</strong> (not core session builtins like <code>/resume</code>). If they are missing from your menu, install or enable them via <code>/skills</code>, or ask Grok to help migrate settings with <code>/import-claude</code> (Claude settings import) and project rules/MCP discovery. For a full inventory of what Grok found in a repo, run <code>grok inspect</code> from a normal terminal when your install supports it.</p>
 
 <h2>Plugins = packs of extras</h2>
 <p>A <strong>plugin</strong> is an installable bundle that may include skills, commands, hooks, agents, and MCP connections. A <strong>marketplace</strong> is a catalog of plugins (like an app store listing).</p>
@@ -73,10 +86,10 @@ user-invocable: true
   <li>Auto-format code after edits</li>
   <li>Refuse to “finish” until tests pass</li>
 </ul>
-<p>Manage with <code>/hooks</code> (extensions modal). Project hooks only run after you <strong>trust</strong> the folder (<code>/hooks-trust</code>, modal Trust, or launch with <code>--trust</code>). The shell also has <code>/hooks-list</code>, <code>/hooks-add</code>, <code>/hooks-remove</code>, and <code>/hooks-untrust</code>—in the pager those are mostly folded into the modal. Creating hooks means writing JSON/config and scripts—optional until you need automation seatbelts. Official hooks guide has full schemas.</p>
+<p>Manage with <code>/hooks</code> (extensions modal). Project hooks only run after you <strong>trust</strong> the folder (<code>/hooks-trust</code>, modal Trust, or launch with <code>--trust</code>). Trust is stored in the unified folder-trust list (often <code>~/.grok/trusted_folders.toml</code> on your machine—same gate as repo-local MCP/LSP). The shell also has <code>/hooks-list</code>, <code>/hooks-add</code>, <code>/hooks-remove</code>, and <code>/hooks-untrust</code>—in the pager those are mostly folded into the modal. Creating hooks means writing JSON/config and scripts—optional until you need automation seatbelts. Official hooks guide has full schemas.</p>
 
 <div class="callout lab"><div class="mark">Tiny lab</div><div>
-<p>Create the hello-skill above under <code>~/.grok/skills/</code>, restart Grok, and run <code>/hello-skill</code> or ask “run hello-skill practice.”</p>
+<p>Create the hello-skill above under <code>~/.grok/skills/</code>, restart Grok, and run <code>/hello-skill</code> or ask “run hello-skill practice.” Then open <code>/skills</code> and notice which installed skills appear as slash entries vs model-only.</p>
 </div></div>
 
 <section class="self-check" data-self-check>
@@ -91,6 +104,11 @@ user-invocable: true
       <legend>2. Hooks are for…</legend>
       <label><input type="radio" name="sk2" value="right" /> Automatic scripts at certain moments (use carefully)</label>
       <label><input type="radio" name="sk2" value="wrong" /> Replacing the need to install Grok</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. A skill with <code>user-invocable: false</code>…</legend>
+      <label><input type="radio" name="sk3" value="right" /> Can still guide Grok, but usually does not appear as <code>/skill-name</code> in the menu</label>
+      <label><input type="radio" name="sk3" value="wrong" /> Is deleted from your computer</label>
     </fieldset>
     <button type="submit" class="btn btn-primary">Check answers</button>
     <p class="self-check-result" data-self-check-result hidden></p>

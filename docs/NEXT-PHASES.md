@@ -9,7 +9,7 @@ This document is the product roadmap for turning **Build With Grok** (buildwithg
 2. Returning learner resumes the *true* next incomplete lesson.  
 3. Intermediate can search to advanced topics in seconds.  
 4. Advanced depth never blocks beginners (ship-first order preserved).  
-5. Beta-sensitive advice shows when it was last verified.  
+5. Version-sensitive advice shows when it was last verified.  
 6. Stays static-hostable (simple deploy to a normal website).
 
 ## Production home
@@ -44,4 +44,6 @@ Auth, payments, multiplayer classrooms, SCORM, mandatory SPA rewrite, live in-br
 
 Product phases through a11y/print, Day-2 Git, content accuracy, and **journey polish + Build With Grok rebrand + legal disclaimer** are implemented.
 
-Next: further modules (debug studio / team pack), or **deploy this static site to buildwithgrok.com** (GoDaddy). Keep re-running accuracy when major CLI versions land.
+**Content pin (2026-08):** slash inventory + encyclopedia reconciled to installed **Grok Build 1.0.0** (including `/delete`, aliases, shell `/hooks-*`, skill `user-invocable` truth). Re-run accuracy when major CLI versions land.
+
+Next: further modules (debug studio / team pack), optional P2 doc-depth (Mermaid, `grok inspect`, admin permission locks), or **deploy this static site to buildwithgrok.com** (GoDaddy).

@@ -180,10 +180,11 @@
 
 <div class="callout tip"><div class="mark">Skills can become commands too</div><div>
 <p>If you (or a plugin) install a skill marked <code>user-invocable: true</code>, it appears as <code>/skill-name</code>. Built-in commands always win if names clash; use <code>/user:name</code> or <code>/local:name</code> to be specific.</p>
+<p><strong>1.0.0 note:</strong> some bundled specialist skills use <code>user-invocable: false</code>—Grok may still apply them, but they will <strong>not</strong> show under <code>/</code>. Migration helpers like <code>/resume-claude</code>, <code>/resume-codex</code>, and <code>/resume-cursor</code> are skills (when installed), not session builtins. Details: <a href="11-skills-plugins-hooks.html">Skills, Plugins &amp; Hooks</a>.</p>
 </div></div>
 
 <div class="callout tip" id="truth"><div class="mark">Version truth</div><div>
-<p>Grok Build is Beta. Features gate by config/build (memory, auto mode, goals, sharing). When something is missing from your menu, that is usually expected—check <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code> for <em>your</em> version. Academy inventory source: <code>data/slash-commands-inventory.json</code>.</p>
+<p>Grok Build is a stable product, but features still gate by config/build and version (memory, auto mode, goals, sharing). When something is missing from your menu, that is usually expected—check <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code> for <em>your</em> version. Academy inventory source: <code>data/slash-commands-inventory.json</code>.</p>
 </div></div>
 
 <div class="callout lab"><div class="mark">Practice</div><div>

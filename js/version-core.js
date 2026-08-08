@@ -157,7 +157,7 @@
   <span class="version-ribbon-badge">${escapeHtml(stamp.label)}</span>
   <time class="version-ribbon-date" datetime="${escapeAttr(stamp.verifiedISO)}">${escapeHtml(stamp.verifiedISO)}</time>
   <span class="version-ribbon-cadence">Review every ${stamp.reviewEveryDays} days</span>
-  <span class="version-ribbon-note">Beta-sensitive advice · ${escapeHtml(status)}. When your Grok build disagrees, trust in-product <code>/docs</code>.</span>
+  <span class="version-ribbon-note">Version-sensitive advice · ${escapeHtml(status)}. When your Grok build disagrees, trust in-product <code>/docs</code>.</span>
 </aside>`;
   }
 

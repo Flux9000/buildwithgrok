@@ -6,6 +6,8 @@
 **Brand / home:** Build With Grok · intended live at **buildwithgrok.com** (not affiliated with Grok / xAI / SpaceXAI)  
 **Code health at review:** `npm test` all suites green (progress, search, version, walkthrough, a11y, slash accuracy, practice cue, integrity)
 
+> **Maintainer note (2026-08-08):** This critique is a **historical snapshot** of pedagogy and craft as of 2026-07-27. Slash/inventory version facts below that still say **0.2.112** are **superseded**. Live pin is **Grok Build 1.0.0** (`data/slash-commands-inventory.json`, encyclopedia/cheatsheet badges, accuracy tests). Re-read those sections as “what we worried about then,” not current ground truth.
+
 ---
 
 ## 1. Current-state baseline (what the site is today)
@@ -35,7 +37,7 @@ Explicit rule: **do not jump to Advanced until you have shipped once.**
 - **Progress:** Dual state in `progress-core.js`—opened ≠ completed; Continue = next incomplete in curriculum order; walkthrough overall complete only after all 6 phases.
 - **Walkthrough chrome:** Phase spy, badges, prompt-bundle copy (`walkthrough-chrome.js`).
 - **Discovery:** Client search + ⌘/Ctrl+K palette (`search-core.js`); index from curriculum metadata + keywords.
-- **Trust:** Last-verified ribbons + cadence on flag-heavy lessons (`version-core.js`); slash inventory JSON + accuracy tests vs install ~0.2.112.
+- **Trust:** Last-verified ribbons + cadence on flag-heavy lessons (`version-core.js`); slash inventory JSON + accuracy tests (pin at review was ~0.2.112; **now 1.0.0** — see note at top).
 - **A11y / print:** Skip link, main landmark, lazy images, focus-visible, reduced-motion, print CSS.
 - **Visual system:** Dark glass showcase CSS (~2.8k lines), hub hero orbs, showcase band, polished cards/path.
 - **Language:** Recent clarity pass (leads, hub copy, jargon fixes on slash/safety/sessions).
@@ -55,7 +57,7 @@ The product’s own exceptional bar (from `docs/NEXT-PHASES.md`) plus the beginn
 | 2. Resume true next incomplete | **Strong** | Dual progress + Continue CTA + hub path list. Weakness: progress is browser-only; clear on hub but easy to lose on new device. |
 | 3. Intermediate can search advanced topics in seconds | **Strong** | Palette + keywords (sandbox, MCP, git, …). Index is metadata-first, not full HTML body—fine for topics, weaker for deep phrase search inside long walkthroughs. |
 | 4. Advanced never blocks beginners | **Strong** | Ship-first order in curriculum + hub copy. Showcase/advanced teasers could still tempt skips; messaging is good enough. |
-| 5. Beta-sensitive advice shows last verified | **Good** | Ribbons on safety/commands/mcp/auto/workflows/dashboard (+ some advanced). Not every flag-heavy sentence is dated; inventory is version-pinned to 0.2.112 and will stale. |
+| 5. Version-sensitive advice shows last verified | **Good** | Ribbons on safety/commands/mcp/auto/workflows/dashboard (+ some advanced). Not every flag-heavy sentence is dated; inventory pin will stale (was 0.2.112 at review; **live pin 1.0.0**). |
 | 6. Static-hostable | **Strong** | Pure multi-page static; critical dark CSS; tests guard integrity. **Not yet live** on buildwithgrok.com (parked). |
 
 ### Dimension-by-dimension critique
@@ -95,11 +97,11 @@ The product’s own exceptional bar (from `docs/NEXT-PHASES.md`) plus the beginn
 #### D. Content accuracy / trust
 **Strengths**
 - Slash inventory + unit tests against real install patterns; easter eggs (`/gboom`) framed honestly.
-- Version ribbons; “check `/docs`” hedges on Beta.
+- Version ribbons; “check `/docs`” hedges when local Grok Build differs.
 - Safety layers taught as stack (mode / rules / sandbox).
 
 **Gaps**
-- **Version drift is inevitable:** inventory pinned to 0.2.112; no automated “re-verify on new grok version” workflow in-repo.
+- **Version drift is inevitable:** inventory is version-pinned (0.2.112 at this critique; **1.0.0** after 2026-08 reconcile); no automated “re-verify on new grok version” workflow in-repo.
 - Some advanced pages are thinner conceptually (skills, config) relative to slash encyclopedia depth—risk of feeling like summaries of official docs without enough “when to use.”
 - Walkthrough prompts are excellent but **not automatically re-tested** against current Grok behavior (only human accuracy passes).
 

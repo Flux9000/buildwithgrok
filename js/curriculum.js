@@ -52,7 +52,7 @@ window.GROK_ACADEMY = {
       color: "amber",
       pages: [
         { id: "rules", href: "10-project-rules.html", title: "Project Rules", time: "15 min", blurb: "AGENTS.md so you stop repeating yourself", keywords: ["AGENTS.md", "project rules", "conventions"] },
-        { id: "skills", href: "11-skills-plugins-hooks.html", title: "Skills, Plugins & Hooks", time: "25 min", blurb: "Saved playbooks, installable packs, and automatic scripts", keywords: ["skills", "plugins", "hooks", "SKILL.md"], verified: "2026-08-07", reviewEveryDays: 90 },
+        { id: "skills", href: "11-skills-plugins-hooks.html", title: "Skills, Plugins & Hooks", time: "25 min", blurb: "Saved playbooks, installable packs, and automatic scripts", keywords: ["skills", "plugins", "hooks", "SKILL.md", "user-invocable", "resume-claude", "resume-codex", "resume-cursor", "folder trust"], verified: "2026-08-08", reviewEveryDays: 90 },
         { id: "plan", href: "12-plan-mode.html", title: "Plan Mode", time: "15 min", blurb: "Approve a plan before big code changes", keywords: ["plan", "design", "approve plan"], verified: "2026-08-07", reviewEveryDays: 90 },
         { id: "agents", href: "13-subagents.html", title: "Subagents & Personas", time: "15 min", blurb: "Helper chats that research or work in parallel", keywords: ["subagent", "explore", "parallel", "personas"], verified: "2026-08-07", reviewEveryDays: 90 },
         { id: "mcp", href: "14-mcp.html", title: "MCP Integrations", time: "20 min", blurb: "Connect Grok to other apps you trust", keywords: ["mcp", "model context protocol", "integrations", "servers", "tools servers"], verified: "2026-08-07", reviewEveryDays: 60 },

@@ -43,7 +43,7 @@ Do these **in order**:
 7. **Advanced** — only after you ship (rules, plan mode, MCP, automation, dashboard)  
 8. **Path to Mastery** + **Cheatsheet**
 
-If two options appear, the page states **which to do first**. When a Beta feature is missing on your build, the lesson tells you what to do instead.
+If two options appear, the page states **which to do first**. When a gated or version-specific feature is missing on your build, the lesson tells you what to do instead.
 
 ## Verify the site
 
