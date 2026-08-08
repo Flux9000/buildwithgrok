@@ -73,7 +73,7 @@
 <tr><td><strong>Always-approve</strong></td><td>Skips ordinary prompts</td><td>Trusted machine + project + good git/tests</td></tr>
 <tr><td><strong>acceptEdits</strong> (advanced)</td><td>Edits freer; shell may still ask</td><td>Heavy local refactors you’ll review in git</td></tr>
 </tbody></table></div>
-<p><strong>How to change:</strong> <kbd>Shift+Tab</kbd> cycles <strong>Normal → Plan → Always-approve</strong> (watch the UI indicator). Also: <code>/always-approve</code>, <code>/auto</code> (only if that feature appears in your menu), <kbd>Ctrl+O</kbd> (toggle always-approve), <code>/settings</code>, or launch with <code>grok --always-approve</code> / <code>--yolo</code> (CLI flags—not a <code>/yolo</code> slash command).</p>
+<p><strong>How to change:</strong> <kbd>Shift+Tab</kbd> cycles <strong>Normal → Plan → Always-approve</strong> (watch the UI indicator). Also: <code>/always-approve</code>, <code>/auto</code> (only if that feature appears in your menu), <kbd>Ctrl+O</kbd> (toggle always-approve), <code>/settings</code>, or launch with <code>grok --always-approve</code> / <code>--yolo</code> (CLI flags—not a <code>/yolo</code> slash command). Running <code>/always-approve</code> or <code>/auto</code> while the other is active <strong>switches</strong> modes; running the mode you are already in turns it back off (back to Ask).</p>
 <div class="callout warn"><div class="mark">Beginner rule</div><div>
 <p>Stay on <strong>Ask</strong> until you finish a ship walkthrough. Never Always-approve on folders with production secrets or untrusted downloads.</p>
 </div></div>
@@ -82,6 +82,7 @@
 <p>Rules are patterns that force allow or deny for tools regardless of mode. Deny wins ties. Configure via settings UI, project <code>.grok/config.toml</code> permission sections, or CLI flags such as:</p>
 <div class="pre-wrap"><pre><code>grok --deny '…' --allow '…'</code></pre></div>
 <p class="why">Use deny as a permanent seatbelt for dangerous shell patterns—even when always-approve is on for trusted automation (scripts/CI you control).</p>
+<p><strong>Permission prompts:</strong> when Grok asks about a bash command, you can allow once, deny, or choose <strong>Always allow</strong> for matching commands. On recent builds (0.2.119+), Always allow for bash lets you edit a <strong>free-form glob pattern</strong> (not only a fixed word-prefix scope)—so you can approve a family of commands carefully. Long bash bodies in the prompt expand with <kbd>Ctrl+F</kbd> so you can read the full script before deciding (1.0.0+).</p>
 
 <h2 id="sandbox">Sandbox (separate from permissions)</h2>
 <p>Off by default. An extra OS safety net that limits what Grok’s process (and child commands) may read, write, or use on the network—even after you approve a tool. On Linux this uses Landlock; on macOS it uses Seatbelt (the OS’s built-in sandbox tech). You usually pick a profile instead of typing those names.</p>

@@ -29,7 +29,7 @@
     announceHint: "Select 'Grok 4.5' under /model.",
     tip: "Tip: Press Ctrl+O to toggle auto-approve mode.",
     statusModel: "Grok 4.5 (high) · always-approve",
-    footer: "Grok Build 0.2.117 [stable] Beta",
+    footer: "Grok Build 1.0.0 [stable]",
   };
 
   /** Ordered demo steps (data only — testable without DOM). */

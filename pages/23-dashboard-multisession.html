@@ -61,13 +61,15 @@
 <h2 id="dashboard">Agent Dashboard</h2>
 <p>The <strong>Agent Dashboard</strong> is a control surface for sessions: see what’s running, jump between chats, queue replies, and start new work (sometimes in a git worktree).</p>
 <ul class="clean-list">
-  <li><strong>How to open it (try in order):</strong> type <code>/dashboard</code> or its alias <code>/sessions</code> in Grok (same command—official sessions guide); open the command palette with <kbd>Ctrl+P</kbd> and search for “dashboard”; or use any dashboard chord your build advertises in-app. If a shell subcommand exists on your version (<code>grok dashboard</code>), that works from a normal terminal too—confirm with <code>grok --help</code>.</li>
-  <li>Use it when you have more than one active chat and need an overview.</li>
-  <li>Always <code>/rename</code> sessions so the list is readable (example: “combat-slice”, “ci-fix”).</li>
+  <li><strong>How to open it (try in order):</strong> type <code>/dashboard</code> (aliases <code>/sessions</code> and <code>/agents-dashboard</code>—same command); press <kbd>Ctrl+\</kbd>; open the command palette with <kbd>Ctrl+P</kbd> and search for “dashboard”; or from a normal terminal run <code>grok dashboard</code>. Hidden in <strong>minimal</strong> mode—switch with <code>/fullscreen</code> if the command is missing. Disable with <code>GROK_AGENT_DASHBOARD=0</code> or <code>[dashboard].enabled = false</code>.</li>
+  <li><strong>Not the same as</strong> <code>/config-agents</code> (alias <code>/agents</code>), which edits agent <em>definitions</em> and personas—not the live multi-session board.</li>
+  <li>Use it when you have more than one active chat and need an overview. Rows can show a short summary of the previous turn (1.0.0+).</li>
+  <li>Always <code>/rename</code> sessions so the list is readable (example: “combat-slice”, “ci-fix”). From the dashboard you can also rename with <kbd>Ctrl+R</kbd>.</li>
+  <li><strong>Delete a session:</strong> while inside a chat, <code>/delete</code> (confirm)—if you opened that chat from the dashboard, you return to the dashboard. On the roster, <kbd>Ctrl+X</kbd> twice within 2s, or hover and confirm <code>[✗]</code>.</li>
 </ul>
 
 <div class="you-will-see"><strong>What success looks like</strong>
-<p>A list or board of sessions with statuses. <strong>If none of the open steps work:</strong> that feature may be missing on your build. Use two terminal windows instead, and <code>/rename</code> each session so you can tell them apart.</p>
+<p>A list or board of top-level sessions with statuses (needs input, working, idle, …). <strong>If none of the open steps work:</strong> that feature may be missing or disabled on your build. Use two terminal windows instead, and <code>/rename</code> each session so you can tell them apart.</p>
 </div>
 
 <h2 id="patterns">Patterns that work</h2>

@@ -73,7 +73,7 @@ user-invocable: true
   <li>Auto-format code after edits</li>
   <li>Refuse to “finish” until tests pass</li>
 </ul>
-<p>Manage with <code>/hooks</code>. Creating hooks means writing JSON/config and scripts—optional until you need automation seatbelts. Official hooks guide has full schemas.</p>
+<p>Manage with <code>/hooks</code> (extensions modal). Project hooks only run after you <strong>trust</strong> the folder (<code>/hooks-trust</code>, modal Trust, or launch with <code>--trust</code>). The shell also has <code>/hooks-list</code>, <code>/hooks-add</code>, <code>/hooks-remove</code>, and <code>/hooks-untrust</code>—in the pager those are mostly folded into the modal. Creating hooks means writing JSON/config and scripts—optional until you need automation seatbelts. Official hooks guide has full schemas.</p>
 
 <div class="callout lab"><div class="mark">Tiny lab</div><div>
 <p>Create the hello-skill above under <code>~/.grok/skills/</code>, restart Grok, and run <code>/hello-skill</code> or ask “run hello-skill practice.”</p>

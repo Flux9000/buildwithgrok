@@ -1,17 +1,30 @@
 {
   "source": {
-    "grokVersion": "0.2.112",
+    "grokVersion": "1.0.0",
     "docs": "~/.grok/docs/user-guide/04-slash-commands.md",
-    "binary": "~/.grok/bin/grok (strings inspection)",
-    "captured": "2026-07-27"
+    "relatedDocs": [
+      "~/.grok/docs/user-guide/17-sessions.md",
+      "~/.grok/docs/user-guide/23-dashboard.md",
+      "~/.grok/docs/user-guide/22-permissions-and-safety.md"
+    ],
+    "changelog": "~/.grok/CHANGELOG.md",
+    "binary": "~/.grok/bin/grok → ~/.grok/downloads/grok-1.0.0-macos-aarch64 (strings corroboration only)",
+    "captured": "2026-08-07",
+    "previousPin": "0.2.112"
   },
   "notes": [
     "Official user-guide lists shell + pager builtins with aliases.",
-    "Some pager commands appear in the binary menu but are abbreviated in the public guide (/help, /find, /jump, /dashboard, /tasks, /queue, /recap, /share, /debug, /gboom).",
+    "Some pager commands appear in the binary menu but are abbreviated in the public guide (/help, /find, /jump, /timeline, /dashboard, /tasks, /queue, /recap, /share, /debug, /gboom).",
     "/auto only appears when auto permission-mode feature is enabled.",
     "/memory /flush /dream require memory enabled; /remember is always available.",
     "/goal appears when goal mode is enabled for the session.",
-    "Skills with user-invocable:true also appear as /skill-name (not listed here)."
+    "Fullscreen-only (hidden in minimal): /find, /jump, /timeline, /theme, /tutorial, /workflows, /dashboard.",
+    "Minimal-only: /expand, /edit-prompt.",
+    "Skills with user-invocable:true also appear as /skill-name (not listed here).",
+    "1.0.0 net-new vs academy 0.2.112 pin: /delete primary; /undo alias for /rewind; /agents-dashboard alias for /dashboard; /timeline documented as fullscreen-only; /feedback report pane.",
+    "Binary census follow-up (1.0.0 aarch64 strings + menu labels): /cd [path] is a real shell/menu command (Change the working directory for new agents) even though it is not a ### heading in 04-slash-commands.md.",
+    "Shell-advertised /hooks-list|/hooks-trust|/hooks-add|/hooks-remove|/hooks-untrust remain real; pager folds most into /hooks modal (see 10-hooks.md).",
+    "Binary strings alone are noisy (path fragments, crypto, crates). Authority order: user-guide headings → product menu labels (name/name + description) → shell Usage: lines → raw strings."
   ],
   "builtins": {
     "session": [
@@ -21,15 +34,18 @@
       { "cmd": "/context", "aliases": [] },
       { "cmd": "/session-info", "aliases": ["/status", "/info"] },
       { "cmd": "/fork", "aliases": [] },
-      { "cmd": "/rewind", "aliases": [] },
+      { "cmd": "/rewind", "aliases": ["/undo"] },
       { "cmd": "/rename", "aliases": ["/title"] },
       { "cmd": "/copy", "aliases": [] },
       { "cmd": "/export", "aliases": [] },
+      { "cmd": "/delete", "aliases": [], "framing": "Delete the current session's history after confirm. Returns to welcome, or to the dashboard when the session was opened from the dashboard. From /resume or welcome list: d then y. Dashboard: Ctrl+X twice or [✗]." },
+      { "cmd": "/cd", "aliases": [], "args": "[path]", "framing": "Change the working directory for new agents (binary menu label). Usage shape: /cd [path]. Not a ### heading in 04-slash-commands.md on 1.0.0; present in installed binary command table." },
       { "cmd": "/quit", "aliases": ["/exit"] },
       { "cmd": "/home", "aliases": ["/welcome"] },
-      { "cmd": "/edit-prompt", "aliases": [] },
-      { "cmd": "/find", "aliases": [] },
-      { "cmd": "/jump", "aliases": [] },
+      { "cmd": "/edit-prompt", "aliases": [], "gated": "minimal mode only" },
+      { "cmd": "/find", "aliases": [], "gated": "fullscreen only" },
+      { "cmd": "/jump", "aliases": [], "gated": "fullscreen only" },
+      { "cmd": "/timeline", "aliases": [], "gated": "fullscreen only", "framing": "Timeline / turn navigation surface (fullscreen only; hidden in minimal mode)." },
       { "cmd": "/recap", "aliases": ["/summarize"] },
       { "cmd": "/share", "aliases": [] }
     ],
@@ -55,9 +71,14 @@
     ],
     "extensions": [
       { "cmd": "/skills", "aliases": [] },
-      { "cmd": "/plugins", "aliases": [] },
+      { "cmd": "/plugins", "aliases": [], "framing": "Opens Plugins tab in extensions modal. Shell also supports subcommands: list, install <source>, uninstall <name>, remove <path>, reload, trust <path> (pager prefers the modal)." },
       { "cmd": "/marketplace", "aliases": [] },
-      { "cmd": "/hooks", "aliases": [] },
+      { "cmd": "/hooks", "aliases": [], "framing": "Opens Hooks tab in extensions modal. Shell also advertises /hooks-list, /hooks-trust, /hooks-add, /hooks-remove, /hooks-untrust; pager folds most into the modal (trust often still via /hooks-trust or modal Trust)." },
+      { "cmd": "/hooks-list", "aliases": [], "gated": "shell-advertised; may be hidden from pager slash menu", "framing": "Show hooks loaded in this session." },
+      { "cmd": "/hooks-trust", "aliases": [], "gated": "shell-advertised; may be hidden from pager slash menu", "framing": "Trust this project folder for hooks (and unified folder-trust for MCP/LSP)." },
+      { "cmd": "/hooks-add", "aliases": [], "gated": "shell-advertised; may be hidden from pager slash menu", "framing": "Add a custom hook file or directory (Usage: /hooks-add <path> or /hooks add <path>)." },
+      { "cmd": "/hooks-remove", "aliases": [], "gated": "shell-advertised; may be hidden from pager slash menu", "framing": "Remove a custom hook path (Usage: /hooks-remove <path>)." },
+      { "cmd": "/hooks-untrust", "aliases": [], "gated": "shell-advertised; may be hidden from pager slash menu", "framing": "Revoke project trust for hooks/folder-trust." },
       { "cmd": "/mcps", "aliases": [] },
       { "cmd": "/config-agents", "aliases": ["/agents"] },
       { "cmd": "/personas", "aliases": [] }
@@ -71,17 +92,17 @@
       { "cmd": "/goal", "aliases": [], "gated": "goal mode enabled" },
       { "cmd": "/deep-research", "aliases": [] },
       { "cmd": "/workflow", "aliases": [] },
-      { "cmd": "/workflows", "aliases": [] },
-      { "cmd": "/dashboard", "aliases": ["/sessions"] },
+      { "cmd": "/workflows", "aliases": [], "gated": "fullscreen only" },
+      { "cmd": "/dashboard", "aliases": ["/agents-dashboard", "/sessions"], "gated": "fullscreen only" },
       { "cmd": "/tasks", "aliases": [] },
       { "cmd": "/queue", "aliases": [] }
     ],
     "help_account_ui": [
       { "cmd": "/help", "aliases": [] },
       { "cmd": "/docs", "aliases": ["/howto", "/guides"] },
-      { "cmd": "/tutorial", "aliases": ["/tour", "/onboarding"] },
+      { "cmd": "/tutorial", "aliases": ["/tour", "/onboarding"], "gated": "fullscreen only" },
       { "cmd": "/doctor", "aliases": ["/terminal-setup", "/terminal-check", "/terminal-info"] },
-      { "cmd": "/theme", "aliases": ["/t"] },
+      { "cmd": "/theme", "aliases": ["/t"], "gated": "fullscreen only" },
       { "cmd": "/settings", "aliases": ["/config", "/preferences", "/prefs"] },
       { "cmd": "/timestamps", "aliases": [] },
       { "cmd": "/btw", "aliases": [] },
@@ -89,7 +110,7 @@
       { "cmd": "/logout", "aliases": [] },
       { "cmd": "/usage", "aliases": ["/cost"] },
       { "cmd": "/privacy", "aliases": [] },
-      { "cmd": "/feedback", "aliases": [] },
+      { "cmd": "/feedback", "aliases": [], "framing": "With a message, sends immediately. Bare /feedback opens a dedicated report pane (Enter sends, Esc discards)." },
       { "cmd": "/import-claude", "aliases": [] },
       { "cmd": "/release-notes", "aliases": ["/changelog"] },
       { "cmd": "/debug", "aliases": [] },

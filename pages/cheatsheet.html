@@ -84,17 +84,17 @@ Ctrl+P    command palette
 
 <input class="filter-box" id="cmd-filter" type="search" placeholder="Filter quick list…" />
 <div class="cmd-group">
-<div class="cmd-item"><h4>Session</h4><p>/new /resume /compact /context /session-info /fork /rewind /rename /copy /export /find /jump /recap /share /quit /home</p></div>
+<div class="cmd-item"><h4>Session</h4><p>/new /resume /compact /context /session-info /fork /rewind (/undo) /rename /copy /export /delete /cd /find /jump /timeline /recap /share /quit /home</p></div>
 <div class="cmd-item"><h4>Modes</h4><p>/model /effort /always-approve /auto (gated) /plan /view-plan /multiline /vim-mode /minimal /fullscreen /compact-mode</p></div>
 <div class="cmd-item"><h4>Memory</h4><p>/remember (always) · /memory /flush /dream (need memory enabled)</p></div>
-<div class="cmd-item"><h4>Extensions</h4><p>/skills /plugins /marketplace /hooks /mcps /config-agents /personas</p></div>
-<div class="cmd-item"><h4>Automation &amp; multi-session</h4><p>/loop /goal (gated) /deep-research /workflow /workflows /dashboard (/sessions) /tasks /queue</p></div>
+<div class="cmd-item"><h4>Extensions</h4><p>/skills /plugins /marketplace /hooks (/hooks-list · /hooks-trust · /hooks-add · /hooks-remove · /hooks-untrust shell) /mcps /config-agents /personas</p></div>
+<div class="cmd-item"><h4>Automation &amp; multi-session</h4><p>/loop /goal (gated) /deep-research /workflow /workflows /dashboard (/agents-dashboard, /sessions) /tasks /queue</p></div>
 <div class="cmd-item"><h4>Help &amp; account</h4><p>/help /docs /tutorial /doctor /theme /settings /timestamps /btw /login /logout /usage /privacy /feedback /import-claude /release-notes /debug /announcements /transcript /expand (minimal)</p></div>
 <div class="cmd-item" data-easter-egg="gboom"><h4>Hidden / fun</h4><p><code>/gboom</code> — easter-egg mini overlay (graphics terminal). Not a learning path. See <a href="05-slash-commands.html#hidden">Slash Commands → Hidden</a>.</p></div>
 </div>
 
 <div class="callout tip"><div class="mark">Version truth</div><div>
-<p>Reconciled for Grok <strong>0.2.112</strong>. If something here disagrees with your install, trust in-app <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code>. Inventory file: <code>data/slash-commands-inventory.json</code>.</p>
+<p>Reconciled for Grok <strong>1.0.0</strong>. If something here disagrees with your install, trust in-app <code>/docs</code>, <code>/release-notes</code>, and <code>~/.grok/docs/user-guide/</code>. Inventory file: <code>data/slash-commands-inventory.json</code>.</p>
 </div></div>
 
         
@@ -102,7 +102,9 @@ Ctrl+P    command palette
 <div class="table-wrap"><table>
 <thead><tr><th>Need</th><th>Reach for</th></tr></thead>
 <tbody>
-<tr><td>Many sessions overview</td><td><code>/dashboard</code> · <code>grok dashboard</code> (when available)</td></tr>
+<tr><td>Many sessions overview</td><td><code>/dashboard</code> · aliases <code>/sessions</code>, <code>/agents-dashboard</code> · <code>grok dashboard</code></td></tr>
+<tr><td>Delete this session</td><td><code>/delete</code> (confirm) · resume list <kbd>d</kbd> <kbd>y</kbd> · dashboard <kbd>Ctrl+X</kbd> twice</td></tr>
+<tr><td>Undo turns / files</td><td><code>/rewind</code> or <code>/undo</code></td></tr>
 <tr><td>Recurring check</td><td><code>/loop 10m …</code></td></tr>
 <tr><td>Long shell job</td><td>Background · <kbd>Ctrl+B</kbd> · tasks pane</td></tr>
 <tr><td>Multi-hour migration</td><td><code>/goal</code></td></tr>

@@ -58,7 +58,7 @@
 </nav>
 
 <div class="callout tip"><div class="mark">Verified against install</div><div>
-<p>Checked against <strong>Grok Build 0.2.112</strong> (official user guide + installed <code>grok</code>). If your version differs, trust in-app <code>/docs</code> and <code>/release-notes</code>.</p>
+<p>Checked against <strong>Grok Build 1.0.0</strong> (official user guide + installed <code>grok</code>). If your version differs, trust in-app <code>/docs</code> and <code>/release-notes</code>.</p>
 </div></div>
 
 <h2 id="what">What a slash command is</h2>
@@ -88,12 +88,15 @@
 <div class="cmd-item"><h4>/context</h4><p><strong>What it does:</strong> Shows a breakdown of what is filling Grok’s memory for this chat (system text, messages, tools, free space). <strong>When to use:</strong> Before a huge task, to see if you should compact first.</p></div>
 <div class="cmd-item"><h4>/session-info</h4><div class="aliases">/status, /info</div><p>Shows which model you are on, how you signed in, how many turns you have taken, and other session stats (including usage when available).</p></div>
 <div class="cmd-item"><h4>/fork</h4><p>Starts a <strong>side chat</strong> from this point, keeping history so far, so you can try a risky idea without spoiling the original thread. Optional flags in the install: <code>/fork [--worktree|--no-worktree] [directive]</code>.</p></div>
-<div class="cmd-item"><h4>/rewind</h4><p>Steps backward to an earlier point in the chat and discards what came after (including related file snapshots when available). Use carefully—it is real undo for the session timeline. (Double-Esc on an empty idle prompt can open the same rewind picker.)</p></div>
+<div class="cmd-item"><h4>/rewind</h4><div class="aliases">/undo</div><p>Steps backward to an earlier point in the chat and discards what came after (including related file snapshots when available). Alias <code>/undo</code> is the same command. Use carefully—it is real undo for the session timeline. (Double-Esc on an empty idle prompt can open the same rewind picker.)</p></div>
 <div class="cmd-item"><h4>/rename</h4><div class="aliases">/title</div><p>Gives the session a human name: <code>/rename inventory-ui</code>. Helps when resuming later.</p></div>
 <div class="cmd-item"><h4>/copy</h4><p>Copies Grok’s latest answer to the clipboard. Options: <code>/copy 2</code> (Nth-latest), or a file path to write text (handy over SSH). Also backs up to <code>~/.grok/last-copy.txt</code> (or <code>GROK_COPY_FILE</code>).</p></div>
 <div class="cmd-item"><h4>/export</h4><p>Saves or copies the whole conversation.</p></div>
-<div class="cmd-item"><h4>/find [text]</h4><p>Search the conversation history (the messages above the typing box) for text.</p></div>
-<div class="cmd-item"><h4>/jump</h4><p>Jump to a turn in the conversation (navigate the transcript by turn).</p></div>
+<div class="cmd-item"><h4>/delete</h4><p><strong>What it does:</strong> Deletes the <em>current</em> session’s history after a confirm. Returns to the welcome screen, or to the <strong>dashboard</strong> when you opened the session from the dashboard. <strong>Other ways:</strong> in <code>/resume</code> or the welcome session list, press <kbd>d</kbd> then <kbd>y</kbd>; on the dashboard, <kbd>Ctrl+X</kbd> twice or click <code>[✗]</code>. Permanent—use when a throwaway chat should not clutter your list.</p></div>
+<div class="cmd-item"><h4>/cd [path]</h4><p><strong>What it does:</strong> Changes the <strong>working directory for new agents</strong> (menu label from the 1.0.0 install). Example shape: <code>/cd path/to/project</code>. This is a real builtin in the binary command table even though the public slash-guide page may not give it its own heading—if it is missing from your menu, trust <code>/help</code> for your build.</p></div>
+<div class="cmd-item"><h4>/find [text]</h4><p>Search the conversation history (the messages above the typing box) for text. <strong>Fullscreen only</strong> (hidden in minimal mode—run <code>/fullscreen</code> if needed).</p></div>
+<div class="cmd-item"><h4>/jump</h4><p>Jump to a turn in the conversation (navigate the transcript by turn). <strong>Fullscreen only.</strong></p></div>
+<div class="cmd-item"><h4>/timeline</h4><p>Open the timeline / turn-navigation surface for this session. <strong>Fullscreen only</strong> (hidden in minimal mode).</p></div>
 <div class="cmd-item"><h4>/recap</h4><div class="aliases">/summarize</div><p>Summarize the session so far (handy before compact or handoff).</p></div>
 <div class="cmd-item"><h4>/share</h4><p>Share this session via URL when sharing is available for your account/build. If disabled, Grok will say so.</p></div>
 <div class="cmd-item"><h4>/quit</h4><div class="aliases">/exit</div><p>Leaves Grok and returns you to the normal terminal.</p></div>
@@ -111,7 +114,7 @@
 <div class="cmd-item"><h4>/multiline</h4><div class="aliases">/ml</div><p>When on, Enter inserts a newline; send with Shift+Enter or Alt+Enter. Mid-turn, bare Enter on an empty composer can still force-send the top queued follow-up.</p></div>
 <div class="cmd-item"><h4>/history</h4><p>Open prompt-history search (fuzzy over prompts you sent this session). On an empty prompt, <kbd>↑</kbd> is the quick path to the last prompt.</p></div>
 <div class="cmd-item"><h4>/vim-mode</h4><p>Toggle optional Vim-style keys for moving in history (j/k, and more). Off by default; beginners can ignore. Setting saves to <code>[ui] vim_mode</code>.</p></div>
-<div class="cmd-item"><h4>/minimal · /fullscreen</h4><div class="aliases">/full → fullscreen</div><p>Switch how this session looks: <strong>fullscreen</strong> is the usual full Grok screen; <strong>minimal</strong> is an experimental layout that uses more of your terminal’s normal scrollback. Does not rewrite config—use <code>/settings</code> → Default screen mode for permanent defaults.</p></div>
+<div class="cmd-item"><h4>/minimal · /fullscreen</h4><div class="aliases">/full → fullscreen</div><p>Switch how this session looks: <strong>fullscreen</strong> is the usual full Grok screen; <strong>minimal</strong> is an experimental layout that uses more of your terminal’s normal scrollback. Does not rewrite config—use <code>/settings</code> → Default screen mode for permanent defaults. <strong>Mode gates:</strong> fullscreen-only include <code>/find</code>, <code>/jump</code>, <code>/timeline</code>, <code>/theme</code>, <code>/tutorial</code>, <code>/workflows</code>, <code>/dashboard</code>; minimal-only include <code>/expand</code> and <code>/edit-prompt</code>.</p></div>
 <div class="cmd-item"><h4>/compact-mode</h4><p>Tighter visual spacing (display density), not the same as <code>/compact</code> history compression.</p></div>
 </div>
 
@@ -124,7 +127,8 @@
 
 <div class="cmd-group" id="ext"><h3>Extensions — skills, plugins, agents, MCP</h3>
 <p>These open management UIs. You will understand each concept in later lessons; commands are listed here so the encyclopedia is complete.</p>
-<div class="cmd-item"><h4>/skills · /plugins · /marketplace · /hooks</h4><p>Same extensions window, different tabs: reusable recipes, installable bundles, store browsing, lifecycle scripts.</p></div>
+<div class="cmd-item"><h4>/skills · /plugins · /marketplace · /hooks</h4><p>Same extensions window, different tabs: reusable recipes, installable bundles, store browsing, lifecycle scripts. <strong>Shell extras:</strong> <code>/plugins</code> also accepts subcommands such as <code>list</code>, <code>install &lt;source&gt;</code>, <code>uninstall &lt;name&gt;</code>, <code>remove &lt;path&gt;</code>, <code>reload</code>, and <code>trust &lt;path&gt;</code> (the pager UI usually does the same work visually). The shell also advertises <code>/hooks-list</code>, <code>/hooks-trust</code>, <code>/hooks-add</code>, <code>/hooks-remove</code>, and <code>/hooks-untrust</code>; in the fullscreen pager those are mostly folded into the <code>/hooks</code> modal (project trust often still via <code>/hooks-trust</code> or the modal Trust action).</p></div>
+<div class="cmd-item"><h4>/hooks-list · /hooks-trust · /hooks-add · /hooks-remove · /hooks-untrust</h4><p>Shell-side hooks management (list loaded hooks, trust/untrust the project folder, add/remove hook paths). <strong>May be hidden from the pager slash menu</strong>—use the <code>/hooks</code> modal first. Project hooks need folder trust before they run.</p></div>
 <div class="cmd-item"><h4>/mcps</h4><p>Manage MCP servers (bridges to other apps/tools).</p></div>
 <div class="cmd-item"><h4>/config-agents</h4><div class="aliases">/agents</div><p>Open the agents modal: view/manage agent definitions, set the default, switch the active one.</p></div>
 <div class="cmd-item"><h4>/personas</h4><p>Create, edit, and delete personas (overlays a subagent can apply).</p></div>
@@ -140,7 +144,7 @@
 <div class="cmd-item"><h4>/goal</h4><p>Set/manage an autonomous goal that only completes after independent evidence review. Subcommands: <code>status</code>, <code>pause</code>, <code>resume</code>, <code>clear</code>. <strong>Only appears when goal mode is enabled</strong> for the session—if missing, use normal prompts or workflows instead.</p></div>
 <div class="cmd-item"><h4>/deep-research</h4><p>Start a structured research workflow with sources and verification; follow progress in <code>/workflows</code>.</p></div>
 <div class="cmd-item"><h4>/workflow · /workflows</h4><p><code>/workflow</code> launches or manages a saved multi-agent script by display name. <code>/workflows</code> is the live <strong>run</strong> dashboard (not a catalog of definitions). Project scripts: <code>.grok/workflows/*.rhai</code>; user: <code>~/.grok/workflows/*.rhai</code>.</p></div>
-<div class="cmd-item"><h4>/dashboard</h4><div class="aliases">/sessions</div><p>Fullscreen overview of running sessions (multi-session)—switch between, rename, or close active sessions (parent + forks). Alias <code>/sessions</code> is the same command (official sessions guide + install menu). Also try the command palette or any dashboard chord your build advertises in-app.</p></div>
+<div class="cmd-item"><h4>/dashboard</h4><div class="aliases">/agents-dashboard, /sessions</div><p>Fullscreen overview of running top-level sessions (multi-session)—peek, reply, dispatch, pin, rename, stop, or attach. Aliases <code>/agents-dashboard</code> and <code>/sessions</code> are the same command. <strong>Fullscreen only</strong> (hidden in minimal). Not the same as <code>/config-agents</code> (alias <code>/agents</code>), which manages agent <em>definitions</em>. Disable with <code>GROK_AGENT_DASHBOARD=0</code> or <code>[dashboard].enabled = false</code>. Chord: <kbd>Ctrl+\</kbd>. Also try the command palette or <code>grok dashboard</code> from a normal terminal.</p></div>
 <div class="cmd-item"><h4>/tasks</h4><p>List background tasks, subagents, and scheduled tasks. Full TUI: <kbd>Ctrl+G</kbd> toggles the tasks pane (in minimal mode, Ctrl+G may mean external-edit draft instead—use this slash or the palette if the chord conflicts).</p></div>
 <div class="cmd-item"><h4>/queue</h4><p>List prompts queued behind the running turn. Mid-turn, plain Enter with text queues follow-ups; empty Enter / send-now chords can promote the top item.</p></div>
 </div>
@@ -157,7 +161,7 @@
 <div class="cmd-item"><h4>/login · /logout</h4><p>Authenticate or sign out without leaving the app shell awkwardly.</p></div>
 <div class="cmd-item"><h4>/usage</h4><div class="aliases">/cost</div><p>Credit usage / billing: bare <code>/usage</code> or <code>/usage manage</code>.</p></div>
 <div class="cmd-item"><h4>/privacy</h4><p>Show or toggle privacy / data-retention status (<code>opt-in</code> / <code>opt-out</code>). Team rules may restrict who can toggle.</p></div>
-<div class="cmd-item"><h4>/feedback</h4><p>Report an issue or send feedback.</p></div>
+<div class="cmd-item"><h4>/feedback</h4><p>Report an issue or send feedback. With a message (<code>/feedback Something broke</code>), sends immediately. Bare <code>/feedback</code> opens a <strong>dedicated report pane</strong>: <kbd>Enter</kbd> sends, <kbd>Esc</kbd> discards.</p></div>
 <div class="cmd-item"><h4>/import-claude</h4><p>Import settings from Claude Code (<code>~/.claude</code>): permissions, env, MCP, hooks, paths.</p></div>
 <div class="cmd-item"><h4>/release-notes</h4><div class="aliases">/changelog</div><p>What changed in this Grok version.</p></div>
 <div class="cmd-item"><h4>/debug [scroll|fps|log]</h4><p>Toggle debug overlays (scroll diagnostics HUD, FPS, scroll flight recorder). For advanced troubleshooting—not everyday work.</p></div>
